@@ -42,24 +42,24 @@ class Paint extends Canvas{
 	public void addOffsetX(double x){
 		offsetX += x;
 		if(offsetX > 0) offsetX = 0;
-		if(offsetX < -Main.world.getImage().getWidth()) offsetX = -Main.world.getImage().getWidth();
+		if(offsetX < -Main.WINDOW_WIDTH) offsetX = -Main.WINDOW_WIDTH;
 	}
 	
 	public void addOffsetY(double y){
 		offsetY += y;
 		if(offsetY > 0) offsetY = 0;
-		if(offsetY < -Main.world.getImage().getHeight()) offsetY = -Main.world.getImage().getHeight();
+		if(offsetY < -Main.WINDOW_HEIGHT) offsetY = -Main.WINDOW_HEIGHT;
 	}
 	
 	public void setOffsetX(double x){
 		offsetX = x;
 		if(offsetX > 0) offsetX = 0;
-		if(offsetX < -Main.world.getImage().getWidth()) offsetX = -Main.world.getImage().getWidth();
+		if(offsetX < -Main.WINDOW_WIDTH) offsetX = -Main.WINDOW_WIDTH;
 	}
 	
 	public void setOffsetY(double y){
 		offsetY = y;
 		if(offsetY > 0) offsetY = 0;
-		if(offsetY < -Main.world.getImage().getHeight()) offsetY = -Main.world.getImage().getHeight();
+		if(offsetY < -Main.WINDOW_HEIGHT) offsetY = -Main.WINDOW_HEIGHT;
 	}
 }

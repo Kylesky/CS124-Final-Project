@@ -16,7 +16,7 @@ public class Main{
 		JFrame window = new JFrame("CS124 Final Project");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		world = new World(WORLD_WIDTH, WORLD_HEIGHT, WORLD_GENERATION);
+		world = new World(WORLD_WIDTH, WORLD_HEIGHT);
 		
 		//StateHandler.setup();
 		
@@ -27,6 +27,10 @@ public class Main{
 		MouseHandler mouseHandler = MouseHandler.getInstance();
 		mouseHandler.setParent(window);
 		canvas.addMouseListener(mouseHandler);
+		
+		KeyboardHandler keyboardHandler = KeyboardHandler.getInstance();
+		keyboardHandler.setParent(window);
+		canvas.addKeyListener(keyboardHandler);
 		
 		window.pack();
 		window.setResizable(false);
