@@ -7,7 +7,6 @@ import javax.swing.event.*;
 
 public class Main{
 	public static int WINDOW_WIDTH, WINDOW_HEIGHT, WORLD_WIDTH, WORLD_HEIGHT;
-	public static int WORLD_CELL_SIZE = 40;
 	public static World world;
 	
 	public static void main(String[] args){

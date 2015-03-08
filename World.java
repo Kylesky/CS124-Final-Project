@@ -4,6 +4,7 @@ import java.awt.image.*;
 class World{
 	private int width, height;
 	private Entity[][] grid;
+	private int CELL_SIZE = SystemPreferences.WORLD_CELL_SIZE;
 
 	public World(int width, int height){
 		this.width = width;

@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 class ObjectHandler{
-	private static final int ENTITY_INIT_COUNT = 100;
+	private static final int ENTITY_INIT_COUNT = SystemPreferences.ENTITY_INIT_COUNT;
 
 	private static ObjectHandler unique;
 	
@@ -18,7 +18,7 @@ class ObjectHandler{
 	ArrayList<Entity> entityPrototypes;
 	HashMap<String, Integer> entityPrototypeIds;
 	
-	private static void setup(){
+	public void setup(){
 		entityPool = new ObjectPool<Entity>(ENTITY_INIT_COUNT, Entity.class);
 		entityPrototypes = new ArrayList<Entity>();
 		entityPrototypeIds = new HashMap<String, Integer>();
@@ -51,7 +51,7 @@ class ObjectHandler{
 	}
 	
 	public void destroyEntity(Entity e){
-		e.active = false;
+		e.setActive(false);
 		entityPool.returnInstance(e);
 	}
 }

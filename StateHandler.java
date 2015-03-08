@@ -13,7 +13,7 @@ class StateHandler{
 	
 	//private static HashMap<String, __State> __States;
 	
-	public static void setup(){
+	public void setup(){
 		//__States = new HashMap<String, __State>();
 		//__States.put("__", new __State("__"));
 	}
