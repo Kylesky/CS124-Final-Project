@@ -4,6 +4,7 @@ import java.awt.image.*;
 class World{
 	private int width, height;
 	private Entity[][] grid;
+	private ArrayList<Agent> agents;
 	private int CELL_SIZE = Config.getWorldCellSize();
 	private long timeNanos;
 
@@ -11,6 +12,7 @@ class World{
 		this.width = width;
 		this.height = height;
 		this.timeNanos = 0;
+		agents = new ArrayList<Agent>();
 	}
 	
 	public boolean isEmpty(int r, int c){
