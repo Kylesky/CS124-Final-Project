@@ -4,7 +4,7 @@ import javax.swing.*;
 class Config{
 	private static int WINDOW_WIDTH, WINDOW_HEIGHT;
 	private static int WORLD_WIDTH, WORLD_HEIGHT, WORLD_CELL_SIZE;
-	private static int ENTITY_INIT_COUNT;
+	private static int ENTITY_INIT_COUNT, AGENT_INIT_COUNT;
 	
 	private Config(){}
 	
@@ -23,6 +23,7 @@ class Config{
 					case "WorldHeight": WORLD_HEIGHT = Integer.parseInt(split[1]); break;
 					case "WorldCellSize": WORLD_CELL_SIZE = Integer.parseInt(split[1]); break;
 					case "InitialEntityPoolSize": ENTITY_INIT_COUNT = Integer.parseInt(split[1]); break;
+					case "InitialAgentPoolSize": AGENT_INIT_COUNT = Integer.parseInt(split[1]); break;
 				}
 			}
 		}catch(IOException ioe){
@@ -39,4 +40,5 @@ class Config{
 	public static int getWorldHeight(){return WORLD_HEIGHT;}
 	public static int getWorldCellSize(){return WORLD_CELL_SIZE;}
 	public static int getEntityInitCount(){return ENTITY_INIT_COUNT;}
+	public static int getAgentInitCount(){return AGENT_INIT_COUNT;}
 }

@@ -65,4 +65,8 @@ class KeyboardHandler implements KeyListener{
 	public boolean isKeyDown(int key){
 		return (keyMap & (1<<key)) != 0;
 	}
+	
+	public boolean isAnyDown(){
+		return isLeftDown()|isRightDown()|isUpDown()|isDownDown();
+	}
 }

@@ -38,12 +38,6 @@ public class Main{
 		window.setResizable(false);
 		window.show();
 		
-		/*
-		entityList = new ArrayList<Entity>();
-		toRemove = new ArrayList<Entity>();
-		toAdd = new ArrayList<Entity>();
-		*/
-		
 		long timeSoFar = 0;
 		long oldTime = System.nanoTime();
 		while(true){
@@ -52,35 +46,29 @@ public class Main{
 			timeSoFar += deltaTime;
 			oldTime = curTime;
 			
-			System.out.println(timeSoFar/1000000000L);
-			
 			if(mouseHandler.isMouseDown()){
 				int x = mouseHandler.getPressedX()-canvas.getOffsetX()-Config.getWindowWidth();
 				int y = mouseHandler.getPressedY()-canvas.getOffsetY()-Config.getWindowHeight();
 				//insert command
 			}
+			if(keyboardHandler.isAnyDown()){
+				if(keyboardHandler.isLeftDown()){
+					canvas.addOffsetX(-5*deltaTime/20000000.);
+				}
+				if(keyboardHandler.isRightDown()){
+					canvas.addOffsetX(5*deltaTime/20000000.);
+				}
+				if(keyboardHandler.isUpDown()){
+					canvas.addOffsetY(-5*deltaTime/20000000.);
+				}
+				if(keyboardHandler.isDownDown()){
+					canvas.addOffsetY(5*deltaTime/20000000.);
+				}
+			}
 			
-			/*
-			for(Entity e: entityList){
-				e.process(deltaTime);
-			}
-			for(Entity e: toRemove){
-				entityList.remove(e);
-			}
-			toRemove.clear();
-			for(Entity e: toAdd){
-				entityList.add(e);
-			}
-			toAdd.clear();
-			*/
+			world.process(deltaTime);
 			
-			//canvas.repaint();
+			canvas.repaint();
 		}
 	}
-	
-	/*
-	public static void remove(Entity e){
-		toRemove.add(e);
-	}
-	*/
 }

@@ -2,8 +2,6 @@ import java.util.*;
 import java.io.*;
 
 class ObjectHandler{
-	private static final int ENTITY_INIT_COUNT = Config.getEntityInitCount();
-
 	private static ObjectHandler unique;
 	
 	private ObjectHandler(){}
@@ -17,11 +15,17 @@ class ObjectHandler{
 	ObjectPool<Entity> entityPool;
 	ArrayList<Entity> entityPrototypes;
 	HashMap<String, Integer> entityPrototypeIds;
+	ObjectPool<Agent> agentPool;
+	ArrayList<Agent> agentPrototypes;
+	HashMap<String, Integer> agentPrototypeIds;
 	
 	public void setup(){
-		entityPool = new ObjectPool<Entity>(ENTITY_INIT_COUNT, Entity.class);
+		entityPool = new ObjectPool<Entity>(Config.getEntityInitCount(), Entity.class);
 		entityPrototypes = new ArrayList<Entity>();
 		entityPrototypeIds = new HashMap<String, Integer>();
+		agentPool = new ObjectPool<Agent>(Config.getAgentInitCount(), Agent.class);
+		agentPrototypes = new ArrayList<Agent>();
+		agentPrototypeIds = new HashMap<String, Integer>();
 		
 		/* read prototypes from file
 		try{
@@ -31,15 +35,12 @@ class ObjectHandler{
 		*/
 	}
 	
-	public Entity clone(Entity prototype){
+	public Entity createEntity(int id){
+		Entity prototype = entityPrototypes.get(id);
 		Entity instance = entityPool.requestInstance();
-		//copy prototype
+		//clone prototype
 		
 		return instance;
-	}
-	
-	public Entity createEntity(int id){
-		return clone(entityPrototypes.get(id));
 	}
 	
 	public Entity createEntity(String name){
@@ -53,5 +54,26 @@ class ObjectHandler{
 	public void destroyEntity(Entity e){
 		e.setActive(false);
 		entityPool.returnInstance(e);
+	}
+	
+	public Agent createAgent(int id){
+		Agent prototype = agentPrototypes.get(id);
+		Agent instance = agentPool.requestInstance();
+		//clone prototype
+		
+		return instance;
+	}
+	
+	public Agent createAgent(String name){
+		if(agentPrototypeIds.containsKey(name)){
+			return createAgent(agentPrototypeIds.get(name));
+		}else{
+			return null;
+		}
+	}
+	
+	public void destroyAgent(Agent a){
+		a.setActive(false);
+		agentPool.returnInstance(a);
 	}
 }

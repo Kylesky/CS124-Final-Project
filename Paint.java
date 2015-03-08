@@ -28,6 +28,8 @@ class Paint extends Canvas{
 		}
 		
 		bufg.clearRect(0, 0, Config.getWindowWidth(), Config.getWindowHeight());
+		bufg.drawString(Main.world.getTime(), (int)(Config.getWindowWidth()+200+offsetX), (int)(Config.getWindowHeight()+200+offsetY));
+		
 		g.drawImage(buf, 0, 0, this);
 	}
 	
