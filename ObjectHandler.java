@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 class ObjectHandler{
-	private static final int ENTITY_INIT_COUNT = SystemPreferences.ENTITY_INIT_COUNT;
+	private static final int ENTITY_INIT_COUNT = Config.getEntityInitCount();
 
 	private static ObjectHandler unique;
 	
