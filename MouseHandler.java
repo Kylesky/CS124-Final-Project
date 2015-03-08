@@ -6,6 +6,7 @@ import javax.swing.event.*;
 class MouseHandler implements MouseListener{
 	private static MouseHandler unique;
 	
+	private MouseHandler(){}
 	public static MouseHandler getInstance(){
 		if(unique == null){
 			unique = new MouseHandler();

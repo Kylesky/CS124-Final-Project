@@ -10,6 +10,7 @@ class KeyboardHandler implements KeyListener{
 	public static final int UP = 2;
 	public static final int DOWN = 3;
 	
+	private KeyboardHandler(){}
 	public static KeyboardHandler getInstance(){
 		if(unique == null){
 			unique = new KeyboardHandler();

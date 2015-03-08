@@ -18,7 +18,10 @@ public class Main{
 		
 		world = new World(WORLD_WIDTH, WORLD_HEIGHT);
 		
-		//StateHandler.setup();
+		StateHandler stateHandler = StateHandler.getInstance();
+		ObjectHandler objectHandler = ObjectHandler.getInstance();
+		stateHandler.setup();
+		objectHandler.setup();
 		
 		Paint canvas = new Paint();
 		canvas.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
