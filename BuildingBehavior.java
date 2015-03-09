@@ -5,14 +5,15 @@ public abstract class BuildingBehavior
 {
 	String name; 
 	Color color; 
+	World world;
 	int w,h; 
-	public BuildingBehavior(String name, Color color, int w, int h)
+	public BuildingBehavior(String name, Color color, int w, int h, World world)
 	{
 		this.name = name;
 		this.color = color;
 		this.w = w;
 		this.h = h;
-		
+		this.world = world; 
 	}
 	
 	public abstract void execute();
