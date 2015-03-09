@@ -34,6 +34,8 @@ public class NeedManager
 		
 		this.house = house; 
 		Arrays.fill(weights,1); 
+		
+		//Set weights so that needs are more important in satisfaction computation
 		weights[FOOD]=3; 
 		weights[NONFOOD]=3; 
 		for(int i=0; i<weights.length; i++)
@@ -56,6 +58,15 @@ public class NeedManager
 		if(conv.containsKey(need)) flag = conv.get(need);
 		
 		if(flag!=-1) needs[flag]=val; 
+		else throw new InvalidNeedException(); 
+	}
+	
+	public int getVal(String need) throws InvalidNeedException
+	{
+		int flag = -1; 
+		if(conv.containsKey(need)) flag = conv.get(need);
+		
+		if(flag!=-1) return needs[flag]; 
 		else throw new InvalidNeedException(); 
 	}
 }

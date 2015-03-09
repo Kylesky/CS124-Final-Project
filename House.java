@@ -17,6 +17,7 @@ public class House extends Building
 	{
 		throw new UnsupportedOperationException(); 
 	}
+	
 	public int getSat()
 	{
 		satisfaction = needs.getSat(); 
