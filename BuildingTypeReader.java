@@ -41,7 +41,8 @@ public class BuildingTypeReader
 				ret.add(new NeedBehavior(name, cost, color, width, height, wealth, defAmount, serviceTime, serviced)); 
 			}else if(type.equals("ENTERTAINMENT"))
 			{
-				
+				int serviceTime = Integer.parseInt(tk.nextToken().trim());
+				ret.add(new EntertainmentBehavior(name, cost, color, width, height, wealth, serviceTime)); 
 			}
 		}
 		return ret;
