@@ -22,7 +22,7 @@ public class Main{
 		stateHandler.setup();
 		objectHandler.setup();
 		
-		Paint canvas = new Paint();
+		Paint canvas = new Paint(world);
 		canvas.setPreferredSize(new Dimension(Config.getWindowWidth(), Config.getWindowHeight()));
 		window.add(canvas);
 		
@@ -53,16 +53,16 @@ public class Main{
 			}
 			if(keyboardHandler.isAnyDown()){
 				if(keyboardHandler.isLeftDown()){
-					canvas.addOffsetX(-5*deltaTime/20000000.);
+					canvas.addOffsetX(5*deltaTime/10000000.);
 				}
 				if(keyboardHandler.isRightDown()){
-					canvas.addOffsetX(5*deltaTime/20000000.);
+					canvas.addOffsetX(-5*deltaTime/10000000.);
 				}
 				if(keyboardHandler.isUpDown()){
-					canvas.addOffsetY(-5*deltaTime/20000000.);
+					canvas.addOffsetY(5*deltaTime/10000000.);
 				}
 				if(keyboardHandler.isDownDown()){
-					canvas.addOffsetY(5*deltaTime/20000000.);
+					canvas.addOffsetY(-5*deltaTime/10000000.);
 				}
 			}
 			

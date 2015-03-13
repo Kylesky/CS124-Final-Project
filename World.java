@@ -12,6 +12,7 @@ class World{
 		this.width = width;
 		this.height = height;
 		this.timeNanos = 0;
+		grid = new Entity[height][width];
 		agents = new ArrayList<Agent>();
 	}
 	
@@ -23,6 +24,10 @@ class World{
 		return grid[r][c] != null;
 	}
 	
+	public Entity getCell(int r, int c){
+		return grid[r][c];
+	}
+	
 	public void process(long deltaTime){
 		timeNanos += deltaTime;
 	}
@@ -31,4 +36,8 @@ class World{
 		long time = (timeNanos/1000000000L)%(1440);
 		return String.format("%02d:%02d", time/60, time%60);
 	}
+	
+	public int getWidth() {return width;}
+	public int getHeight() {return height;}
+	public int getCellSize() {return CELL_SIZE;}
 }
