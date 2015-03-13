@@ -6,7 +6,7 @@ public class Building extends Entity
 	
 	public Building(int r, int c, BuildingBehavior behavior, World world)
 	{
-		super(r,c,world);
+		super(r,c,world,Entity.BUILDING);
 		this.behavior = behavior;
 	}
 	

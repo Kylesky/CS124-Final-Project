@@ -10,7 +10,7 @@ class Paint extends Canvas{
 	private double offsetX, offsetY;
 	private World world;
 	private Color GRID_COLOR;
-	private Stroke solid, broken;
+	public static Stroke solidStroke, brokenStroke, roadStroke;
 	
 	public Paint(World world){
 		firstDraw = true;
@@ -30,18 +30,18 @@ class Paint extends Canvas{
 	
 	public void paint(Graphics g){
 		if(firstDraw){
+			firstDraw = false;
 			setBackground(Color.white);
 			buf = (BufferedImage)createImage(imgWidth, imgHeight);
 			bufg = (Graphics2D)buf.getGraphics();
 			bufg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			firstDraw = false;
-			solid = bufg.getStroke();
-			broken = new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{world.getCellSize()/4}, 0);
+			solidStroke = bufg.getStroke();
+			brokenStroke = new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{world.getCellSize()/4}, 0);
+			roadStroke = new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{0, world.getCellSize()/8, world.getCellSize()/4, world.getCellSize()/8}, 0);
 		}
-		
 		bufg.clearRect(0, 0, imgWidth, imgHeight);
 
-        bufg.setStroke(broken);
+        bufg.setStroke(brokenStroke);
 		bufg.setColor(GRID_COLOR);
 		for(int i=0; i<=world.getWidth(); i++){
 			int x = (int)(i*world.getCellSize()+offsetX);
@@ -55,12 +55,13 @@ class Paint extends Canvas{
 			if(y > imgHeight) break;
 			bufg.drawLine(-3*world.getCellSize()/8+(int)(offsetX)%world.getCellSize()-(movx?1:0), y, imgWidth, y);
 		}
-        bufg.setStroke(solid);
+        bufg.setStroke(solidStroke);
 		
 		for(int c=0; c<world.getWidth(); c++){
 			for(int r=0; r<world.getHeight(); r++){
 				if(world.isEmpty(r, c)) continue;
 				Entity toDraw = world.getCell(r, c);
+				toDraw.draw(bufg, (int)offsetX, (int)offsetY);
 			}
 		}
 		
