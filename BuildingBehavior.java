@@ -6,17 +6,18 @@ public abstract class BuildingBehavior
 	String name; 
 	Color color; 
 	World world;
-	int w,h; 
-	public BuildingBehavior(String name, Color color, int w, int h, World world)
+	int w,h,wealth; 
+	public BuildingBehavior(String name, Color color, int w, int h, int wealth, World world)
 	{
 		this.name = name;
 		this.color = color;
 		this.w = w;
 		this.h = h;
+		this.wealth = wealth;
 		this.world = world; 
 	}
 	
-	public abstract void execute();
+	public abstract void execute(long deltaTime, Building build);
 	
 	public void draw(Graphics2D g, int r, int c, int offsetX, int offsetY)
 	{
