@@ -18,7 +18,7 @@ public abstract class BuildingBehavior
 	}
 	
 	public abstract void execute(long deltaTime, Building build);
-	
+	public abstract void setup(Building build); 
 	public void draw(Graphics2D g, int r, int c, int offsetX, int offsetY)
 	{
 		int cellsize = Config.getWorldCellSize(); 
