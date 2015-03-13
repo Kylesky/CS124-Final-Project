@@ -32,10 +32,10 @@ public class BuildingTypeReader
 			int wealth = Integer.parseInt(tk.nextToken().trim());
 			if(type.equals("UTILITY"))
 			{
-				int radius = Integer.parseInt(tk.nextToken().trim());
+				int cap = Integer.parseInt(tk.nextToken().trim());
 				int util = Integer.parseInt(tk.nextToken().trim());
 				//Util==1 is power, util==2 is water
-				ret.add(new Utility(name, color, width, height, wealth, world, radius,util));  
+				ret.add(new Utility(name, color, width, height, wealth, world, cap, util));  
 			}else if(type.equals("FOOD"))
 			{
 				

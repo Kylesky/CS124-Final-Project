@@ -3,11 +3,12 @@ public class Building extends Entity
 {
 	String name;
 	BuildingBehavior behavior; 
-	
+	int[] fields; 
 	public Building(int r, int c, BuildingBehavior behavior, World world)
 	{
 		super(r,c,world,Entity.BUILDING);
 		this.behavior = behavior;
+		fields = new int[5]; 
 	}
 	
 	//Get behavior of certain building flyweight
@@ -30,6 +31,6 @@ public class Building extends Entity
 	
 	public void process(long deltaTime)
 	{
-		getbhvr().execute();
+		getbhvr().execute(deltaTime, this);
 	}
 }

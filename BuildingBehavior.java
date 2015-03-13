@@ -17,7 +17,7 @@ public abstract class BuildingBehavior
 		this.world = world; 
 	}
 	
-	public abstract void execute();
+	public abstract void execute(long deltaTime, Building build);
 	
 	public void draw(Graphics2D g, int r, int c, int offsetX, int offsetY)
 	{
