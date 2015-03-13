@@ -7,9 +7,9 @@ public class NeedBehavior extends BuildingBehavior
 	final int UNITS = 0; 
 	final int SALES = 1;
 	int serviced;  
-	public NeedBehavior(String name, Color color, int w, int h, int wealth, World world, int defAmount, int serviceTime, int serviced)
+	public NeedBehavior(String name, Color color, int w, int h, int wealth, int defAmount, int serviceTime, int serviced)
 	{
-		super(name, color, w, h, wealth, world);
+		super(name, color, w, h, wealth);
 		this.defAmount = defAmount; 
 		this.serviceTime = serviceTime; 
 		this.serviced = serviced;
@@ -27,7 +27,7 @@ public class NeedBehavior extends BuildingBehavior
 	
 	public void execute(long deltaTime, Building build)
 	{
-		long curTime = world.getCurrentTime(); 
+		long curTime = build.getWorld().getCurrentTime(); 
 		while(!build.agents.isEmpty())
 		{
 			Agent e = build.agents.peek(); 
@@ -42,7 +42,7 @@ public class NeedBehavior extends BuildingBehavior
 					build.fields[UNITS]--; 
 					//Add needs based on serviced to household of Agent e
 				}
-				world.spawnAgent(e,build.getR(),build.getC()); 
+				build.getWorld().spawnAgent(e,build.getR(),build.getC()); 
 			}else break;
 		}
 	}

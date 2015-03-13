@@ -4,13 +4,8 @@ import java.awt.*;
 
 public class BuildingTypeReader
 {
-	BufferedReader br; 
-	World world; 
-	public BuildingTypeReader(World world)
-	{
-		this.world=world; 
-	}
-	public ArrayList<BuildingBehavior> getBehaviors() throws Exception
+	static BufferedReader br; 
+	public static ArrayList<BuildingBehavior> getBehaviors() throws Exception
 	{
 		br = new BufferedReader(new FileReader("Buildings.txt"));
 		br.readLine();
@@ -35,14 +30,14 @@ public class BuildingTypeReader
 				int cap = Integer.parseInt(tk.nextToken().trim());
 				int util = Integer.parseInt(tk.nextToken().trim());
 				//Util==1 is power, util==2 is water
-				ret.add(new UtilityBehavior(name, color, width, height, wealth, world, cap, util));  
+				ret.add(new UtilityBehavior(name, color, width, height, wealth, cap, util));  
 			}else if(type.equals("NEED"))
 			{
 				int defAmount = Integer.parseInt(tk.nextToken().trim());
 				int serviceTime = Integer.parseInt(tk.nextToken().trim());
 				int serviced = Integer.parseInt(tk.nextToken().trim());
 				
-				ret.add(new NeedBehavior(name, color, width, height, wealth, world, defAmount, serviceTime, serviced)); 
+				ret.add(new NeedBehavior(name, color, width, height, wealth, defAmount, serviceTime, serviced)); 
 			}else if(type.equals("ENTERTAINMENT"))
 			{
 				

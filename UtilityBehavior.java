@@ -3,9 +3,9 @@ import java.awt.*;
 public class UtilityBehavior extends BuildingBehavior
 {
 	int capacity, util; 
-	public UtilityBehavior(String name, Color color, int w, int h, int wealth, World world, int capacity, int util)
+	public UtilityBehavior(String name, Color color, int w, int h, int wealth, int capacity, int util)
 	{
-		super(name, color, w, h, wealth, world);
+		super(name, color, w, h, wealth);
 		this.capacity = capacity;
 		this.util = util; 
 	}
