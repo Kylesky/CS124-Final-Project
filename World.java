@@ -49,6 +49,15 @@ class World{
 		return String.format("%02d:%02d", time/60, time%60);
 	}
 	
+	public void spawnAgent(Agent e, int r, int c)
+	{
+		
+	}
+	
+	public long getCurrentTime()
+	{
+		return timeNanos; 
+	}
 	public int getWidth() {return width;}
 	public int getHeight() {return height;}
 	public int getCellSize() {return CELL_SIZE;}

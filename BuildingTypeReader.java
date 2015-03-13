@@ -35,10 +35,12 @@ public class BuildingTypeReader
 				int cap = Integer.parseInt(tk.nextToken().trim());
 				int util = Integer.parseInt(tk.nextToken().trim());
 				//Util==1 is power, util==2 is water
-				ret.add(new Utility(name, color, width, height, wealth, world, cap, util));  
+				ret.add(new UtilityBehavior(name, color, width, height, wealth, world, cap, util));  
 			}else if(type.equals("FOOD"))
 			{
-				
+				int defAmount = Integer.parseInt(tk.nextToken().trim());
+				int serviceTime = Integer.parseInt(tk.nextToken().trim());
+				ret.add(new FoodBehavior(name, color, width, height, wealth, world, defAmount, serviceTime)); 
 			}else if(type.equals("NONFOOD"))
 			{
 				

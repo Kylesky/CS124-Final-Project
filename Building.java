@@ -9,6 +9,7 @@ public class Building extends Entity
 		super(r,c,world,Entity.BUILDING);
 		this.behavior = behavior;
 		fields = new int[5]; 
+		behavior.setup(this); 
 	}
 	
 	//Get behavior of certain building flyweight
