@@ -12,19 +12,31 @@ class ObjectHandler{
 		return unique;
 	}
 	
-	ObjectPool<Entity> entityPool;
-	ArrayList<Entity> entityPrototypes;
-	HashMap<String, Integer> entityPrototypeIds;
+	ObjectPool<Building> buildingPool;
+	ObjectPool<House> housePool;
+	ObjectPool<Road> roadPool;
 	ObjectPool<Agent> agentPool;
+	
+	ArrayList<Building> buildingPrototypes;
+	ArrayList<House> housePrototypes;
 	ArrayList<Agent> agentPrototypes;
+	
+	HashMap<String, Integer> buildingPrototypeIds;
+	HashMap<String, Integer> housePrototypeIds;
 	HashMap<String, Integer> agentPrototypeIds;
 	
 	public void setup(){
-		entityPool = new ObjectPool<Entity>(Config.getEntityInitCount(), Entity.class);
-		entityPrototypes = new ArrayList<Entity>();
-		entityPrototypeIds = new HashMap<String, Integer>();
+		buildingPool = new ObjectPool<Building>(Config.getBuildingInitCount(), Building.class);
+		housePool = new ObjectPool<House>(Config.getHouseInitCount(), House.class);
+		roadPool = new ObjectPool<Road>(Config.getRoadInitCount(), Road.class);
 		agentPool = new ObjectPool<Agent>(Config.getAgentInitCount(), Agent.class);
+		
+		buildingPrototypes = new ArrayList<Building>();
+		housePrototypes = new ArrayList<House>();
 		agentPrototypes = new ArrayList<Agent>();
+		
+		buildingPrototypeIds = new HashMap<String, Integer>();
+		housePrototypeIds = new HashMap<String, Integer>();
 		agentPrototypeIds = new HashMap<String, Integer>();
 		
 		/* read prototypes from file
@@ -35,25 +47,58 @@ class ObjectHandler{
 		*/
 	}
 	
-	public Entity createEntity(int id){
-		Entity prototype = entityPrototypes.get(id);
-		Entity instance = entityPool.requestInstance();
+	public Building createBuilding(int id){
+		Building prototype = buildingPrototypes.get(id);
+		Building instance = buildingPool.requestInstance();
 		//clone prototype
 		
 		return instance;
 	}
 	
-	public Entity createEntity(String name){
-		if(entityPrototypeIds.containsKey(name)){
-			return createEntity(entityPrototypeIds.get(name));
+	public Building createBuilding(String name){
+		if(buildingPrototypeIds.containsKey(name)){
+			return createBuilding(buildingPrototypeIds.get(name));
 		}else{
 			return null;
 		}
 	}
 	
-	public void destroyEntity(Entity e){
+	public void destroyBuilding(Building b){
+		b.setActive(false);
+		buildingPool.returnInstance(b);
+	}
+	
+	public House createHouse(int id){
+		House prototype = housePrototypes.get(id);
+		House instance = housePool.requestInstance();
+		//clone prototype
+		
+		return instance;
+	}
+	
+	public House createHouse(String name){
+		if(housePrototypeIds.containsKey(name)){
+			return createHouse(housePrototypeIds.get(name));
+		}else{
+			return null;
+		}
+	}
+	
+	public void destroyHouse(House e){
 		e.setActive(false);
-		entityPool.returnInstance(e);
+		housePool.returnInstance(e);
+	}
+	
+	public Road createRoad(){
+		Road instance = roadPool.requestInstance();
+		//clone prototype?
+		
+		return instance;
+	}
+	
+	public void destroyRoad(Road e){
+		e.setActive(false);
+		roadPool.returnInstance(e);
 	}
 	
 	public Agent createAgent(int id){
