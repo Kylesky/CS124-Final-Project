@@ -5,16 +5,14 @@ public abstract class BuildingBehavior
 {
 	String name; 
 	Color color; 
-	World world;
 	int width, height, wealth; 
-	public BuildingBehavior(String name, Color color, int width, int height, int wealth, World world)
+	public BuildingBehavior(String name, Color color, int width, int height, int wealth)
 	{
 		this.name = name;
 		this.color = color;
 		this.width = width;
 		this.height = height;
 		this.wealth = wealth;
-		this.world = world; 
 	}
 	public void restock(Building build){};
 	public abstract void execute(long deltaTime, Building build);
