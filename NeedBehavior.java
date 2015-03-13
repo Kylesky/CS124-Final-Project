@@ -1,16 +1,18 @@
 import java.util.*;
 import java.awt.*;
-public class FoodBehavior extends BuildingBehavior
+public class NeedBehavior extends BuildingBehavior
 {
 	int defAmount, serviceTime;
 	//Universal parameter indices
 	final int UNITS = 0; 
 	final int SALES = 1;
-	public FoodBehavior(String name, Color color, int w, int h, int wealth, World world, int defAmount, int serviceTime)
+	int serviced;  
+	public NeedBehavior(String name, Color color, int w, int h, int wealth, World world, int defAmount, int serviceTime, int serviced)
 	{
 		super(name, color, w, h, wealth, world);
 		this.defAmount = defAmount; 
 		this.serviceTime = serviceTime; 
+		this.serviced = serviced;
 	}
 	
 	public void restock(Building build)
@@ -38,7 +40,7 @@ public class FoodBehavior extends BuildingBehavior
 				{
 					build.fields[SALES]++;
 					build.fields[UNITS]--; 
-					//Add food to Agent e's household
+					//Add needs based on serviced to household of Agent e
 				}
 				world.spawnAgent(e,build.getR(),build.getC()); 
 			}else break;
