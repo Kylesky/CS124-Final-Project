@@ -5,13 +5,13 @@ public abstract class BuildingBehavior
 {
 	String name; 
 	Color color; 
-	int w,h,wealth; 
-	public BuildingBehavior(String name, Color color, int w, int h, int wealth)
+	int width, height, wealth; 
+	public BuildingBehavior(String name, Color color, int width, int height, int wealth)
 	{
 		this.name = name;
 		this.color = color;
-		this.w = w;
-		this.h = h;
+		this.width = width;
+		this.height = height;
 		this.wealth = wealth;
 	}
 	public void restock(Building build){};
@@ -22,6 +22,6 @@ public abstract class BuildingBehavior
 		int cellsize = Config.getWorldCellSize(); 
 		int x = c*cellsize + offsetX;
 		int y = r*cellsize + offsetY; 
-		g.fillRect(x,y,w,h); 
+		g.fillRect(x,y,width*cellsize,height*cellsize); 
 	}
 }

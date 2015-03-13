@@ -4,19 +4,19 @@ public class House extends Entity
 {
 	NeedManager needs; 
 	ArrayList<Agent> agents; 
-	int adults, kids, health, wealth, satisfaction, w, h; 
+	int adults, kids, health, wealth, satisfaction, width, height; 
 	public House(int r, int c, World world)
 	{
 		super(r,c,world,Entity.HOUSE);
 		adults = 1;
 		kids = 0;
 		health = 100; 
-		wealth = 0; 
+		wealth = 0;
 		satisfaction = 0; 
 		needs = new NeedManager(this); 
 		agents = new ArrayList<Agent>(); 
-		w=2;
-		h=2;
+		width=2;
+		height=2;
 	}
 	
 	public int getSat()
