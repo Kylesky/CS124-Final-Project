@@ -1,8 +1,10 @@
 import java.awt.*;
 
-abstract class Agent{
+public class Agent{
 	private double x, y;
 	private boolean active;
+	
+	public Agent(){}
 	public Agent(double x, double y){
 		this.x = x;
 		this.y = y;
@@ -16,6 +18,8 @@ abstract class Agent{
 	public double getY(){return y;}
 	public boolean isActive(){return active;}
 	
-	public abstract void draw(Graphics2D g, int offsetX, int offsetY);
-	public abstract void process(long deltaTime);
+	public void draw(Graphics2D g, int offsetX, int offsetY){
+	}
+	public void process(long deltaTime){
+	}
 }

@@ -14,6 +14,8 @@ public abstract class BuildingBehavior
 		this.height = height;
 		this.wealth = wealth;
 	}
+	public String getName(){return name;}
+	
 	public void restock(Building build){};
 	public abstract void execute(long deltaTime, Building build);
 	public void setup(Building build){}; 
@@ -22,6 +24,7 @@ public abstract class BuildingBehavior
 		int cellsize = Config.getWorldCellSize(); 
 		int x = c*cellsize + offsetX;
 		int y = r*cellsize + offsetY; 
+		g.setColor(color);
 		g.fillRect(x,y,width*cellsize,height*cellsize); 
 	}
 }

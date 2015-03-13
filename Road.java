@@ -4,6 +4,7 @@ public class Road extends Entity
 	public static final int[] mr = {0, 1, 0, -1};
 	public static final int[] mc = {1, 0, -1, 0};
 
+	public Road(){}
 	public Road(int r, int c, World world)
 	{
 		super(r,c,world,Entity.ROAD);

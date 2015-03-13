@@ -2,6 +2,7 @@ import java.awt.*;
 
 public abstract class HouseBehavior
 {
+	String name;
 	Color color;
 	World world;
 	int width, height;

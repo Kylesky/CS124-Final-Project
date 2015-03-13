@@ -65,7 +65,8 @@ class Paint extends Canvas{
 			for(int r=0; r<world.getHeight(); r++){
 				if(world.isEmpty(r, c)) continue;
 				Entity toDraw = world.getCell(r, c);
-				toDraw.draw(bufg, (int)offsetX, (int)offsetY);
+				if(toDraw.getR() == r && toDraw.getC() == c)
+					toDraw.draw(bufg, (int)offsetX, (int)offsetY);
 			}
 		}
 		
@@ -89,6 +90,7 @@ class Paint extends Canvas{
 		bufg.setColor(Color.BLUE);
 		bufg.fillRect(imgWidth-240, 0, 200, imgHeight);
 		
+		
 		bufg.drawString(Main.world.getTime(), (int)(imgWidth+200+offsetX), (int)(imgHeight+200+offsetY));
 		
 		g.drawImage(buf, 0, 0, this);
@@ -106,27 +108,27 @@ class Paint extends Canvas{
 		movx = true;
 		offsetX += x;
 		if(offsetX > 0) offsetX = 0;
-		if(offsetX < -(world.getWidth()-1)*world.getCellSize()+Config.getWindowWidth()) offsetX = -(world.getWidth()-1)*world.getCellSize()+Config.getWindowWidth();
+		if(offsetX < -(world.getWidth()+5)*world.getCellSize()+Config.getWindowWidth()+9) offsetX = -(world.getWidth()+5)*world.getCellSize()+Config.getWindowWidth()+9;
 	}
 	
 	public void addOffsetY(double y){
 		movy = true;
 		offsetY += y;
 		if(offsetY > 0) offsetY = 0;
-		if(offsetY < -(world.getHeight()-1)*world.getCellSize()+Config.getWindowHeight()) offsetY = -(world.getHeight()-1)*world.getCellSize()+Config.getWindowHeight();
+		if(offsetY < -(world.getHeight()+1)*world.getCellSize()+Config.getWindowHeight()+9) offsetY = -(world.getHeight()+1)*world.getCellSize()+Config.getWindowHeight()+9;
 	}
 	
 	public void setOffsetX(double x){
 		movx = true;
 		offsetX = x;
 		if(offsetX > 0) offsetX = 0;
-		if(offsetX < -(world.getWidth()-1)*world.getCellSize()+Config.getWindowWidth()) offsetX = -(world.getWidth()-1)*world.getCellSize()+Config.getWindowWidth();
+		if(offsetX < -(world.getWidth()+5)*world.getCellSize()+Config.getWindowWidth()+9) offsetX = -(world.getWidth()+5)*world.getCellSize()+Config.getWindowWidth()+9;
 	}
 	
 	public void setOffsetY(double y){
 		movy = true;
 		offsetY = y;
 		if(offsetY > 0) offsetY = 0;
-		if(offsetY < -(world.getHeight()-1)*world.getCellSize()+Config.getWindowHeight()) offsetY = -(world.getHeight()-1)*world.getCellSize()+Config.getWindowHeight();
+		if(offsetY < -(world.getHeight()+1)*world.getCellSize()+Config.getWindowHeight()+9) offsetY = -(world.getHeight()+1)*world.getCellSize()+Config.getWindowHeight()+9;
 	}
 }

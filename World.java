@@ -14,6 +14,13 @@ class World{
 		this.timeNanos = 0;
 		grid = new Entity[height][width];
 		agents = new ArrayList<Agent>();
+		
+		grid[100][100] = ObjectHandler.getInstance().createBuilding("POWER PLANT");
+		grid[100][100].setR(100);
+		grid[100][100].setC(100);
+		grid[105][105] = ObjectHandler.getInstance().createBuilding("HOTDOG STAND");
+		grid[105][105].setR(105);
+		grid[105][105].setC(105);
 	}
 	
 	public boolean boundsCheck(int r, int c){

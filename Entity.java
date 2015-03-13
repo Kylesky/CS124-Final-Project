@@ -8,6 +8,7 @@ abstract class Entity{
 	public static final int HOUSE = 1;
 	public static final int ROAD = 2;
 	
+	public Entity(){}
 	public Entity(int r, int c, World world, int type){
 		this.r = r;
 		this.c = c;

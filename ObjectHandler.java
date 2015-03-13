@@ -25,7 +25,7 @@ class ObjectHandler{
 	HashMap<String, Integer> housePrototypeIds;
 	HashMap<String, Integer> agentPrototypeIds;
 	
-	public void setup(){
+	public void setup() throws Exception{
 		buildingPool = new ObjectPool<Building>(Config.getBuildingInitCount(), Building.class);
 		housePool = new ObjectPool<House>(Config.getHouseInitCount(), House.class);
 		roadPool = new ObjectPool<Road>(Config.getRoadInitCount(), Road.class);
@@ -45,12 +45,23 @@ class ObjectHandler{
 		}catch(IOException ioe){
 		}
 		*/
+		
+		ArrayList<BuildingBehavior> buildingBehaviors = BuildingTypeReader.getBehaviors();
+		for(int i=0; i<buildingBehaviors.size(); i++){
+			Building prototype = new Building(-1, -1, buildingBehaviors.get(i), Main.world);
+			buildingPrototypeIds.put(buildingBehaviors.get(i).getName(), buildingPrototypes.size());
+			buildingPrototypes.add(prototype);
+		}
 	}
 	
 	public Building createBuilding(int id){
 		Building prototype = buildingPrototypes.get(id);
 		Building instance = buildingPool.requestInstance();
-		//clone prototype
+		
+		instance.setBehavior(prototype.getBehavior());
+		instance.clearAgents(); 
+		instance.clearTimes();
+		instance.copyFields(prototype);
 		
 		return instance;
 	}

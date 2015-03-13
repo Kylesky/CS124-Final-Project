@@ -4,8 +4,11 @@ public class House extends Entity
 {
 	NeedManager needs; 
 	ArrayList<Agent> agents; 
-	int adults, kids, health, wealth, satisfaction, width, height; 
-	public House(int r, int c, World world)
+	int adults, kids, health, wealth, satisfaction; 
+	HouseBehavior behavior;
+	
+	public House(){}
+	public House(int r, int c, HouseBehavior behavior, World world)
 	{
 		super(r,c,world,Entity.HOUSE);
 		adults = 1;
@@ -14,9 +17,8 @@ public class House extends Entity
 		wealth = 0;
 		satisfaction = 0; 
 		needs = new NeedManager(this); 
-		agents = new ArrayList<Agent>(); 
-		width=2;
-		height=2;
+		agents = new ArrayList<Agent>();
+		this.behavior = behavior;
 	}
 	
 	public int getSat()
@@ -50,10 +52,7 @@ public class House extends Entity
 	
 	public void draw(Graphics2D g, int offsetX, int offsetY)
 	{
-		int cellsize = Config.getWorldCellSize(); 
-		int x = getC()*cellsize + offsetX;
-		int y = getR()*cellsize + offsetY; 
-		g.fillRect(x,y,w,h); 
+		behavior.draw(g,getR(),getC(),offsetX,offsetY); 
 	}
 	
 	public void process(long deltaTime)

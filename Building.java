@@ -7,6 +7,8 @@ public class Building extends Entity
 	ArrayDeque<Agent> agents; 
 	ArrayDeque<Long> times; 
 	int[] fields; 
+	
+	public Building(){}
 	public Building(int r, int c, BuildingBehavior behavior, World world)
 	{
 		super(r,c,world,Entity.BUILDING);
@@ -23,22 +25,26 @@ public class Building extends Entity
 		times.offer(getWorld().getCurrentTime()); 
 	}
 	
-	public void restock()
-	{
-		behavior.restock(this);
+	public void clearAgents(){
+		if(agents == null) agents = new ArrayDeque<Agent>();
+		agents.clear();
 	}
+	public void clearTimes(){
+		if(times == null) times = new ArrayDeque<Long>();
+		times.clear();
+	}
+	public void copyFields(Building b){
+		fields = Arrays.copyOf(b.fields, b.fields.length);
+	}
+	
+	public void restock(){behavior.restock(this);}
 	
 	//Get behavior of certain building flyweight
-	public BuildingBehavior getbhvr()
-	{
-		return behavior; 
-	}
+	public BuildingBehavior getBehavior(){return behavior;}
+	public void setBehavior(BuildingBehavior behavior){this.behavior = behavior;}
 	
 	//Get name of building
-	public String getName()
-	{
-		return name; 
-	}
+	public String getName(){return name;}
 	
 	//Houses override these functions so don't worry about behavior being null
 	public void draw(Graphics2D g, int offsetX, int offsetY)
@@ -48,6 +54,6 @@ public class Building extends Entity
 	
 	public void process(long deltaTime)
 	{
-		getbhvr().execute(deltaTime, this);
+		getBehavior().execute(deltaTime, this);
 	}
 }
