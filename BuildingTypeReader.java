@@ -18,6 +18,7 @@ public class BuildingTypeReader
 			
 			String type = tk.nextToken().trim(); 
 			String name = tk.nextToken().trim(); 
+			int cost = Integer.parseInt(tk.nextToken().trim()); 
 			int r = Integer.parseInt(tk.nextToken().trim()); 
 			int g = Integer.parseInt(tk.nextToken().trim()); 
 			int b = Integer.parseInt(tk.nextToken().trim()); 
@@ -30,14 +31,14 @@ public class BuildingTypeReader
 				int cap = Integer.parseInt(tk.nextToken().trim());
 				int util = Integer.parseInt(tk.nextToken().trim());
 				//Util==1 is power, util==2 is water
-				ret.add(new UtilityBehavior(name, color, width, height, wealth, cap, util));  
+				ret.add(new UtilityBehavior(name, cost, color, width, height, wealth, cap, util));  
 			}else if(type.equals("NEED"))
 			{
 				int defAmount = Integer.parseInt(tk.nextToken().trim());
 				int serviceTime = Integer.parseInt(tk.nextToken().trim());
 				int serviced = Integer.parseInt(tk.nextToken().trim());
 				
-				ret.add(new NeedBehavior(name, color, width, height, wealth, defAmount, serviceTime, serviced)); 
+				ret.add(new NeedBehavior(name, cost, color, width, height, wealth, defAmount, serviceTime, serviced)); 
 			}else if(type.equals("ENTERTAINMENT"))
 			{
 				

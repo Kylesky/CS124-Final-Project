@@ -5,14 +5,15 @@ public abstract class BuildingBehavior
 {
 	String name; 
 	Color color; 
-	int width, height, wealth; 
-	public BuildingBehavior(String name, Color color, int width, int height, int wealth)
+	int width, height, wealth, cost; 
+	public BuildingBehavior(String name, int cost, Color color, int width, int height, int wealth)
 	{
 		this.name = name;
 		this.color = color;
 		this.width = width;
 		this.height = height;
 		this.wealth = wealth;
+		this.cost=cost; 
 	}
 	public String getName(){return name;}
 	
