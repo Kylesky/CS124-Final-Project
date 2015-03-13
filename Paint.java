@@ -6,20 +6,22 @@ class Paint extends Canvas{
 	private BufferedImage buf;
 	private Graphics2D bufg;
 	private boolean firstDraw, movx, movy;
-	private int imgWidth, imgHeight;
+	private int imgWidth, imgHeight, playerMoney;
 	private double offsetX, offsetY;
 	private World world;
 	private Color GRID_COLOR;
 	public static Stroke solidStroke, brokenStroke, roadStroke;
+	public static Font defFont, UIFont;
 	
 	public Paint(World world){
 		firstDraw = true;
 		offsetX = -world.getWidth()*world.getCellSize()/2;
 		offsetY = -world.getHeight()*world.getCellSize()/2;
 		imgWidth = Config.getWindowWidth()+50;
-		imgHeight = Config.getWindowWidth()+50;
+		imgHeight = Config.getWindowHeight()+50;
 		this.world = world;
 		movx = movy = false;
+		playerMoney = 0;
 		
 		GRID_COLOR = new Color(0, 0, 0, 31);
 	}
@@ -38,6 +40,8 @@ class Paint extends Canvas{
 			solidStroke = bufg.getStroke();
 			brokenStroke = new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{world.getCellSize()/4}, 0);
 			roadStroke = new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{0, world.getCellSize()/8, world.getCellSize()/4, world.getCellSize()/8}, 0);
+			defFont = bufg.getFont();
+			UIFont = bufg.getFont().deriveFont(23.f);
 		}
 		bufg.clearRect(0, 0, imgWidth, imgHeight);
 
@@ -64,6 +68,26 @@ class Paint extends Canvas{
 				toDraw.draw(bufg, (int)offsetX, (int)offsetY);
 			}
 		}
+		
+		bufg.setColor(Color.BLUE);
+		bufg.fillRect(0, imgHeight-80, imgWidth, 40);
+		bufg.setColor(Color.BLACK);
+		bufg.setFont(UIFont);
+		bufg.drawString(world.getTime(), 10, imgHeight-52);
+		bufg.drawRect(5, imgHeight-75, 67, 28);
+		bufg.drawString(String.format("%07d", playerMoney), 90, imgHeight-52);
+		bufg.drawRect(85, imgHeight-75, 100, 28);
+		bufg.drawString("Build", 200, imgHeight-52);
+		bufg.drawRect(195, imgHeight-75, 58, 28);
+		bufg.drawString("Demolish", 270, imgHeight-52);
+		bufg.drawRect(265, imgHeight-75, 103, 28);
+		bufg.drawString("Overlays", 385, imgHeight-52);
+		bufg.drawRect(380, imgHeight-75, 100, 28);
+		bufg.drawString("Statistics", 500, imgHeight-52);
+		bufg.drawRect(495, imgHeight-75, 100, 28);
+		
+		bufg.setColor(Color.BLUE);
+		bufg.fillRect(imgWidth-240, 0, 200, imgHeight);
 		
 		bufg.drawString(Main.world.getTime(), (int)(imgWidth+200+offsetX), (int)(imgHeight+200+offsetY));
 		
