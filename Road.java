@@ -1,11 +1,9 @@
 import java.awt.*;
 public class Road extends Entity
 {
-	World world; 
-	
-	public Road(int r, int c)
+	public Road(int r, int c, World world)
 	{
-		super(r,c);
+		super(r,c,world);
 	}
 	
 	public void draw(Graphics2D g, int offsetX, int offsetY)

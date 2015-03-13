@@ -3,11 +3,10 @@ public class Building extends Entity
 {
 	String name;
 	BuildingBehavior behavior; 
-	World world; 
 	
-	public Building(int r, int c, BuildingBehavior behavior)
+	public Building(int r, int c, BuildingBehavior behavior, World world)
 	{
-		super(r,c);
+		super(r,c,world);
 		this.behavior = behavior;
 	}
 	

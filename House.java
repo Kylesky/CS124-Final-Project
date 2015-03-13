@@ -5,9 +5,9 @@ public class House extends Entity
 	NeedManager needs; 
 	ArrayList<Agent> agents; 
 	int adults, kids, health, wealth, satisfaction; 
-	public House(int r, int c)
+	public House(int r, int c, World world)
 	{
-		super(r,c);
+		super(r,c,world);
 		adults = 1;
 		kids = 0;
 		health = 100; 
