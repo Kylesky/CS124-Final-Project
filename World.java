@@ -16,15 +16,27 @@ class World{
 		agents = new ArrayList<Agent>();
 	}
 	
+	public boolean boundsCheck(int r, int c){
+		return r >= 0 && c >= 0 && r <= height && c <= width;
+	}
+	
 	public boolean isEmpty(int r, int c){
+		if(!boundsCheck(r, c)) return false;
 		return grid[r][c] == null;
 	}
 	
 	public boolean isOccupied(int r, int c){
+		if(!boundsCheck(r, c)) return false;
 		return grid[r][c] != null;
 	}
 	
+	public boolean isRoad(int r, int c){
+		if(!boundsCheck(r, c)) return false;
+		return isOccupied(r, c) && grid[r][c].getType() == Entity.ROAD;
+	}
+	
 	public Entity getCell(int r, int c){
+		if(!boundsCheck(r, c)) return null;
 		return grid[r][c];
 	}
 	

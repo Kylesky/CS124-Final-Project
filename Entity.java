@@ -1,12 +1,17 @@
 import java.awt.*;
 
 abstract class Entity{
-	private int r, c;
+	private int r, c, type;
 	private boolean active;
 	private World world;
-	public Entity(int r, int c, World world){
+	public static final int BUILDING = 0;
+	public static final int HOUSE = 1;
+	public static final int ROAD = 2;
+	
+	public Entity(int r, int c, World world, int type){
 		this.r = r;
 		this.c = c;
+		this.type = type;
 		active = true;
 		this.world = world;
 	}
@@ -18,6 +23,7 @@ abstract class Entity{
 	public int getC(){return c;}
 	public boolean isActive(){return active;}
 	public World getWorld(){return world;}
+	public int getType(){return type;}
 	
 	public abstract void draw(Graphics2D g, int offsetX, int offsetY);
 	public abstract void process(long deltaTime);

@@ -7,7 +7,7 @@ public class House extends Entity
 	int adults, kids, health, wealth, satisfaction; 
 	public House(int r, int c, World world)
 	{
-		super(r,c,world);
+		super(r,c,world,Entity.HOUSE);
 		adults = 1;
 		kids = 0;
 		health = 100; 
