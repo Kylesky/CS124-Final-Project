@@ -42,6 +42,10 @@ public class House extends Entity
 		return health; 
 	}
 	
+	public HouseBehavior getBehavior(){
+		return behavior;
+	}
+	
 	public int getWealthLevel()
 	{
 		if(wealth<0) return 0;

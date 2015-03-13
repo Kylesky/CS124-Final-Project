@@ -4,6 +4,7 @@ import javax.swing.*;
 class Config{
 	private static int WINDOW_WIDTH, WINDOW_HEIGHT;
 	private static int WORLD_WIDTH, WORLD_HEIGHT, WORLD_CELL_SIZE;
+	private static int COMMANDS_PER_PAGE;
 	private static int BUILDING_INIT_COUNT, HOUSE_INIT_COUNT, ROAD_INIT_COUNT, AGENT_INIT_COUNT;
 	
 	private Config(){}
@@ -22,6 +23,7 @@ class Config{
 					case "WorldWidth": WORLD_WIDTH = Integer.parseInt(split[1]); break;
 					case "WorldHeight": WORLD_HEIGHT = Integer.parseInt(split[1]); break;
 					case "WorldCellSize": WORLD_CELL_SIZE = Integer.parseInt(split[1]); break;
+					case "CommandsPerPage": COMMANDS_PER_PAGE = Integer.parseInt(split[1]); break;
 					case "InitialBuildingPoolSize": BUILDING_INIT_COUNT = Integer.parseInt(split[1]); break;
 					case "InitialHousePoolSize": HOUSE_INIT_COUNT = Integer.parseInt(split[1]); break;
 					case "InitialRoadPoolSize": ROAD_INIT_COUNT = Integer.parseInt(split[1]); break;
@@ -41,6 +43,7 @@ class Config{
 	public static int getWorldWidth(){return WORLD_WIDTH;}
 	public static int getWorldHeight(){return WORLD_HEIGHT;}
 	public static int getWorldCellSize(){return WORLD_CELL_SIZE;}
+	public static int getCommandsPerPage(){return COMMANDS_PER_PAGE;}
 	public static int getBuildingInitCount(){return BUILDING_INIT_COUNT;}
 	public static int getHouseInitCount(){return HOUSE_INIT_COUNT;}
 	public static int getRoadInitCount(){return ROAD_INIT_COUNT;}

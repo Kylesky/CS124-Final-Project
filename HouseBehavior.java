@@ -15,6 +15,7 @@ public abstract class HouseBehavior
 		this.world = world;
 	}
 	
+	public String getName(){return name;}
 	public abstract void process(long deltaTime, House house);
 	public void draw(Graphics2D g, int r, int c, int offsetX, int offsetY)
 	{

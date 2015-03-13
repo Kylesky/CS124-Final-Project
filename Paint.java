@@ -6,12 +6,13 @@ class Paint extends Canvas{
 	private BufferedImage buf;
 	private Graphics2D bufg;
 	private boolean firstDraw, movx, movy;
-	private int imgWidth, imgHeight, playerMoney;
+	private int imgWidth, imgHeight;
 	private double offsetX, offsetY;
 	private World world;
 	private Color GRID_COLOR;
 	public static Stroke solidStroke, brokenStroke, roadStroke;
 	public static Font defFont, UIFont;
+	private int sidebarPage;
 	
 	public Paint(World world){
 		firstDraw = true;
@@ -21,7 +22,7 @@ class Paint extends Canvas{
 		imgHeight = Config.getWindowHeight()+50;
 		this.world = world;
 		movx = movy = false;
-		playerMoney = 0;
+		sidebarPage = 0;
 		
 		GRID_COLOR = new Color(0, 0, 0, 31);
 	}
@@ -76,7 +77,7 @@ class Paint extends Canvas{
 		bufg.setFont(UIFont);
 		bufg.drawString(world.getTime(), 10, imgHeight-52);
 		bufg.drawRect(5, imgHeight-75, 67, 28);
-		bufg.drawString(String.format("%07d", playerMoney), 90, imgHeight-52);
+		bufg.drawString(String.format("%07d", world.getPlayerMoney()), 90, imgHeight-52);
 		bufg.drawRect(85, imgHeight-75, 100, 28);
 		bufg.drawString("Build", 200, imgHeight-52);
 		bufg.drawRect(195, imgHeight-75, 58, 28);
@@ -89,7 +90,19 @@ class Paint extends Canvas{
 		
 		bufg.setColor(Color.BLUE);
 		bufg.fillRect(imgWidth-240, 0, 200, imgHeight);
-		
+		bufg.setColor(Color.BLACK);
+		bufg.setFont(defFont);
+		if(Main.UIState == Main.UI_BUILD){
+			int index = sidebarPage*Config.getCommandsPerPage();
+			do{
+				bufg.drawString(Main.buildCommands.get(index).getDisplayString(), imgWidth-230, 20+(index%Config.getCommandsPerPage())*30);
+				bufg.drawRect(imgWidth-235, 5+(index%Config.getCommandsPerPage())*30, 170, 20);
+			
+				index++;
+			}while(index%10 != 0 && index < Main.buildCommands.size());
+		}else if(Main.UIState == Main.UI_OVERLAYS){
+			
+		}
 		
 		bufg.drawString(Main.world.getTime(), (int)(imgWidth+200+offsetX), (int)(imgHeight+200+offsetY));
 		
@@ -130,5 +143,9 @@ class Paint extends Canvas{
 		offsetY = y;
 		if(offsetY > 0) offsetY = 0;
 		if(offsetY < -(world.getHeight()+1)*world.getCellSize()+Config.getWindowHeight()+9) offsetY = -(world.getHeight()+1)*world.getCellSize()+Config.getWindowHeight()+9;
+	}
+	
+	public void setSidebarPage(int page){
+		sidebarPage = page;
 	}
 }

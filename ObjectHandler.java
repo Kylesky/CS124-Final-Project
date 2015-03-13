@@ -132,4 +132,14 @@ class ObjectHandler{
 		a.setActive(false);
 		agentPool.returnInstance(a);
 	}
+	
+	public void generateBuildCommands(ArrayList<BuildCommand> list){
+		list.add(new BuildCommand(Entity.ROAD, null));
+		for(int i=0; i<housePrototypes.size(); i++){
+			list.add(new BuildCommand(Entity.HOUSE, housePrototypes.get(i).getBehavior().getName()));
+		}
+		for(int i=0; i<buildingPrototypes.size(); i++){
+			list.add(new BuildCommand(Entity.BUILDING, buildingPrototypes.get(i).getBehavior().getName()));
+		}
+	}
 }

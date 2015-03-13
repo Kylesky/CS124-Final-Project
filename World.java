@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.image.*;
 import java.util.*;
 class World{
-	private int width, height;
+	private int width, height, playerMoney;
 	private Entity[][] grid;
 	private ArrayList<Agent> agents;
 	private int CELL_SIZE = Config.getWorldCellSize();
@@ -14,6 +14,7 @@ class World{
 		this.timeNanos = 0;
 		grid = new Entity[height][width];
 		agents = new ArrayList<Agent>();
+		playerMoney = 0;
 		
 		grid[100][100] = ObjectHandler.getInstance().createBuilding("POWER PLANT");
 		grid[100][100].setR(100);
@@ -54,6 +55,10 @@ class World{
 	public String getTime(){
 		long time = (timeNanos/1000000000L)%(1440);
 		return String.format("%02d:%02d", time/60, time%60);
+	}
+	
+	public int getPlayerMoney(){
+		return playerMoney;
 	}
 	
 	public void spawnAgent(Agent e, int r, int c)
