@@ -17,12 +17,12 @@ public abstract class HouseBehavior
 	
 	public String getName(){return name;}
 	public abstract void process(long deltaTime, House house);
+	public Color getColor(){return color;}
 	public void draw(Graphics2D g, int r, int c, int offsetX, int offsetY)
 	{
 		int cellsize = Config.getWorldCellSize(); 
 		int x = c*cellsize + offsetX;
-		int y = r*cellsize + offsetY; 
-		g.setColor(color);
+		int y = r*cellsize + offsetY;
 		g.fillRect(x,y,width*cellsize,height*cellsize); 
 	}
 }

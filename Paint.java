@@ -67,6 +67,7 @@ class Paint extends Canvas{
 				if(world.isEmpty(r, c)) continue;
 				Entity toDraw = world.getCell(r, c);
 				if(toDraw.getR() == r && toDraw.getC() == c)
+					OverlayHandler.getInstance().applyOverlay(bufg, toDraw);
 					toDraw.draw(bufg, (int)offsetX, (int)offsetY);
 			}
 		}
@@ -92,16 +93,27 @@ class Paint extends Canvas{
 		bufg.fillRect(imgWidth-240, 0, 200, imgHeight);
 		bufg.setColor(Color.BLACK);
 		bufg.setFont(defFont);
+		
+		bufg.drawString("Previous", imgWidth-230, imgHeight-87);
+		bufg.drawRect(imgWidth-235, imgHeight-102, 60, 20);
+		bufg.drawString("Next", imgWidth-85, imgHeight-87);
+		bufg.drawRect(imgWidth-90, imgHeight-102, 35, 20);
 		if(Main.UIState == Main.UI_BUILD){
 			int index = sidebarPage*Config.getCommandsPerPage();
 			do{
 				bufg.drawString(Main.buildCommands.get(index).getDisplayString(), imgWidth-230, 20+(index%Config.getCommandsPerPage())*30);
-				bufg.drawRect(imgWidth-235, 5+(index%Config.getCommandsPerPage())*30, 170, 20);
+				bufg.drawRect(imgWidth-235, 5+(index%Config.getCommandsPerPage())*30, 180, 20);
 			
 				index++;
-			}while(index%10 != 0 && index < Main.buildCommands.size());
+			}while(index%Config.getCommandsPerPage() != 0 && index < Main.buildCommands.size());
 		}else if(Main.UIState == Main.UI_OVERLAYS){
+			int index = sidebarPage*Config.getCommandsPerPage();
+			do{
+				bufg.drawString(Main.overlaySwitchCommands.get(index).getDisplayString(), imgWidth-230, 20+(index%Config.getCommandsPerPage())*30);
+				bufg.drawRect(imgWidth-235, 5+(index%Config.getCommandsPerPage())*30, 180, 20);
 			
+				index++;
+			}while(index%Config.getCommandsPerPage() != 0 && index < Main.overlaySwitchCommands.size());
 		}
 		
 		bufg.drawString(Main.world.getTime(), (int)(imgWidth+200+offsetX), (int)(imgHeight+200+offsetY));
@@ -147,5 +159,26 @@ class Paint extends Canvas{
 	
 	public void setSidebarPage(int page){
 		sidebarPage = page;
+		fixSidebarPage();
+	}
+	
+	public void addSidebarPage(int pages){
+		sidebarPage += pages;
+		fixSidebarPage();
+	}
+	
+	public int getSidebarPage(){
+		return sidebarPage;
+	}
+	
+	public void fixSidebarPage(){
+		if(sidebarPage < 0) sidebarPage = 0;
+		if(Main.UIState == Main.UI_BUILD){
+			if( (Main.buildCommands.size()-1)/Config.getCommandsPerPage() < sidebarPage)
+				sidebarPage = (Main.buildCommands.size()-1)/Config.getCommandsPerPage();
+		}else if(Main.UIState == Main.UI_OVERLAYS){
+			if( (Main.overlaySwitchCommands.size()-1)/Config.getCommandsPerPage() < sidebarPage)
+				sidebarPage = (Main.overlaySwitchCommands.size()-1)/Config.getCommandsPerPage();
+		}
 	}
 }

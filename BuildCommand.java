@@ -8,7 +8,7 @@ public class BuildCommand extends Command{
 	}
 	
 	public String getDisplayString(){
-		if(type == Entity.ROAD) return "Road";
+		if(type == Entity.ROAD) return "ROAD";
 		return toBuild;
 	}
 	
