@@ -19,6 +19,11 @@ class World{
 		grid[100][100] = ObjectHandler.getInstance().createBuilding("POWER PLANT");
 		grid[100][100].setR(100);
 		grid[100][100].setC(100);
+		for(int i=0; i<3; i++){
+			for(int j=0; j<3; j++){
+				grid[100+i][100+j] = grid[100][100];
+			}
+		}
 		grid[105][105] = ObjectHandler.getInstance().createBuilding("HOTDOG STAND");
 		grid[105][105].setR(105);
 		grid[105][105].setC(105);
@@ -59,6 +64,15 @@ class World{
 	
 	public int getPlayerMoney(){
 		return playerMoney;
+	}
+	
+	public boolean isBuildable(Entity e, int r, int c){
+		for(int i=0; i<e.getHeight(); i++){
+			for(int j=0; j<e.getWidth(); j++){
+				if(!isEmpty(r+i, c+j)) return false;
+			}
+		}
+		return true;
 	}
 	
 	public void spawnAgent(Agent e, int r, int c)

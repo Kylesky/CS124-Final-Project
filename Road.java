@@ -32,4 +32,7 @@ public class Road extends Entity
 	public void process(long deltaTime){
 		//do nothing
 	}
+	
+	public int getWidth(){return 1;}
+	public int getHeight(){return 1;}
 }

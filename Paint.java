@@ -9,7 +9,7 @@ class Paint extends Canvas{
 	private int imgWidth, imgHeight;
 	private double offsetX, offsetY;
 	private World world;
-	private Color GRID_COLOR;
+	private Color GRID_COLOR, TRANS_GREEN, TRANS_RED;
 	public static Stroke solidStroke, brokenStroke, roadStroke;
 	public static Font defFont, UIFont;
 	private int sidebarPage;
@@ -25,6 +25,8 @@ class Paint extends Canvas{
 		sidebarPage = 0;
 		
 		GRID_COLOR = new Color(0, 0, 0, 31);
+		TRANS_GREEN = new Color(0, 255, 0, 31);
+		TRANS_RED = new Color(255, 0, 0, 31);
 	}
 	
 	public void update(Graphics g){
@@ -46,6 +48,9 @@ class Paint extends Canvas{
 		}
 		bufg.clearRect(0, 0, imgWidth, imgHeight);
 
+		/*
+			GRID
+		*/
         bufg.setStroke(brokenStroke);
 		bufg.setColor(GRID_COLOR);
 		for(int i=0; i<=world.getWidth(); i++){
@@ -62,6 +67,9 @@ class Paint extends Canvas{
 		}
         bufg.setStroke(solidStroke);
 		
+		/*
+			OBJECTS
+		*/
 		for(int c=0; c<world.getWidth(); c++){
 			for(int r=0; r<world.getHeight(); r++){
 				if(world.isEmpty(r, c)) continue;
@@ -72,6 +80,27 @@ class Paint extends Canvas{
 			}
 		}
 		
+		int x = (int)((MouseHandler.getInstance().getMouseX()-offsetX)/world.getCellSize());
+		int y = (int)((MouseHandler.getInstance().getMouseY()-offsetY)/world.getCellSize());
+		if(Main.UIState == Main.UI_BUILD){
+			if(Main.buildCommandSelected != null){
+				if(world.isBuildable(Main.buildCommandSelected.getPrototype(), y, x)){
+					bufg.setColor(TRANS_GREEN);
+				}else{
+					bufg.setColor(TRANS_RED);
+				}
+				bufg.fillRect(x*world.getCellSize()+(int)offsetX, y*world.getCellSize()+(int)offsetY, Main.buildCommandSelected.getPrototype().getWidth()*world.getCellSize(), Main.buildCommandSelected.getPrototype().getHeight()*world.getCellSize());
+			}
+		}else if(Main.UIState == Main.UI_DEMOLISH){
+			if(world.isOccupied(y, x)){
+				bufg.setColor(TRANS_RED);
+				bufg.fillRect(x*world.getCellSize()+(int)offsetX, y*world.getCellSize()+(int)offsetY, world.getCell(y, x).getWidth()*world.getCellSize(), world.getCell(y, x).getHeight()*world.getCellSize());
+			}
+		}
+		
+		/*
+			BOTTOM UI
+		*/
 		bufg.setColor(Color.BLUE);
 		bufg.fillRect(0, imgHeight-80, imgWidth, 40);
 		bufg.setColor(Color.BLACK);
@@ -89,6 +118,9 @@ class Paint extends Canvas{
 		bufg.drawString("Statistics", 500, imgHeight-52);
 		bufg.drawRect(495, imgHeight-75, 100, 28);
 		
+		/*
+			RIGHT-SIDE UI
+		*/
 		bufg.setColor(Color.BLUE);
 		bufg.fillRect(imgWidth-240, 0, 200, imgHeight);
 		bufg.setColor(Color.BLACK);
@@ -116,8 +148,9 @@ class Paint extends Canvas{
 			}while(index%Config.getCommandsPerPage() != 0 && index < Main.overlaySwitchCommands.size());
 		}
 		
-		bufg.drawString(Main.world.getTime(), (int)(imgWidth+200+offsetX), (int)(imgHeight+200+offsetY));
-		
+		/*
+			FINISHED
+		*/
 		g.drawImage(buf, 0, 0, this);
 	}
 	

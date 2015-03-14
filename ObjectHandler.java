@@ -134,12 +134,12 @@ class ObjectHandler{
 	}
 	
 	public void generateBuildCommands(ArrayList<BuildCommand> list){
-		list.add(new BuildCommand(Entity.ROAD, null));
+		list.add(new BuildCommand(Entity.ROAD, null, roadPool.requestInstance()));
 		for(int i=0; i<housePrototypes.size(); i++){
-			list.add(new BuildCommand(Entity.HOUSE, housePrototypes.get(i).getBehavior().getName()));
+			list.add(new BuildCommand(Entity.HOUSE, housePrototypes.get(i).getBehavior().getName(), housePrototypes.get(i)));
 		}
 		for(int i=0; i<buildingPrototypes.size(); i++){
-			list.add(new BuildCommand(Entity.BUILDING, buildingPrototypes.get(i).getBehavior().getName()));
+			list.add(new BuildCommand(Entity.BUILDING, buildingPrototypes.get(i).getBehavior().getName(), buildingPrototypes.get(i)));
 		}
 	}
 }

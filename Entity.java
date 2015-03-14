@@ -26,6 +26,8 @@ abstract class Entity{
 	public World getWorld(){return world;}
 	public int getType(){return type;}
 	
+	public abstract int getWidth();
+	public abstract int getHeight();
 	public abstract void draw(Graphics2D g, int offsetX, int offsetY);
 	public abstract void process(long deltaTime);
 }

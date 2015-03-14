@@ -18,6 +18,8 @@ public abstract class HouseBehavior
 	public String getName(){return name;}
 	public abstract void process(long deltaTime, House house);
 	public Color getColor(){return color;}
+	public int getWidth(){return width;}
+	public int getHeight(){return height;}
 	public void draw(Graphics2D g, int r, int c, int offsetX, int offsetY)
 	{
 		int cellsize = Config.getWorldCellSize(); 

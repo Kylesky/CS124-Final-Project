@@ -64,4 +64,6 @@ public class House extends Entity
 		//Agents coming out and stuff
 	}
 	
+	public int getWidth(){return getBehavior().getWidth();}
+	public int getHeight(){return getBehavior().getHeight();}
 }
