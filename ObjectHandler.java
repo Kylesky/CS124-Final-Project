@@ -62,6 +62,7 @@ class ObjectHandler{
 		instance.clearAgents(); 
 		instance.clearTimes();
 		instance.copyFields(prototype);
+		instance.setActive(true);
 		
 		return instance;
 	}
@@ -95,21 +96,32 @@ class ObjectHandler{
 		}
 	}
 	
-	public void destroyHouse(House e){
-		e.setActive(false);
-		housePool.returnInstance(e);
+	public void destroyHouse(House h){
+		h.setActive(false);
+		housePool.returnInstance(h);
 	}
 	
 	public Road createRoad(){
 		Road instance = roadPool.requestInstance();
-		//clone prototype?
+		
+		instance.setActive(true);
 		
 		return instance;
 	}
 	
-	public void destroyRoad(Road e){
-		e.setActive(false);
-		roadPool.returnInstance(e);
+	public void destroyRoad(Road r){
+		r.setActive(false);
+		roadPool.returnInstance(r);
+	}
+	
+	public void destroyEntity(Entity e){
+		if(e.getType() == Entity.BUILDING){
+			destroyBuilding((Building)e);
+		}else if(e.getType() == Entity.HOUSE){
+			destroyHouse((House)e);
+		}else if(e.getType() == Entity.ROAD){
+			destroyRoad((Road)e);
+		}
 	}
 	
 	public Agent createAgent(int id){
@@ -134,12 +146,12 @@ class ObjectHandler{
 	}
 	
 	public void generateBuildCommands(ArrayList<BuildCommand> list){
-		list.add(new BuildCommand(Entity.ROAD, null, roadPool.requestInstance()));
+		list.add(new BuildCommand(Entity.ROAD, roadPool.requestInstance()));
 		for(int i=0; i<housePrototypes.size(); i++){
-			list.add(new BuildCommand(Entity.HOUSE, housePrototypes.get(i).getBehavior().getName(), housePrototypes.get(i)));
+			list.add(new BuildCommand(Entity.HOUSE, housePrototypes.get(i)));
 		}
 		for(int i=0; i<buildingPrototypes.size(); i++){
-			list.add(new BuildCommand(Entity.BUILDING, buildingPrototypes.get(i).getBehavior().getName(), buildingPrototypes.get(i)));
+			list.add(new BuildCommand(Entity.BUILDING, buildingPrototypes.get(i)));
 		}
 	}
 }

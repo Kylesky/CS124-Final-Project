@@ -23,11 +23,14 @@ abstract class Entity{
 	public int getR(){return r;}
 	public int getC(){return c;}
 	public boolean isActive(){return active;}
+	public void setWorld(World world){this.world = world;}
 	public World getWorld(){return world;}
+	public void setType(int type){this.type = type;}
 	public int getType(){return type;}
 	
 	public abstract int getWidth();
 	public abstract int getHeight();
+	public abstract String getBehaviorName();
 	public abstract void draw(Graphics2D g, int offsetX, int offsetY);
 	public abstract void process(long deltaTime);
 }

@@ -74,9 +74,10 @@ class Paint extends Canvas{
 			for(int r=0; r<world.getHeight(); r++){
 				if(world.isEmpty(r, c)) continue;
 				Entity toDraw = world.getCell(r, c);
-				if(toDraw.getR() == r && toDraw.getC() == c)
+				if(toDraw.getR() == r && toDraw.getC() == c){
 					OverlayHandler.getInstance().applyOverlay(bufg, toDraw);
 					toDraw.draw(bufg, (int)offsetX, (int)offsetY);
+				}
 			}
 		}
 		
@@ -94,7 +95,7 @@ class Paint extends Canvas{
 		}else if(Main.UIState == Main.UI_DEMOLISH){
 			if(world.isOccupied(y, x)){
 				bufg.setColor(TRANS_RED);
-				bufg.fillRect(x*world.getCellSize()+(int)offsetX, y*world.getCellSize()+(int)offsetY, world.getCell(y, x).getWidth()*world.getCellSize(), world.getCell(y, x).getHeight()*world.getCellSize());
+				bufg.fillRect(world.getCell(y, x).getC()*world.getCellSize()+(int)offsetX, world.getCell(y, x).getR()*world.getCellSize()+(int)offsetY, world.getCell(y, x).getWidth()*world.getCellSize(), world.getCell(y, x).getHeight()*world.getCellSize());
 			}
 		}
 		

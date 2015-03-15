@@ -45,6 +45,7 @@ public class Building extends Entity
 	
 	//Get name of building
 	public String getName(){return name;}
+	public String getBehaviorName(){return getBehavior().getName();}
 	
 	//Houses override these functions so don't worry about behavior being null
 	public void draw(Graphics2D g, int offsetX, int offsetY)

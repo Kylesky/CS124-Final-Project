@@ -66,4 +66,5 @@ public class House extends Entity
 	
 	public int getWidth(){return getBehavior().getWidth();}
 	public int getHeight(){return getBehavior().getHeight();}
+	public String getBehaviorName(){return getBehavior().getName();}
 }

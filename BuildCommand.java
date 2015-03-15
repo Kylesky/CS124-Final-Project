@@ -1,24 +1,27 @@
 public class BuildCommand extends Command{
 	private int type;
-	private String toBuild;
 	private Entity prototype;
 	
-	public BuildCommand(int type, String toBuild, Entity prototype){
+	public BuildCommand(int type, Entity prototype){
 		this.type = type;
-		this.toBuild = toBuild;
 		this.prototype = prototype;
 	}
 	
 	public String getDisplayString(){
-		if(type == Entity.ROAD) return "ROAD";
-		return toBuild;
+		return prototype.getBehaviorName();
 	}
 	
 	public Entity getPrototype(){
 		return prototype;
 	}
 	
-	public void execute(Object o){
+	public void execute(Object[] o){
+		int c = (int)o[0];
+		int r = (int)o[1];
+		World world = (World)o[2];
 		
+		if(world.isBuildable(prototype, r, c)){
+			world.build(type, prototype, r, c);
+		}
 	}
 }

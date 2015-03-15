@@ -5,7 +5,7 @@ public class UICommand extends Command{
 		this.UIConv = UIConv;
 		this.canvas = canvas;
 	}
-	public void execute(Object o){
+	public void execute(Object[] o){
 		switch(UIConv){
 			case Main.UI_BUILD:
 				Main.UIState = Main.UI_BUILD;

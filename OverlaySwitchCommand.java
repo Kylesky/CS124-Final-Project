@@ -8,7 +8,7 @@ public class OverlaySwitchCommand extends Command{
 		return overlay;
 	}
 	
-	public void execute(Object o){
+	public void execute(Object[] o){
 		OverlayHandler.getInstance().setOverlay(overlay);
 	}
 }

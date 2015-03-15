@@ -13,6 +13,7 @@ public class Main{
 	public static ArrayList<BuildCommand> buildCommands;
 	public static ArrayList<OverlaySwitchCommand> overlaySwitchCommands;
 	public static BuildCommand buildCommandSelected;
+	public static DestroyCommand destroyCommand;
 	
 	public static final int UI_BUILD = 0;
 	public static final int UI_DEMOLISH = 1;
@@ -49,6 +50,7 @@ public class Main{
 		objectHandler.generateBuildCommands(buildCommands);
 		overlaySwitchCommands = new ArrayList<OverlaySwitchCommand>();
 		overlayHandler.generateOverlaySwitchCommands(overlaySwitchCommands);
+		destroyCommand = new DestroyCommand();
 		
 		MouseHandler mouseHandler = MouseHandler.getInstance();
 		mouseHandler.setParent(window);
@@ -117,6 +119,14 @@ public class Main{
 				}else{
 					x = (x-canvas.getOffsetX())/world.getCellSize();
 					y = (y-canvas.getOffsetY())/world.getCellSize();
+					
+					if(UIState == UI_BUILD){
+						if(buildCommandSelected != null){
+							buildCommandSelected.execute(new Object[]{x, y, world});
+						}
+					}else if(UIState == UI_DEMOLISH){
+						destroyCommand.execute(new Object[]{x, y, world});
+					}
 				}
 			}
 			if(keyboardHandler.isAnyDown()){

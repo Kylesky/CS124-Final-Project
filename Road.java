@@ -35,4 +35,5 @@ public class Road extends Entity
 	
 	public int getWidth(){return 1;}
 	public int getHeight(){return 1;}
+	public String getBehaviorName(){return "ROAD";}
 }
