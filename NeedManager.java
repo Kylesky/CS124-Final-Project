@@ -1,16 +1,16 @@
 import java.util.*;
 public class NeedManager
 {
-	final int FOOD = 0;
-	final int POWER = 1;
-	final int WATER = 2; 
-	final int ENTERTAINMENT = 3; 
-	final int ENVIRONMENT = 4;
-	final int POLICE = 5;
-	final int FIREHOUSE = 6;
-	final int SCHOOL = 7;
-	final int NONFOOD = 8;
-	House house; 
+	public static final int FOOD = 0;
+	public static final int POWER = 1;
+	public static final int WATER = 2; 
+	public static final int ENTERTAINMENT = 3; 
+	public static final int ENVIRONMENT = 4;
+	public static final int POLICE = 5;
+	public static final int FIREHOUSE = 6;
+	public static final int SCHOOL = 7;
+	public static final int NONFOOD = 8;
+	private House house; 
 	private int needs[];
 	private int weights[]; 
 	private int weightTot; 

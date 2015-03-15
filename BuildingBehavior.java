@@ -20,6 +20,7 @@ public abstract class BuildingBehavior
 	public void restock(Building build){};
 	public abstract void process(long deltaTime, Building build);
 	public void setup(Building build){}; 
+	public int getCost(){return cost;}
 	public Color getColor(){return color;}
 	public int getWidth(){return width;}
 	public int getHeight(){return height;}

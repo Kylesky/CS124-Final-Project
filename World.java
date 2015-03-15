@@ -14,7 +14,7 @@ class World{
 		this.timeNanos = 0;
 		grid = new Entity[height][width];
 		agents = new ArrayList<Agent>();
-		playerMoney = 0;
+		playerMoney = Config.getStartingMoney();
 	}
 	
 	public boolean boundsCheck(int r, int c){
@@ -76,6 +76,7 @@ class World{
 	}
 	
 	public boolean isBuildable(Entity e, int r, int c){
+		if(e.getCost() > playerMoney) return false;
 		for(int i=0; i<e.getHeight(); i++){
 			for(int j=0; j<e.getWidth(); j++){
 				if(!isEmpty(r+i, c+j)) return false;
@@ -110,6 +111,7 @@ class World{
 			e.setType(Entity.ROAD);
 		}
 		if(e == null) return;
+		playerMoney -= prototype.getCost();
 		e.setR(r);
 		e.setC(c);
 		e.setWorld(this);

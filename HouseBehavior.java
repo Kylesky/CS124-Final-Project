@@ -18,6 +18,7 @@ public class HouseBehavior
 	
 	public String getName(){return name;}
 	public void process(long deltaTime, House house){}
+	public int getCost(){return cost;}
 	public Color getColor(){return color;}
 	public int getWidth(){return width;}
 	public int getHeight(){return height;}

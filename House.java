@@ -3,26 +3,26 @@ import java.awt.*;
 public class House extends Entity
 {
 	NeedManager needs; 
-	ArrayList<Agent> agents; 
-	int adults, kids, health, wealth, satisfaction; 
+	ArrayDeque<Agent> inAgents;
+	HashSet<Agent> outAgents;
+	int health, wealth, satisfaction; 
 	HouseBehavior behavior;
 	
 	public House(){}
 	public House(int r, int c, HouseBehavior behavior, World world)
 	{
 		super(r,c,world,Entity.HOUSE);
-		adults = 1;
-		kids = 0;
 		health = 100; 
 		wealth = 0;
 		satisfaction = 0; 
 		needs = new NeedManager(this); 
-		agents = new ArrayList<Agent>();
+		inAgents = new ArrayDeque<Agent>();
+		outAgents = new HashSet<Agent>();
 		this.behavior = behavior;
 	}
 	
 	public int getSat(){satisfaction = needs.getSat(); return satisfaction;}
-	public int getPop(){return adults+kids;}
+	public int getPop(){return inAgents.size() + outAgents.size();}
 	public void addWealth(int wealth){this.wealth += wealth;}
 	public void setWealth(int wealth){this.wealth = wealth;}
 	public int getWealth(){return wealth;}
@@ -33,8 +33,10 @@ public class House extends Entity
 	public HouseBehavior getBehavior(){return behavior;}
 	
 	public void clearAgents(){
-		if(agents == null) agents = new ArrayList<Agent>();
-		agents.clear();
+		if(inAgents == null) inAgents = new ArrayDeque<Agent>();
+		inAgents.clear();
+		if(outAgents == null) outAgents = new HashSet<Agent>();
+		outAgents.clear();
 	}
 	public void copyFields(House h){
 	}
@@ -57,6 +59,7 @@ public class House extends Entity
 		//Agents coming out and stuff
 	}
 	
+	public int getCost(){return getBehavior().getCost();}
 	public int getWidth(){return getBehavior().getWidth();}
 	public int getHeight(){return getBehavior().getHeight();}
 	public String getBehaviorName(){return getBehavior().getName();}

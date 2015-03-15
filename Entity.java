@@ -30,6 +30,7 @@ abstract class Entity{
 	
 	public abstract int getWidth();
 	public abstract int getHeight();
+	public abstract int getCost();
 	public abstract String getBehaviorName();
 	public abstract void draw(Graphics2D g, int offsetX, int offsetY);
 	public abstract void process(long deltaTime);

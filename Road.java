@@ -34,6 +34,7 @@ public class Road extends Entity
 		//do nothing
 	}
 	
+	public int getCost(){return Config.getRoadCost();}
 	public int getWidth(){return 1;}
 	public int getHeight(){return 1;}
 	public String getBehaviorName(){return "ROAD";}
