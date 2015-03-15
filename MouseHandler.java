@@ -14,7 +14,7 @@ class MouseHandler implements MouseListener{
 		return unique;
 	}
 
-	private boolean MOUSE_DOWN = false;
+	private boolean MOUSE_DOWN = false, MOUSE_ACTION_DONE = false;
 	private int MOUSE_PRESS_X = -1;
 	private int MOUSE_PRESS_Y = -1;
 	private static JFrame parent;
@@ -31,6 +31,7 @@ class MouseHandler implements MouseListener{
 	}
 	public void mouseReleased(MouseEvent e){
 		MOUSE_DOWN = false;
+		MOUSE_ACTION_DONE = false;
 	}
 	
 	public void setParent(JFrame parent){
@@ -56,5 +57,11 @@ class MouseHandler implements MouseListener{
 	}
 	public boolean isMouseUp(){
 		return !MOUSE_DOWN;
+	}
+	public boolean isMouseActionDone(){
+		return MOUSE_ACTION_DONE;
+	}
+	public void setMouseActionDone(boolean b){
+		MOUSE_ACTION_DONE = b;
 	}
 }

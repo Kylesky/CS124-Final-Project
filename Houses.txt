@@ -1,0 +1,9 @@
+TYPE | NAME | COST | RED | GREEN | BLUE | CAPACITY | WIDTH | HEIGHT | WEALTH
+??? | SHACK | 20 | 0 | 50 | 0 | 1 | 1 | 1 | 1
+??? | TRAILER PARK | 100 | 100 | 100 | 5 | 2 | 3 | 3 | 1
+??? | APARTELLE | 500 | 60 | 50 | 0 | 25 | 3 | 4 | 1
+??? | SMALL HOUSE | 40 | 50 | 0 | 80 | 2 | 1 | 2 | 2
+??? | MEDIUM HOUSE | 70 | 0 | 100 | 100 | 4 | 2 | 2 | 2
+??? | CONDOMINIUM | 750 | 200 | 100 | 100 | 50 | 4 | 4 | 2
+??? | MANSION | 200 | 100 | 200 | 100 | 5 | 3 | 3 | 3
+??? | HOTEL | 1000 | 100 | 100 | 200 | 100 | 5 | 5 | 3

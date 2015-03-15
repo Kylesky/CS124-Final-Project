@@ -25,7 +25,7 @@ public class NeedBehavior extends BuildingBehavior
 		build.fields[UNITS] = defAmount; 
 	}
 	
-	public void execute(long deltaTime, Building build)
+	public void process(long deltaTime, Building build)
 	{
 		long curTime = build.getWorld().getCurrentTime(); 
 		while(!build.agents.isEmpty())

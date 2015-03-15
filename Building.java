@@ -55,7 +55,7 @@ public class Building extends Entity
 	
 	public void process(long deltaTime)
 	{
-		getBehavior().execute(deltaTime, this);
+		getBehavior().process(deltaTime, this);
 	}
 	
 	public int getWidth(){return getBehavior().getWidth();}

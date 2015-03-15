@@ -15,18 +15,6 @@ class World{
 		grid = new Entity[height][width];
 		agents = new ArrayList<Agent>();
 		playerMoney = 0;
-		
-		grid[100][100] = ObjectHandler.getInstance().createBuilding("POWER PLANT");
-		grid[100][100].setR(100);
-		grid[100][100].setC(100);
-		for(int i=0; i<3; i++){
-			for(int j=0; j<3; j++){
-				grid[100+i][100+j] = grid[100][100];
-			}
-		}
-		grid[105][105] = ObjectHandler.getInstance().createBuilding("HOTDOG STAND");
-		grid[105][105].setR(105);
-		grid[105][105].setC(105);
 	}
 	
 	public boolean boundsCheck(int r, int c){
@@ -53,8 +41,29 @@ class World{
 		return grid[r][c];
 	}
 	
+	public int getAgents(){
+		return agents.size();
+	}
+	
+	public Agent getAgent(int i){
+		if(i < 0 || i >= agents.size()) return null;
+		return agents.get(i);
+	}
+	
 	public void process(long deltaTime){
 		timeNanos += deltaTime*Config.getGameSpeed();
+		
+		for(int i=0; i<height; i++){
+			for(int j=0; j<width; j++){
+				if(grid[i][j] == null) continue;
+				if(grid[i][j].getR() != i || grid[i][j].getC() != j) continue;
+				grid[i][j].process(deltaTime);
+			}
+		}
+		
+		for(int i=0; i<agents.size(); i++){
+			agents.get(i).process(deltaTime);
+		}
 	}
 	
 	public String getTime(){

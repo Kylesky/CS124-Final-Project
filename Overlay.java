@@ -17,4 +17,8 @@ public class Overlay{
 			g.setColor(Color.BLACK);
 		}
 	}
+	
+	public void process(Graphics2D g, Agent a){
+		g.setColor(a.getBehavior().getColor());
+	}
 }

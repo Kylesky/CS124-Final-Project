@@ -13,12 +13,12 @@ public abstract class BuildingBehavior
 		this.width = width;
 		this.height = height;
 		this.wealth = wealth;
-		this.cost=cost; 
+		this.cost = cost; 
 	}
 	public String getName(){return name;}
 	
 	public void restock(Building build){};
-	public abstract void execute(long deltaTime, Building build);
+	public abstract void process(long deltaTime, Building build);
 	public void setup(Building build){}; 
 	public Color getColor(){return color;}
 	public int getWidth(){return width;}
@@ -28,6 +28,7 @@ public abstract class BuildingBehavior
 		int cellsize = Config.getWorldCellSize(); 
 		int x = c*cellsize + offsetX;
 		int y = r*cellsize + offsetY;
+		if(x > Config.getWindowWidth() || y > Config.getWindowHeight() || x+width*cellsize < 0 || y+height*cellsize < 0) return;
 		g.fillRect(x,y,width*cellsize,height*cellsize); 
 	}
 }

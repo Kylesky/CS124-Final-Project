@@ -21,29 +21,22 @@ public class House extends Entity
 		this.behavior = behavior;
 	}
 	
-	public int getSat()
-	{
-		satisfaction = needs.getSat(); 
-		return satisfaction; 
-	}
+	public int getSat(){satisfaction = needs.getSat(); return satisfaction;}
+	public int getPop(){return adults+kids;}
+	public void addWealth(int wealth){this.wealth += wealth;}
+	public void setWealth(int wealth){this.wealth = wealth;}
+	public int getWealth(){return wealth;}
+	public void addHealth(int health){this.health += health;}
+	public void setHealth(int health){this.health = health;}
+	public int getHealth(){return health;}
+	public void setBehavior(HouseBehavior behavior){this.behavior = behavior;}
+	public HouseBehavior getBehavior(){return behavior;}
 	
-	public int getPop()
-	{
-		return adults+kids; 
+	public void clearAgents(){
+		if(agents == null) agents = new ArrayList<Agent>();
+		agents.clear();
 	}
-	
-	public int getWealth()
-	{
-		return wealth; 
-	}
-	
-	public int getHealth()
-	{
-		return health; 
-	}
-	
-	public HouseBehavior getBehavior(){
-		return behavior;
+	public void copyFields(House h){
 	}
 	
 	public int getWealthLevel()

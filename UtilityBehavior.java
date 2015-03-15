@@ -10,7 +10,7 @@ public class UtilityBehavior extends BuildingBehavior
 		this.util = util; 
 	}
 	
-	public void execute(long deltaTime, Building build)
+	public void process(long deltaTime, Building build)
 	{
 		
 	}

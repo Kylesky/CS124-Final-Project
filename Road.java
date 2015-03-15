@@ -15,6 +15,7 @@ public class Road extends Entity
 		int cellSize = getWorld().getCellSize();
 		int x = getC()*cellSize+offsetX;
 		int y = getR()*cellSize+offsetY;
+		if(x > Config.getWindowWidth() || y > Config.getWindowHeight() || x+Config.getWorldCellSize() < 0 || y+Config.getWorldCellSize() < 0) return;
 		
 		g.setColor(Color.BLACK);
 		g.fillRect(x+1, y+1, cellSize-2, cellSize-2);

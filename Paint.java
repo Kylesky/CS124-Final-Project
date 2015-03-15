@@ -81,6 +81,12 @@ class Paint extends Canvas{
 			}
 		}
 		
+		for(int i=0; i<world.getAgents(); i++){
+			Agent toDraw = world.getAgent(i);
+			OverlayHandler.getInstance().applyOverlay(bufg, toDraw);
+			toDraw.draw(bufg, offsetX, offsetY);
+		}
+		
 		int x = (int)((MouseHandler.getInstance().getMouseX()-offsetX)/world.getCellSize());
 		int y = (int)((MouseHandler.getInstance().getMouseY()-offsetY)/world.getCellSize());
 		if(Main.UIState == Main.UI_BUILD){

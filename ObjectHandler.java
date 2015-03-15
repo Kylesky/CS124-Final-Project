@@ -52,12 +52,20 @@ class ObjectHandler{
 			buildingPrototypeIds.put(buildingBehaviors.get(i).getName(), buildingPrototypes.size());
 			buildingPrototypes.add(prototype);
 		}
+		
+		ArrayList<HouseBehavior> houseBehaviors = HouseTypeReader.getBehaviors();
+		for(int i=0; i<houseBehaviors.size(); i++){
+			House prototype = new House(-1, -1, houseBehaviors.get(i), Main.world);
+			housePrototypeIds.put(houseBehaviors.get(i).getName(), housePrototypes.size());
+			housePrototypes.add(prototype);
+		}
 	}
 	
 	public Building createBuilding(int id){
 		Building prototype = buildingPrototypes.get(id);
 		Building instance = buildingPool.requestInstance();
 		
+		instance.setWorld(Main.world);
 		instance.setBehavior(prototype.getBehavior());
 		instance.clearAgents(); 
 		instance.clearTimes();
@@ -83,7 +91,12 @@ class ObjectHandler{
 	public House createHouse(int id){
 		House prototype = housePrototypes.get(id);
 		House instance = housePool.requestInstance();
-		//clone prototype
+		
+		instance.setWorld(Main.world);
+		instance.setBehavior(prototype.getBehavior());
+		instance.clearAgents();
+		instance.copyFields(prototype);
+		instance.setActive(true);
 		
 		return instance;
 	}

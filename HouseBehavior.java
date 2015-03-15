@@ -1,22 +1,23 @@
 import java.awt.*; 
 
-public abstract class HouseBehavior
+public class HouseBehavior
 {
 	String name;
 	Color color;
-	World world;
-	int width, height;
-	public HouseBehavior(String name, Color color, int width, int height, World world)
+	int width, height, wealth, cost, capacity;
+	public HouseBehavior(String name, int cost, Color color, int capacity, int width, int height, int wealth)
 	{
 		this.name = name;
 		this.color = color;
 		this.width = width;
 		this.height = height;
-		this.world = world;
+		this.wealth = wealth;
+		this.cost = cost;
+		this.capacity = capacity;
 	}
 	
 	public String getName(){return name;}
-	public abstract void process(long deltaTime, House house);
+	public void process(long deltaTime, House house){}
 	public Color getColor(){return color;}
 	public int getWidth(){return width;}
 	public int getHeight(){return height;}
@@ -25,6 +26,7 @@ public abstract class HouseBehavior
 		int cellsize = Config.getWorldCellSize(); 
 		int x = c*cellsize + offsetX;
 		int y = r*cellsize + offsetY;
+		if(x > Config.getWindowWidth() || y > Config.getWindowHeight() || x+width*cellsize < 0 || y+height*cellsize < 0) return;
 		g.fillRect(x,y,width*cellsize,height*cellsize); 
 	}
 }

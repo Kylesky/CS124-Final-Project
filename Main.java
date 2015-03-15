@@ -27,15 +27,15 @@ public class Main{
 	
 		JFrame window = new JFrame("CS124 Final Project");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				
+		
+		world = new World(Config.getWorldWidth(), Config.getWorldHeight());
+		
 		StateHandler stateHandler = StateHandler.getInstance();
 		ObjectHandler objectHandler = ObjectHandler.getInstance();
 		OverlayHandler overlayHandler = OverlayHandler.getInstance();
 		stateHandler.setup();
 		objectHandler.setup();
 		overlayHandler.setup();
-		
-		world = new World(Config.getWorldWidth(), Config.getWorldHeight());
 		
 		Paint canvas = new Paint(world);
 		canvas.setPreferredSize(new Dimension(Config.getWindowWidth(), Config.getWindowHeight()));
@@ -72,7 +72,8 @@ public class Main{
 			timeSoFar += deltaTime;
 			oldTime = curTime;
 			
-			if(mouseHandler.isMouseDown()){
+			if(mouseHandler.isMouseDown() && !mouseHandler.isMouseActionDone()){
+				mouseHandler.setMouseActionDone(true);
 				int x = mouseHandler.getPressedX();
 				int y = mouseHandler.getPressedY();
 				if(y > Config.getWindowHeight()-30){

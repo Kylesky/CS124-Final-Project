@@ -42,6 +42,10 @@ class OverlayHandler{
 		currentOverlay.process(g, e);
 	}
 	
+	public void applyOverlay(Graphics2D g, Agent a){
+		currentOverlay.process(g, a);
+	}
+	
 	public void generateOverlaySwitchCommands(ArrayList<OverlaySwitchCommand> list){
 		for(int i=0; i<overlays.size(); i++){
 			list.add(new OverlaySwitchCommand(overlays.get(i).getName()));
