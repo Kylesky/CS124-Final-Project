@@ -8,7 +8,7 @@ public class NeedManager
 	public static final int ENVIRONMENT = 4;
 	public static final int POLICE = 5;
 	public static final int FIREHOUSE = 6;
-	public static final int SCHOOL = 7;
+	public static final int EDUCATION = 7;
 	public static final int NONFOOD = 8;
 	private House house; 
 	private int needs[];
@@ -29,7 +29,7 @@ public class NeedManager
 		conv.put("ENVIRONMENT",ENVIRONMENT);
 		conv.put("POLICE",POLICE);
 		conv.put("FIREHOUSE",FIREHOUSE);
-		conv.put("SCHOOL",SCHOOL);
+		conv.put("EDUCATION",EDUCATION);
 		conv.put("NONFOOD",NONFOOD);
 		
 		this.house = house; 
@@ -52,12 +52,21 @@ public class NeedManager
 		return (int)(100*(sat/weightTot));
 	}
 	
+	public void addVal(String need, int val) throws InvalidNeedException
+	{
+		int flag = -1; 
+		if(conv.containsKey(need)) flag = conv.get(need);
+		
+		if(flag!=-1){needs[flag]+=val; if(needs[flag]>100) needs[flag] = 100;}
+		else throw new InvalidNeedException(); 
+	}
+	
 	public void setVal(String need, int val) throws InvalidNeedException
 	{
 		int flag = -1; 
 		if(conv.containsKey(need)) flag = conv.get(need);
 		
-		if(flag!=-1) needs[flag]=val; 
+		if(flag!=-1){needs[flag]=val; if(needs[flag]>100) needs[flag] = 100;}
 		else throw new InvalidNeedException(); 
 	}
 	

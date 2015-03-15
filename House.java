@@ -2,11 +2,11 @@ import java.util.*;
 import java.awt.*;
 public class House extends Entity
 {
-	NeedManager needs; 
-	ArrayDeque<Agent> inAgents;
-	HashSet<Agent> outAgents;
-	int health, wealth, satisfaction; 
-	HouseBehavior behavior;
+	private NeedManager needs; 
+	private ArrayDeque<Agent> inAgents;
+	private HashSet<Agent> outAgents;
+	private int health, wealth, satisfaction; 
+	private HouseBehavior behavior;
 	
 	public House(){}
 	public House(int r, int c, HouseBehavior behavior, World world)
@@ -57,6 +57,7 @@ public class House extends Entity
 	public void process(long deltaTime)
 	{
 		//Agents coming out and stuff
+		behavior.process(deltaTime, this);
 	}
 	
 	public int getCost(){return getBehavior().getCost();}

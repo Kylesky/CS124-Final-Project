@@ -66,6 +66,7 @@ class ObjectHandler{
 		Building instance = buildingPool.requestInstance();
 		
 		instance.setWorld(Main.world);
+		instance.setTimeFlag(Main.world.getCurrentTimeFlag());
 		instance.setBehavior(prototype.getBehavior());
 		instance.clearAgents(); 
 		instance.clearTimes();
@@ -93,6 +94,7 @@ class ObjectHandler{
 		House instance = housePool.requestInstance();
 		
 		instance.setWorld(Main.world);
+		instance.setTimeFlag(Main.world.getCurrentTimeFlag());
 		instance.setBehavior(prototype.getBehavior());
 		instance.clearAgents();
 		instance.copyFields(prototype);
@@ -141,6 +143,7 @@ class ObjectHandler{
 		Agent prototype = agentPrototypes.get(id);
 		Agent instance = agentPool.requestInstance();
 		//clone prototype
+		instance.setTimeFlag(Main.world.getCurrentTimeFlag());
 		
 		return instance;
 	}

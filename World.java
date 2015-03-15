@@ -7,12 +7,16 @@ class World{
 	private ArrayList<Agent> agents;
 	private int CELL_SIZE = Config.getWorldCellSize();
 	private long timeNanos;
+	private int timeFlag;
+	private boolean[] timeFlags;
 
 	public World(int width, int height){
 		this.width = width;
 		this.height = height;
 		this.timeNanos = 0;
+		this.timeFlag = 0;
 		grid = new Entity[height][width];
+		timeFlags = new boolean[1440];
 		agents = new ArrayList<Agent>();
 		playerMoney = Config.getStartingMoney();
 	}
@@ -52,23 +56,48 @@ class World{
 	
 	public void process(long deltaTime){
 		timeNanos += deltaTime*Config.getGameSpeed();
+		long time = (timeNanos/1000000000L)%1440;
+		if(timeFlag < time){
+			for(int i=(timeFlag==0)?1439:(timeFlag-1); timeFlags[i]; i=(i-1<0)?1439:(i-1)){
+				timeFlags[i] = false;
+			}
+			while(timeFlag < time){
+				timeFlags[timeFlag++] = true;
+			}
+		}else if(time < timeFlag){
+			for(int i=(timeFlag==0)?1439:(timeFlag-1); timeFlags[i]; i=(i-1<0)?1439:(i-1)){
+				timeFlags[i] = false;
+			}
+			while(timeFlag < time+1440){
+				timeFlags[(timeFlag++)%1440] = true;
+			}
+			timeFlag %= 1440;
+		}
 		
 		for(int i=0; i<height; i++){
 			for(int j=0; j<width; j++){
 				if(grid[i][j] == null) continue;
 				if(grid[i][j].getR() != i || grid[i][j].getC() != j) continue;
-				grid[i][j].process(deltaTime);
+				grid[i][j].__process(deltaTime);
 			}
 		}
 		
 		for(int i=0; i<agents.size(); i++){
-			agents.get(i).process(deltaTime);
+			agents.get(i).__process(deltaTime);
 		}
 	}
 	
 	public String getTime(){
-		long time = (timeNanos/1000000000L)%(1440);
+		long time = (timeNanos/1000000000L)%1440;
 		return String.format("%02d:%02d", time/60, time%60);
+	}
+	
+	public boolean getTimeFlag(int i){
+		return timeFlags[i];
+	}
+	
+	public int getCurrentTimeFlag(){
+		return (int)((timeNanos/1000000000L)%1440);
 	}
 	
 	public int getPlayerMoney(){

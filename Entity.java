@@ -1,7 +1,7 @@
 import java.awt.*;
 
 abstract class Entity{
-	private int r, c, type;
+	private int r, c, type, timeFlag;
 	private boolean active;
 	private World world;
 	public static final int BUILDING = 0;
@@ -27,6 +27,17 @@ abstract class Entity{
 	public World getWorld(){return world;}
 	public void setType(int type){this.type = type;}
 	public int getType(){return type;}
+	public void setTimeFlag(int flag){timeFlag = flag;}
+	public boolean isTimeFlagged(){return world.getTimeFlag(timeFlag);}
+	public int getTimeFlagHour(){return timeFlag/60;}
+	public int getTimeFlagMinute(){return timeFlag%60;}
+	public void __process(long deltaTime){
+		process(deltaTime);
+		if(world.getTimeFlag(timeFlag)){
+			timeFlag++;
+			timeFlag %= 1440;
+		}
+	}
 	
 	public abstract int getWidth();
 	public abstract int getHeight();
