@@ -22,21 +22,16 @@ public class ServiceBehavior extends BuildingBehavior
 		int centerr = (build.getC()+height)/2; 
 		World world = build.getWorld();
 		HashSet<Entity> covered = new HashSet<Entity>(); 
-		for(int i=0; i<world.getHeight(); i++)
+		for(int i=centerc-radius; i<=centerc+radius; i++)
 		{
-			for(int j=0; j<world.getWidth();j++)
+			for(int j=centerr-radius; j<=centerr+radius;j++)
 			{
 				Entity temp = world.getCell(i,j);
 				if(temp!=null && temp instanceof House && !covered.contains(temp))
 				{
-					int dx = Math.abs(centerc-temp.getC());
-					int dy = Math.abs(centerr-temp.getR());
-					if((dy+dx)<=radius)
-					{
-						if(give){} //service the Entity temp
-						else //remove service from temp, building destroyed
-						covered.add(temp);
-					}
+					if(give){} //service the Entity temp
+					else //remove service from temp, building destroyed
+					covered.add(temp);
 				}
 			}
 		}
