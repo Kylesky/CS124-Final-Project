@@ -43,6 +43,11 @@ public class BuildingTypeReader
 			{
 				int serviceTime = Integer.parseInt(tk.nextToken().trim());
 				ret.add(new EntertainmentBehavior(name, cost, color, width, height, wealth, serviceTime)); 
+			}else if(type.equals("SERVICE"))
+			{
+				int radius = Integer.parseInt(tk.nextToken().trim());
+				int service = Integer.parseInt(tk.nextToken().trim()); 
+				ret.add(new ServiceBehavior(name,cost,color,width,height,wealth,radius,service)); 
 			}
 		}
 		return ret;

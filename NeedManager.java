@@ -10,16 +10,18 @@ public class NeedManager
 	public static final int FIREHOUSE = 6;
 	public static final int EDUCATION = 7;
 	public static final int NONFOOD = 8;
+	public static final int HEALTH = 9;
 	private House house; 
 	private int needs[];
 	private int weights[]; 
 	private int weightTot; 
-	
+	int numneeds; 
 	HashMap<String, Integer> conv; 
 	public NeedManager(House house)
 	{
-		needs = new int[9];
-		weights = new int[9];
+		numneeds = 10; 
+		needs = new int[numneeds];
+		weights = new int[numneeds];
 		
 		conv = new HashMap<String, Integer>(); 
 		conv.put("FOOD",FOOD);
@@ -31,6 +33,7 @@ public class NeedManager
 		conv.put("FIREHOUSE",FIREHOUSE);
 		conv.put("EDUCATION",EDUCATION);
 		conv.put("NONFOOD",NONFOOD);
+		conv.put("HEALTH",HEALTH);
 		
 		this.house = house; 
 		Arrays.fill(weights,1); 
