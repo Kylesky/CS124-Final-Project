@@ -37,8 +37,8 @@ public class BuildingTypeReader
 				int defAmount = Integer.parseInt(tk.nextToken().trim());
 				int serviceTime = Integer.parseInt(tk.nextToken().trim());
 				int serviced = Integer.parseInt(tk.nextToken().trim());
-				
-				ret.add(new NeedBehavior(name, cost, color, width, height, wealth, defAmount, serviceTime, serviced)); 
+				int servingSize = Integer.parseInt(tk.nextToken().trim());
+				ret.add(new NeedBehavior(name, cost, color, width, height, wealth, defAmount, serviceTime, serviced, servingSize)); 
 			}else if(type.equals("ENTERTAINMENT"))
 			{
 				int serviceTime = Integer.parseInt(tk.nextToken().trim());

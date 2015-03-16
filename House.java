@@ -31,7 +31,7 @@ public class House extends Entity
 	public int getHealth(){return health;}
 	public void setBehavior(HouseBehavior behavior){this.behavior = behavior;}
 	public HouseBehavior getBehavior(){return behavior;}
-	
+	public NeedManager getNeedManager(){return needs;}
 	public void clearAgents(){
 		if(inAgents == null) inAgents = new ArrayDeque<Agent>();
 		inAgents.clear();

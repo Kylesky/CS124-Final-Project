@@ -64,6 +64,16 @@ public class NeedManager
 		else throw new InvalidNeedException(); 
 	}
 	
+	//if index is passed directly
+	public void addVal(int need, int val) throws InvalidNeedException
+	{
+		int flag = -1; 
+		if(need>=0 && need<numneeds) flag = need;
+		
+		if(flag!=-1){needs[flag]+=val; if(needs[flag]>100) needs[flag] = 100;}
+		else throw new InvalidNeedException(); 
+	}
+	
 	public void setVal(String need, int val) throws InvalidNeedException
 	{
 		int flag = -1; 
