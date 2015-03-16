@@ -3,12 +3,13 @@ import java.util.*;
 //Building behavior also counts as a flyweight
 public abstract class BuildingBehavior
 {
-	String name; 
+	String name,code; 
 	Color color; 
 	int width, height, wealth, cost; 
-	public BuildingBehavior(String name, int cost, Color color, int width, int height, int wealth)
+	public BuildingBehavior(String name, String code, int cost, Color color, int width, int height, int wealth)
 	{
 		this.name = name;
+		this.code = code;
 		this.color = color;
 		this.width = width;
 		this.height = height;
@@ -31,5 +32,7 @@ public abstract class BuildingBehavior
 		int y = r*cellsize + offsetY;
 		if(x > Config.getWindowWidth() || y > Config.getWindowHeight() || x+width*cellsize < 0 || y+height*cellsize < 0) return;
 		g.fillRect(x,y,width*cellsize,height*cellsize); 
+		g.setColor(Color.WHITE);
+		g.drawString(code, x+5, y+15);
 	}
 }

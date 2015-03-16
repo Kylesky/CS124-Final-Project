@@ -4,9 +4,9 @@ public class ServiceBehavior extends BuildingBehavior
 {
 	//Universal parameter indices
 	int radius, service; 
-	public ServiceBehavior(String name, int cost, Color color, int w, int h, int wealth, int radius, int service)
+	public ServiceBehavior(String name, String code, int cost, Color color, int w, int h, int wealth, int radius, int service)
 	{
-		super(name, cost, color, w, h, wealth);
+		super(name, code, cost, color, w, h, wealth);
 		this.radius = radius;
 		this.service = service;
 	}

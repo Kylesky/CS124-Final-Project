@@ -4,9 +4,9 @@ public class EntertainmentBehavior extends BuildingBehavior
 {
 	int serviceTime;
 	//Universal parameter indices
-	public EntertainmentBehavior(String name, int cost, Color color, int w, int h, int wealth, int serviceTime)
+	public EntertainmentBehavior(String name, String code, int cost, Color color, int w, int h, int wealth, int serviceTime)
 	{
-		super(name, cost, color, w, h, wealth);
+		super(name, code, cost, color, w, h, wealth);
 		this.serviceTime = serviceTime; 
 	}
 	
@@ -21,6 +21,8 @@ public class EntertainmentBehavior extends BuildingBehavior
 			if(diff>=serviceTime)
 			{
 				build.agents.poll();
+				//Add to needs here! 
+				
 				build.getWorld().spawnAgent(e,build.getR(),build.getC()); 
 			}else break;
 		}
