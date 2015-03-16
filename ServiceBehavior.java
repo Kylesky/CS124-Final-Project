@@ -27,7 +27,7 @@ public class ServiceBehavior extends BuildingBehavior
 			for(int j=0; j<world.getWidth();j++)
 			{
 				Entity temp = world.getCell(i,j);
-				if(temp!=null && !covered.contains(temp))
+				if(temp!=null && temp instanceof House && !covered.contains(temp))
 				{
 					int dx = Math.abs(centerc-temp.getC());
 					int dy = Math.abs(centerr-temp.getR());
