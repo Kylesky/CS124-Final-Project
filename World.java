@@ -4,7 +4,7 @@ import java.util.*;
 class World{
 	private int width, height, playerMoney;
 	private Entity[][] grid;
-	private ArrayList<Agent> agents;
+	private ArrayList<Agent> agents, toRemove;
 	private int CELL_SIZE = Config.getWorldCellSize();
 	private long timeNanos;
 	private int timeFlag;
@@ -18,6 +18,7 @@ class World{
 		grid = new Entity[height][width];
 		timeFlags = new boolean[1440];
 		agents = new ArrayList<Agent>();
+		toRemove = new ArrayList<Agent>();
 		playerMoney = Config.getStartingMoney();
 	}
 	
@@ -82,9 +83,19 @@ class World{
 			}
 		}
 		
+		// System.out.println(agents.size());
 		for(int i=0; i<agents.size(); i++){
 			agents.get(i).__process(deltaTime);
 		}
+		
+		for(int i=0; i<toRemove.size(); i++){
+			agents.remove(toRemove.get(i));
+		}
+		toRemove.clear();
+	}
+	
+	public void removeAgent(Agent agent){
+		toRemove.add(agent);
 	}
 	
 	public String getTime(){
@@ -122,9 +133,12 @@ class World{
 	public int getHeight() {return height;}
 	public int getCellSize() {return CELL_SIZE;}
 	
-	public void spawnAgent(Agent e, int r, int c)
-	{
-		
+	public void spawnAgent(Agent a, int r, int c){
+		Entity e = grid[r][c];
+		a.setX((e.getC()+e.getWidth()/2.0)*Config.getWorldCellSize());
+		a.setY((e.getR()+e.getHeight()/2.0)*Config.getWorldCellSize());
+		a.setup(r, c);
+		agents.add(a);
 	}
 	
 	public void build(int type, Entity prototype, int r, int c){
@@ -135,6 +149,7 @@ class World{
 		}else if(type == Entity.HOUSE){
 			e = ObjectHandler.getInstance().createHouse(prototype.getBehaviorName());
 			e.setType(Entity.HOUSE);
+			((House)e).addAgent(1);
 		}else if(type == Entity.ROAD){
 			e = ObjectHandler.getInstance().createRoad();
 			e.setType(Entity.ROAD);

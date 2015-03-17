@@ -1,5 +1,6 @@
 import java.util.*;
 import java.io.*;
+import java.awt.*;
 
 class ObjectHandler{
 	private static ObjectHandler unique;
@@ -59,6 +60,10 @@ class ObjectHandler{
 			housePrototypeIds.put(houseBehaviors.get(i).getName(), housePrototypes.size());
 			housePrototypes.add(prototype);
 		}
+		
+		Agent citizenPrototype = new Agent(-1, -1, new CitizenBehavior("CITIZEN", new Color(0, 0, 255), Config.getWorldCellSize()/8), null);
+		agentPrototypeIds.put("CITIZEN", 0);
+		agentPrototypes.add(citizenPrototype);
 	}
 	
 	public Building createBuilding(int id){
@@ -96,6 +101,7 @@ class ObjectHandler{
 		instance.setWorld(Main.world);
 		instance.setTimeFlag(Main.world.getCurrentTimeFlag());
 		instance.setBehavior(prototype.getBehavior());
+		instance.setupNeeds();
 		instance.clearAgents();
 		instance.copyFields(prototype);
 		instance.setActive(true);
@@ -142,8 +148,10 @@ class ObjectHandler{
 	public Agent createAgent(int id){
 		Agent prototype = agentPrototypes.get(id);
 		Agent instance = agentPool.requestInstance();
-		//clone prototype
+		
 		instance.setTimeFlag(Main.world.getCurrentTimeFlag());
+		instance.setBehavior(prototype.getBehavior());
+		instance.setActive(true);
 		
 		return instance;
 	}

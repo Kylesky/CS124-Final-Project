@@ -1,3 +1,4 @@
+import java.util.*;
 import java.awt.*;
 
 public class Agent{
@@ -7,9 +8,12 @@ public class Agent{
 	private House house;
 	private AgentBehavior behavior;
 	
+	private Stack<Double> pathx, pathy;
+	private int goalr, goalc;
+	
 	public Agent(){}
 	public Agent(double x, double y, AgentBehavior behavior, House house){
-		timeFlag = house.getWorld().getCurrentTimeFlag();
+		if(house == null) timeFlag = -1; else timeFlag = house.getWorld().getCurrentTimeFlag();
 		this.x = x;
 		this.y = y;
 		this.house = house;
@@ -30,6 +34,14 @@ public class Agent{
 	public boolean isTimeFlagged(){return house.getWorld().getTimeFlag(timeFlag);}
 	public int getTimeFlagHour(){return timeFlag/60;}
 	public int getTimeFlagMinute(){return timeFlag%60;}
+	public Stack<Double> getPathX(){return pathx;}
+	public Stack<Double> getPathY(){return pathy;}
+	public void setPathX(Stack<Double> s){pathx = s;}
+	public void setPathY(Stack<Double> s){pathy = s;}
+	public int getDestinationR(){return goalr;}
+	public int getDestinationC(){return goalc;}
+	public void setDestinationR(int r){goalr = r;}
+	public void setDestinationC(int c){goalc = c;}
 	
 	public void draw(Graphics2D g, double offsetX, double offsetY){
 		behavior.draw(g,x,y,offsetX,offsetY); 

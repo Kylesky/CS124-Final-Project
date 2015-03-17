@@ -57,8 +57,7 @@ public class NeedBehavior extends BuildingBehavior
 				build.fields[UNITS]-=amount; 
 				//Add needs based on serviced to household of Agent e
 				
-				NeedManager curr = house.getNeedManager();
-				try{curr.addVal(serviced,amount);}
+				try{house.addNeed(serviced,amount);}
 				catch(InvalidNeedException ex){System.out.println(
 				"ERROR modifying needs");}
 				build.getWorld().spawnAgent(e,build.getR(),build.getC()); 

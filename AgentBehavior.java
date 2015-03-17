@@ -19,7 +19,9 @@ public abstract class AgentBehavior
 	public int getRadius(){return radius;}
 	public void draw(Graphics2D g, double x, double y, double offsetX, double offsetY)
 	{
+		x = (x-radius+offsetX);
+		y = (y-radius+offsetY);
 		if(x > Config.getWindowWidth() || y > Config.getWindowHeight() || x+2*radius < 0 || y+2*radius < 0) return;
-		g.fillOval((int)(x-radius+offsetX),(int)(y-radius+offsetY),2*radius,2*radius); 
+		g.fillOval((int)x,(int)y,2*radius,2*radius);
 	}
 }

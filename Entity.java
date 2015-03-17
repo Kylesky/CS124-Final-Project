@@ -45,4 +45,5 @@ abstract class Entity{
 	public abstract String getBehaviorName();
 	public abstract void draw(Graphics2D g, int offsetX, int offsetY);
 	public abstract void process(long deltaTime);
+	public abstract void acceptAgent(Agent agent);
 }

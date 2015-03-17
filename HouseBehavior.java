@@ -26,7 +26,7 @@ public class HouseBehavior
 		
 		if(house.isTimeFlagged() && 6 <= house.getTimeFlagHour() && house.getTimeFlagHour() < 10){
 			if(Math.random() < house.getInPop()/(4.0*house.getPop())){
-				//spawnAgent(house);
+				house.getWorld().spawnAgent(house.getAgent(), house.getR(), house.getC());
 			}
 		}
 	}

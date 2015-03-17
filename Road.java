@@ -34,6 +34,8 @@ public class Road extends Entity
 		//do nothing
 	}
 	
+	public void acceptAgent(Agent agent){}
+	
 	public int getCost(){return Config.getRoadCost();}
 	public int getWidth(){return 1;}
 	public int getHeight(){return 1;}
