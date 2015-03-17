@@ -13,6 +13,7 @@ public abstract class AgentBehavior
 	}
 	
 	public String getName(){return name;}
+	public abstract void setup(int r, int c, Agent agent);
 	public abstract void process(long deltaTime, Agent agent);
 	public Color getColor(){return color;}
 	public int getRadius(){return radius;}

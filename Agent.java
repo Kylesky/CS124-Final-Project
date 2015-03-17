@@ -43,7 +43,11 @@ public class Agent{
 		}
 	}
 	
+	public void setup(int r, int c){
+		behavior.setup(r, c, this);
+	}
+	
 	public void process(long deltaTime){
-		
+		behavior.process(deltaTime, this);
 	}
 }

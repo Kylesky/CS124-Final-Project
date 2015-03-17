@@ -48,8 +48,8 @@ public class NeedManager
 		double sat = 0; 
 		for(int i=0; i<needs.length; i++)
 		{
-			if(i==FOOD || i==NONFOOD) sat+=((double)needs[i]/house.getPop())*weights[i]; 
-			else sat+=needs[i]*weights[i]; 
+			double perc = needs[i]/(house.getPop()*house.getWealthLevel()*10.0);
+			sat += Math.min(perc, 1)*weights[i];
 		}
 		return (int)(100*(sat/weightTot));
 	}
@@ -59,7 +59,7 @@ public class NeedManager
 		int flag = -1; 
 		if(conv.containsKey(need)) flag = conv.get(need);
 		
-		if(flag!=-1){needs[flag]+=val; if(needs[flag]>100) needs[flag] = 100;}
+		if(flag!=-1) needs[flag]+=val;
 		else throw new InvalidNeedException(); 
 	}
 	
@@ -92,9 +92,15 @@ public class NeedManager
 	}
 	
 	public double[] getGoalWeights(){
-		for(int i=0; i<numNeeds; i++){
+		double[] ret = new double[10];
+		for(int i=0; i<10; i++){
+			if(2 <= i && i <= 6){
+				double lack = house.getPop()*house.getWealthLevel()*10.0 - needs[i+2];
+				ret[i] = Math.max(lack, 0)*weights[i+2];
+			}else
+				ret[i] = 0;
 		}
-		return null;
+		return ret;
 	}
 }
 

@@ -6,7 +6,7 @@ public class NeedBehavior extends BuildingBehavior
 	//Universal parameter indices
 	final int UNITS = 0; 
 	final int SALES = 1;
-	int serviced, servingSize;  
+	int serviced, servingSize;
 	public NeedBehavior(String name, String code, int cost, Color color, int w,
 	int h, int wealth, int defAmount, int serviceTime, int serviced, int servingSize)
 	{

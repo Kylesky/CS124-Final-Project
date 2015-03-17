@@ -5,7 +5,7 @@ class Config{
 	private static int WINDOW_WIDTH, WINDOW_HEIGHT;
 	private static int WORLD_WIDTH, WORLD_HEIGHT, WORLD_CELL_SIZE;
 	private static int COMMANDS_PER_PAGE;
-	private static int STARTING_MONEY, ROAD_COST, GAME_SPEED;
+	private static int STARTING_MONEY, ROAD_COST, GAME_SPEED, AGENT_MAX_WALK_DISTANCE;
 	private static int BUILDING_INIT_COUNT, HOUSE_INIT_COUNT, ROAD_INIT_COUNT, AGENT_INIT_COUNT;
 	
 	private Config(){}
@@ -28,6 +28,7 @@ class Config{
 					case "StartingMoney": STARTING_MONEY = Integer.parseInt(split[1]); break;
 					case "RoadCost": ROAD_COST = Integer.parseInt(split[1]); break;
 					case "GameSpeed": GAME_SPEED = Integer.parseInt(split[1]); break;
+					case "AgentMaxWalkDistance": AGENT_MAX_WALK_DISTANCE = Integer.parseInt(split[1]); break;
 					case "InitialBuildingPoolSize": BUILDING_INIT_COUNT = Integer.parseInt(split[1]); break;
 					case "InitialHousePoolSize": HOUSE_INIT_COUNT = Integer.parseInt(split[1]); break;
 					case "InitialRoadPoolSize": ROAD_INIT_COUNT = Integer.parseInt(split[1]); break;
@@ -51,6 +52,7 @@ class Config{
 	public static int getStartingMoney(){return STARTING_MONEY;}
 	public static int getRoadCost(){return ROAD_COST;}
 	public static int getGameSpeed(){return GAME_SPEED;}
+	public static int getAgentMaxWalkDistance(){return AGENT_MAX_WALK_DISTANCE;}
 	public static int getBuildingInitCount(){return BUILDING_INIT_COUNT;}
 	public static int getHouseInitCount(){return HOUSE_INIT_COUNT;}
 	public static int getRoadInitCount(){return ROAD_INIT_COUNT;}
