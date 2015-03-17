@@ -14,10 +14,12 @@ public class HouseTypeReader
 		{
 			String input = br.readLine();
 			if(input==null) break; 
-			StringTokenizer tk = new StringTokenizer(input,"|"); 
+			StringTokenizer tk = new StringTokenizer(input,"	"); 
 			
 			String name = tk.nextToken().trim(); 
 			String code = tk.nextToken().trim(); 
+			int power = Integer.parseInt(tk.nextToken().trim());
+			int water = Integer.parseInt(tk.nextToken().trim());
 			int cost = Integer.parseInt(tk.nextToken().trim()); 
 			int r = Integer.parseInt(tk.nextToken().trim()); 
 			int g = Integer.parseInt(tk.nextToken().trim()); 
@@ -26,7 +28,7 @@ public class HouseTypeReader
 			int cap = Integer.parseInt(tk.nextToken().trim()); 
 			int width = Integer.parseInt(tk.nextToken().trim());
 			int height = Integer.parseInt(tk.nextToken().trim());
-			ret.add(new HouseBehavior(name, code, cost, color, cap, width, height));
+			ret.add(new HouseBehavior(name, code, power, water, cost, color, cap, width, height));
 		}
 		return ret;
 	}
