@@ -5,7 +5,7 @@ public class House extends Entity
 	private NeedManager needs; 
 	private ArrayDeque<Agent> inAgents;
 	private HashSet<Agent> outAgents;
-	private int health, wealth, satisfaction; 
+	private int health, wealth; 
 	private HouseBehavior behavior;
 	
 	public House(){}
@@ -14,14 +14,15 @@ public class House extends Entity
 		super(r,c,world,Entity.HOUSE);
 		health = 100; 
 		wealth = 0;
-		satisfaction = 0; 
 		needs = new NeedManager(this); 
 		inAgents = new ArrayDeque<Agent>();
 		outAgents = new HashSet<Agent>();
 		this.behavior = behavior;
 	}
 	
-	public int getSat(){satisfaction = needs.getSat(); return satisfaction;}
+	public int getSat(){return needs.getSat();}
+	public int getInPop(){return inAgents.size();}
+	public int getOutPop(){return outAgents.size();}
 	public int getPop(){return inAgents.size() + outAgents.size();}
 	public void addWealth(int wealth){this.wealth += wealth;}
 	public void setWealth(int wealth){this.wealth = wealth;}
@@ -51,7 +52,7 @@ public class House extends Entity
 	
 	public void draw(Graphics2D g, int offsetX, int offsetY)
 	{
-		behavior.draw(g,getR(),getC(),offsetX,offsetY); 
+		behavior.draw(g,getR(),getC(),offsetX,offsetY, getWealthLevel()); 
 	}
 	
 	public void process(long deltaTime)

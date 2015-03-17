@@ -44,5 +44,6 @@ public class Agent{
 	}
 	
 	public void process(long deltaTime){
+		
 	}
 }

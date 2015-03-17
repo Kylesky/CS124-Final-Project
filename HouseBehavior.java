@@ -2,32 +2,49 @@ import java.awt.*;
 
 public class HouseBehavior
 {
-	String name;
+	String name, code;
 	Color color;
-	int width, height, wealth, cost, capacity;
-	public HouseBehavior(String name, int cost, Color color, int capacity, int width, int height, int wealth)
+	int width, height, cost, capacity;
+	public HouseBehavior(String name, String code, int cost, Color color, int capacity, int width, int height)
 	{
 		this.name = name;
+		this.code = code;
 		this.color = color;
 		this.width = width;
 		this.height = height;
-		this.wealth = wealth;
 		this.cost = cost;
 		this.capacity = capacity;
 	}
 	
 	public String getName(){return name;}
-	public void process(long deltaTime, House house){}
+	public void process(long deltaTime, House house){
+		if(house.isTimeFlagged() && house.getTimeFlagHour() == 0 && house.getTimeFlagMinute() == 0){
+			//midnight
+		}
+		
+		if(house.isTimeFlagged() && 6 <= house.getTimeFlagHour() && house.getTimeFlagHour() < 10){
+			if(Math.random() < house.getInPop()/(4.0*house.getPop())){
+				spawnAgent(house);
+			}
+		}
+	}
+	
+	public void spawnAgent(House house){
+	}
+	
 	public int getCost(){return cost;}
 	public Color getColor(){return color;}
 	public int getWidth(){return width;}
 	public int getHeight(){return height;}
-	public void draw(Graphics2D g, int r, int c, int offsetX, int offsetY)
+	public void draw(Graphics2D g, int r, int c, int offsetX, int offsetY, int level)
 	{
 		int cellsize = Config.getWorldCellSize(); 
 		int x = c*cellsize + offsetX;
 		int y = r*cellsize + offsetY;
 		if(x > Config.getWindowWidth() || y > Config.getWindowHeight() || x+width*cellsize < 0 || y+height*cellsize < 0) return;
 		g.fillRect(x,y,width*cellsize,height*cellsize); 
+		g.setColor(Color.WHITE);
+		g.setFont(Paint.mapFont);
+		g.drawString(code+"("+level+")", x+5, y+Config.getWorldCellSize()/2);
 	}
 }

@@ -33,6 +33,7 @@ public abstract class BuildingBehavior
 		if(x > Config.getWindowWidth() || y > Config.getWindowHeight() || x+width*cellsize < 0 || y+height*cellsize < 0) return;
 		g.fillRect(x,y,width*cellsize,height*cellsize); 
 		g.setColor(Color.WHITE);
-		g.drawString(code, x+5, y+15);
+		g.setFont(Paint.mapFont);
+		g.drawString(code, x+5, y+Config.getWorldCellSize()/2);
 	}
 }

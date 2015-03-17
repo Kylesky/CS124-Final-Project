@@ -11,7 +11,7 @@ class Paint extends Canvas{
 	private World world;
 	private Color GRID_COLOR, TRANS_GREEN, TRANS_RED;
 	public static Stroke solidStroke, brokenStroke, roadStroke;
-	public static Font defFont, UIFont;
+	public static Font defFont, UIFont, mapFont;
 	private int sidebarPage;
 	
 	public Paint(World world){
@@ -45,6 +45,7 @@ class Paint extends Canvas{
 			roadStroke = new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[]{0, world.getCellSize()/8, world.getCellSize()/4, world.getCellSize()/8}, 0);
 			defFont = bufg.getFont();
 			UIFont = bufg.getFont().deriveFont(23.f);
+			mapFont = bufg.getFont().deriveFont(Config.getWorldCellSize()/3.f);
 		}
 		bufg.clearRect(0, 0, imgWidth, imgHeight);
 
