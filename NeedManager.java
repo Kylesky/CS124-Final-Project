@@ -11,28 +11,32 @@ public class NeedManager
 	public static final int ENVIRONMENT = 7;
 	public static final int POLICE = 8;
 	public static final int FIREHOUSE = 9;
+	
+	public static int conv(String s){
+		switch(s){
+			case "POWER": return POWER;
+			case "WATER": return WATER;
+			case "FOOD": return FOOD;
+			case "NONFOOD": return NONFOOD;
+			case "ENTERTAINMENT": return ENTERTAINMENT;
+			case "EDUCATION": return EDUCATION;
+			case "HEALTH": return HEALTH;
+			case "ENVIRONMENT": return ENVIRONMENT;
+			case "POLICE": return POLICE;
+			case "FIREHOUSE": return FIREHOUSE;
+			default: return -1;
+		}
+	}
+	
 	private House house;
 	private int needs[], weights[];
 	private int weightTot;
 	int numNeeds;
-	HashMap<String, Integer> conv;
 	public NeedManager(House house)
 	{
 		numNeeds = 10;
 		needs = new int[numNeeds];
 		weights = new int[numNeeds];
-		
-		conv = new HashMap<String, Integer>();
-		conv.put("FOOD",FOOD);
-		conv.put("POWER",POWER);
-		conv.put("WATER",WATER);
-		conv.put("ENTERTAINMENT",ENTERTAINMENT);
-		conv.put("ENVIRONMENT",ENVIRONMENT);
-		conv.put("POLICE",POLICE);
-		conv.put("FIREHOUSE",FIREHOUSE);
-		conv.put("EDUCATION",EDUCATION);
-		conv.put("NONFOOD",NONFOOD);
-		conv.put("HEALTH",HEALTH);
 		
 		this.house = house;
 		Arrays.fill(weights,1);
@@ -56,9 +60,7 @@ public class NeedManager
 	
 	public void addVal(String need, int val) throws InvalidNeedException
 	{
-		int flag = -1; 
-		if(conv.containsKey(need)) flag = conv.get(need);
-		
+		int flag = conv(need);
 		if(flag!=-1) needs[flag]+=val;
 		else throw new InvalidNeedException(); 
 	}
@@ -75,18 +77,14 @@ public class NeedManager
 	
 	public void setVal(String need, int val) throws InvalidNeedException
 	{
-		int flag = -1; 
-		if(conv.containsKey(need)) flag = conv.get(need);
-		
+		int flag = conv(need);
 		if(flag!=-1) needs[flag]=val;
 		else throw new InvalidNeedException(); 
 	}
 	
 	public int getVal(String need) throws InvalidNeedException
 	{
-		int flag = -1; 
-		if(conv.containsKey(need)) flag = conv.get(need);
-		
+		int flag = conv(need);
 		if(flag!=-1) return needs[flag]; 
 		else throw new InvalidNeedException(); 
 	}
