@@ -14,7 +14,7 @@ public class HouseTypeReader
 		{
 			String input = br.readLine();
 			if(input==null) break; 
-			StringTokenizer tk = new StringTokenizer(input,"|"); 
+			StringTokenizer tk = new StringTokenizer(input,"	"); 
 			
 			String name = tk.nextToken().trim(); 
 			String code = tk.nextToken().trim(); 

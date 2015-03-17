@@ -14,8 +14,8 @@ public class BuildingTypeReader
 		{
 			String input = br.readLine();
 			if(input==null) break; 
-			StringTokenizer tk = new StringTokenizer(input,"|"); 
-			
+			StringTokenizer tk = new StringTokenizer(input,"	"); 
+			//System.out.println(input);
 			String type = tk.nextToken().trim(); 
 			
 			String name = tk.nextToken().trim(); 
