@@ -27,4 +27,10 @@ public class EntertainmentBehavior extends BuildingBehavior
 			}else break;
 		}
 	}
+	
+	public String getNeedServiced()
+	{
+		return "ENTERTAINMENT"; 
+	}
+	
 }

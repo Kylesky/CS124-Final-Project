@@ -15,4 +15,8 @@ public class UtilityBehavior extends BuildingBehavior
 	{
 		
 	}
+	public String getNeedServiced()
+	{
+		return util; 
+	}
 }

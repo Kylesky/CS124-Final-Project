@@ -17,6 +17,11 @@ public class ServiceBehavior extends BuildingBehavior
 		
 	}
 	
+	public String getNeedServiced()
+	{
+		return service; 
+	}
+	
 	public void service(Building build, boolean give)
 	{
 		int centerc = (build.getR()+width)/2;

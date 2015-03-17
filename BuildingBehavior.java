@@ -27,6 +27,7 @@ public abstract class BuildingBehavior
 	public Color getColor(){return color;}
 	public int getWidth(){return width;}
 	public int getHeight(){return height;}
+	public abstract String getNeedServiced(); 
 	public void draw(Graphics2D g, int r, int c, int offsetX, int offsetY)
 	{
 		int cellsize = Config.getWorldCellSize(); 

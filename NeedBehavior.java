@@ -28,6 +28,11 @@ public class NeedBehavior extends BuildingBehavior
 		build.fields[UNITS] = defAmount; 
 	}
 	
+	public String getNeedServiced()
+	{
+		return serviced; 
+	}
+	
 	public void process(long deltaTime, Building build)
 	{
 		long curTime = build.getWorld().getCurrentTime(); 
