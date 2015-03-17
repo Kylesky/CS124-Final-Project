@@ -4,8 +4,8 @@ public class HouseBehavior
 {
 	String name, code;
 	Color color;
-	int width, height, cost, capacity;
-	public HouseBehavior(String name, String code, int cost, Color color, int capacity, int width, int height)
+	int width, height, cost, capacity, power, water;
+	public HouseBehavior(String name, String code, int power, int water, int cost, Color color, int capacity, int width, int height)
 	{
 		this.name = name;
 		this.code = code;
@@ -14,6 +14,8 @@ public class HouseBehavior
 		this.height = height;
 		this.cost = cost;
 		this.capacity = capacity;
+		this.power = power;
+		this.water =water;
 	}
 	
 	public String getName(){return name;}
