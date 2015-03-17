@@ -31,14 +31,14 @@ public class BuildingTypeReader
 			if(type.equals("UTILITY"))
 			{
 				int cap = Integer.parseInt(tk.nextToken().trim());
-				int util = Integer.parseInt(tk.nextToken().trim());
+				String util = tk.nextToken().trim();
 				//Util==1 is power, util==2 is water
 				ret.add(new UtilityBehavior(name, code, cost, color, width, height, wealth, cap, util));  
 			}else if(type.equals("NEED"))
 			{
 				int defAmount = Integer.parseInt(tk.nextToken().trim());
 				int serviceTime = Integer.parseInt(tk.nextToken().trim());
-				int serviced = Integer.parseInt(tk.nextToken().trim());
+				String serviced = tk.nextToken().trim(); 
 				int servingSize = Integer.parseInt(tk.nextToken().trim());
 				ret.add(new NeedBehavior(name, code, cost, color, width, height, wealth, defAmount, serviceTime, serviced, servingSize)); 
 			}else if(type.equals("ENTERTAINMENT"))
@@ -48,8 +48,8 @@ public class BuildingTypeReader
 			}else if(type.equals("SERVICE"))
 			{
 				int radius = Integer.parseInt(tk.nextToken().trim());
-				int service = Integer.parseInt(tk.nextToken().trim()); 
-				ret.add(new ServiceBehavior(name, code, cost,color,width,height,wealth,radius,service)); 
+				String serviced = tk.nextToken().trim(); 
+				ret.add(new ServiceBehavior(name, code, cost,color,width,height,wealth,radius,serviced)); 
 			}
 		}
 		return ret;

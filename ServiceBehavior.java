@@ -3,8 +3,9 @@ import java.awt.*;
 public class ServiceBehavior extends BuildingBehavior
 {
 	//Universal parameter indices
-	int radius, service; 
-	public ServiceBehavior(String name, String code, int cost, Color color, int w, int h, int wealth, int radius, int service)
+	int radius; 
+	String service; 
+	public ServiceBehavior(String name, String code, int cost, Color color, int w, int h, int wealth, int radius, String service)
 	{
 		super(name, code, cost, color, w, h, wealth);
 		this.radius = radius;
