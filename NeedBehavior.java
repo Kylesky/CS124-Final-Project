@@ -21,6 +21,7 @@ public class NeedBehavior extends BuildingBehavior
 	
 	public void restock(Building build)
 	{
+		//assume that they make 100% profit, and spend everything on new stock
 		build.fields[UNITS] = build.fields[SALES]*=2; 
 	}
 	
