@@ -42,7 +42,7 @@ public class NeedManager
 		return unique;
 	}
 	
-	public int getSat(House house)
+	public double getSat(House house)
 	{
 		double sat = 0;
 		double req = house.getPop()*house.getWealthLevel()*10.0;
