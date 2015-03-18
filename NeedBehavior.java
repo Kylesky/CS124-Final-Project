@@ -8,10 +8,11 @@ public class NeedBehavior extends BuildingBehavior
 	final int SALES = 1;
 	int servingSize;
 	String serviced;
-	public NeedBehavior(String name, String code, int power, int water, int cost, Color color, int w,
-						int h, int wealth, int defAmount, int serviceTime, String serviced, int servingSize)
+
+	public NeedBehavior(String name, String code, int power, int water, int cost, int price, Color color, int w,
+	int h, int wealth, int defAmount, int serviceTime, String serviced, int servingSize)
 	{
-		super(name, code, power, water, cost, color, w, h, wealth);
+		super(name, code, power, water, cost, price, color, w, h, wealth);
 		this.defAmount = defAmount; 
 		this.serviceTime = serviceTime; 
 		this.serviced = serviced;
@@ -40,25 +41,47 @@ public class NeedBehavior extends BuildingBehavior
 		{
 			Agent e = build.agents.peek(); 
 			long time = build.times.peek(); 
+
 			long diff = curTime - time; 
 			if(diff/1000000000L>=serviceTime)
 			{
 				//CHANGE SCALING IF THERE IS TIME!
 				build.agents.poll();
 				House house = e.getHouse(); 
-				int wealthDiff = 1 + (2*Math.abs(house.getWealth() - wealth)); 
-				//If wealth = 5, universal structure
-				if(wealth==5) wealthDiff = 1; 
+				int lev = house.getWealthLevel(); 
+				int leftBit = -1; 
+				for(int i=3; i>=1; i--) // find left most 1-bit
+				{
+					if((1<<(i-1) & wealth)>0)
+					{
+						leftBit = i; 
+						break;
+					}
+				}
+				//test if can purchase entire serving
+				int amount = servingSize; 
 				
-				int amount = servingSize / wealthDiff; 
+				//if service is lower end, less satisfied, but stocks are still reduced normally
+				//if(leftBit < lev) amount/=((lev-leftBit)*2);
+				
+				//If less than one serving left, buy everything
 				if(amount>build.fields[UNITS]) amount = build.fields[UNITS];
 				
+				int totalCost = amount*price; 
+				//if not enough money, buy as much as you can
+				if(totalCost > house.getWealth()) 
+				{amount = house.getWealth()/price;  totalCost = amount*price;}
 				build.fields[SALES]+=amount;
 				build.fields[UNITS]-=amount; 
+				house.setWealth(house.getWealth()-totalCost); 
 				//Add needs based on serviced to household of Agent e
+				int satisfaction = amount; 
+				//If person of high class is buying from low-end store, he is less satisfied with his purchase
+				//Gets less satisfaction from the same amount of goods
+				if(leftBit < lev) satisfaction/=((lev-leftBit)*2);
+				try{house.addNeed(serviced,satisfaction);}
+				catch(InvalidNeedException ex){System.out.println("ERROR in NeedBehavior " + name);}
 				
-				try{house.addNeed(serviced,amount);}
-				catch(InvalidNeedException ex){System.out.println("ERROR modifying needs");}
 				build.getWorld().spawnAgent(e,build.getR(),build.getC()); 
 			}else break;
 		}

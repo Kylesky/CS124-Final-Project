@@ -5,8 +5,8 @@ public abstract class BuildingBehavior
 {
 	String name,code; 
 	Color color; 
-	int width, height, wealth, cost, power, water; 
-	public BuildingBehavior(String name, String code, int power, int water, int cost, Color color, int width, int height, int wealth)
+	int width, height, wealth, cost, price, power, water; 
+	public BuildingBehavior(String name, String code, int power, int water, int cost, int price, Color color, int width, int height, int wealth)
 	{
 		this.name = name;
 		this.code = code;
@@ -15,6 +15,7 @@ public abstract class BuildingBehavior
 		this.height = height;
 		this.wealth = wealth;
 		this.cost = cost; 
+		this.price =price;
 		this.power = power;
 		this.water = water; 
 	}
