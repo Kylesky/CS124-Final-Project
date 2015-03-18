@@ -42,7 +42,7 @@ public class NeedManager
 		return unique;
 	}
 	
-	public int getSat(House house)
+	public double getSat(House house)
 	{
 		double sat = 0;
 		double req = house.getPop()*house.getWealthLevel()*10.0;
@@ -50,7 +50,7 @@ public class NeedManager
 		{
 			sat += Math.min(house.getNeed(i)/req, 1)*weights[i];
 		}
-		return (int)(100*(sat/weightTot));
+		return 100*(sat/weightTot);
 	}
 	
 	public double[] getGoalWeights(House house){

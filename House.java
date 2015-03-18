@@ -20,7 +20,7 @@ public class House extends Entity
 		this.behavior = behavior;
 	}
 	
-	public int getSat(){return NeedManager.getInstance().getSat(this);}
+	public double getSat(){return NeedManager.getInstance().getSat(this);}
 	public int getInPop(){return inAgents.size();}
 	public int getOutPop(){return outAgents.size();}
 	public void putAgent(Agent agent){inAgents.offer(agent); outAgents.remove(agent);}

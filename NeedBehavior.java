@@ -8,6 +8,7 @@ public class NeedBehavior extends BuildingBehavior
 	final int SALES = 1;
 	int servingSize;
 	String serviced;
+
 	public NeedBehavior(String name, String code, int power, int water, int cost, int price, Color color, int w,
 	int h, int wealth, int defAmount, int serviceTime, String serviced, int servingSize)
 	{
@@ -40,8 +41,9 @@ public class NeedBehavior extends BuildingBehavior
 		{
 			Agent e = build.agents.peek(); 
 			long time = build.times.peek(); 
-			long diff = (curTime - time)/1000000000; 
-			if(diff>=serviceTime)
+
+			long diff = curTime - time; 
+			if(diff/1000000000L>=serviceTime)
 			{
 				//CHANGE SCALING IF THERE IS TIME!
 				build.agents.poll();
