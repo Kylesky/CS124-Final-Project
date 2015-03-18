@@ -47,6 +47,7 @@ public class NeedBehavior extends BuildingBehavior
 			{
 				//CHANGE SCALING IF THERE IS TIME!
 				build.agents.poll();
+				build.times.poll();
 				House house = e.getHouse(); 
 				int lev = house.getWealthLevel(); 
 				int leftBit = -1; 
@@ -79,8 +80,7 @@ public class NeedBehavior extends BuildingBehavior
 				//If person of high class is buying from low-end store, he is less satisfied with his purchase
 				//Gets less satisfaction from the same amount of goods
 				if(leftBit < lev) satisfaction/=((lev-leftBit)*2);
-				try{house.addNeed(serviced,satisfaction);}
-				catch(InvalidNeedException ex){System.out.println("ERROR in NeedBehavior " + name);}
+				house.addNeed(serviced,satisfaction);
 				
 				build.getWorld().spawnAgent(e,build.getR(),build.getC()); 
 			}else break;

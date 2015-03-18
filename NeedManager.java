@@ -16,7 +16,7 @@ public class NeedManager
 	public static final int[] weights = {1, 1, 3, 3, 1, 1, 1, 1, 1, 1};
 	public static final int weightTot = 14;
 	
-	public static int conv(String s) throws InvalidNeedException{
+	public static int conv(String s){
 		switch(s){
 			case "POWER": return POWER;
 			case "WATER": return WATER;
@@ -63,12 +63,5 @@ public class NeedManager
 				ret[i] = 0;
 		}
 		return ret;
-	}
-}
-
-class InvalidNeedException extends Exception
-{
-	public InvalidNeedException(){
-		System.out.println("INVALID NEED SELECTED");
 	}
 }

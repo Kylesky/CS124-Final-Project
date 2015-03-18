@@ -82,30 +82,8 @@ public class House extends Entity
 	public int getHeight(){return getBehavior().getHeight();}
 	public String getBehaviorName(){return getBehavior().getName();}
 	
-	public void addNeed(String need, int val) throws InvalidNeedException
-	{
-		int flag = NeedManager.conv(need);
-		if(flag!=-1) needs[flag]+=val;
-		else throw new InvalidNeedException(); 
-	}
-	public void addNeed(int need, int val) throws InvalidNeedException
-	{
-		int flag = -1; 
-		if(need>=0 && need<NeedManager.NUMNEEDS) flag = need;
-		
-		if(flag!=-1) needs[flag]+=val;
-		else throw new InvalidNeedException(); 
-	}
-	public void setNeed(String need, int val) throws InvalidNeedException
-	{
-		int flag = NeedManager.conv(need);
-		if(flag!=-1) needs[flag]=val;
-		else throw new InvalidNeedException(); 
-	}
-	public int getNeed(String need) throws InvalidNeedException
-	{
-		int flag = NeedManager.conv(need);
-		if(flag!=-1) return needs[flag]; 
-		else throw new InvalidNeedException(); 
-	}
+	public void addNeed(String need, int val){ needs[NeedManager.conv(need)]+=val; }
+	public void addNeed(int need, int val){ needs[need]+=val; }
+	public void setNeed(String need, int val){ needs[NeedManager.conv(need)]=val; }
+	public int getNeed(String need){ return needs[NeedManager.conv(need)]; }
 }

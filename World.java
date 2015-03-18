@@ -56,7 +56,8 @@ class World{
 	}
 	
 	public void process(long deltaTime){
-		timeNanos += deltaTime*Config.getGameSpeed();
+		deltaTime *= Config.getGameSpeed();
+		timeNanos += deltaTime;
 		long time = (timeNanos/1000000000L)%1440;
 		if(timeFlag < time){
 			for(int i=(timeFlag==0)?1439:(timeFlag-1); timeFlags[i]; i=(i-1<0)?1439:(i-1)){
@@ -92,6 +93,14 @@ class World{
 			agents.remove(toRemove.get(i));
 		}
 		toRemove.clear();
+		
+		if(timeFlags[0]){
+			for(int i=0; i<height; i++){
+				for(int j=0; j<width; j++){
+					if(grid[i][j] != null && grid[i][j].toDemolish()) demolish(i, j);
+				}
+			}
+		}
 	}
 	
 	public void removeAgent(Agent agent){
@@ -101,6 +110,14 @@ class World{
 	public String getTime(){
 		long time = (timeNanos/1000000000L)%1440;
 		return String.format("%02d:%02d", time/60, time%60);
+	}
+	
+	public int getHour(){
+		return (int)(((timeNanos/1000000000L)%1440)/60);
+	}
+	
+	public int getMinute(){
+		return (int)(((timeNanos/1000000000L)%1440)%60);
 	}
 	
 	public boolean getTimeFlag(int i){
@@ -127,7 +144,7 @@ class World{
 	
 	public long getCurrentTime()
 	{
-		return timeNanos; 
+		return timeNanos;
 	}
 	public int getWidth() {return width;}
 	public int getHeight() {return height;}
@@ -166,8 +183,13 @@ class World{
 		}
 	}
 	
-	public void destroy(int r, int c){
+	public void toggleDemolish(int r, int c){
+		grid[r][c].toggleDemolish();
+	}
+	
+	public void demolish(int r, int c){
 		Entity e = grid[r][c];
+
 		for(int i=0; i<e.getHeight(); i++){
 			for(int j=0; j<e.getWidth(); j++){
 				grid[r+i][c+j] = null;

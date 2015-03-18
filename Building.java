@@ -22,7 +22,7 @@ public class Building extends Entity
 	public void addAgent(Agent e)
 	{
 		agents.offer(e);
-		times.offer(getWorld().getCurrentTime()); 
+		times.offer(getWorld().getCurrentTime());
 	}
 	
 	public void clearAgents(){

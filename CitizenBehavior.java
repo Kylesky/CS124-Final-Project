@@ -12,6 +12,11 @@ public class CitizenBehavior extends AgentBehavior
 	}
 	
 	public void setup(int r, int c, Agent agent){
+		if(agent.getHouse().getWorld().getHour() >= 22 || agent.getHouse().getWorld().getHour() < 6){
+			findGoal(r, c, agent, -1);
+			return;
+		}
+	
 		TreeMap<Double, Integer> priority = new TreeMap<Double, Integer>();
 		double[] goals = NeedManager.getInstance().getGoalWeights(agent.getHouse());
 		for(int i=0; i<goals.length; i++){
@@ -20,21 +25,17 @@ public class CitizenBehavior extends AgentBehavior
 				priority.put(goals[i], i);
 			}
 		}
-		try{
-			while(priority.size()>0){
-				Map.Entry<Double, Integer> goal = priority.lastEntry();
-				priority.remove(goal.getKey());
-				if(findGoal(r, c, agent, goal.getValue())){
-					return;
-				}
+		while(priority.size()>0){
+			Map.Entry<Double, Integer> goal = priority.lastEntry();
+			priority.remove(goal.getKey());
+			if(findGoal(r, c, agent, goal.getValue())){
+				return;
 			}
-			findGoal(r, c, agent, -1);
-		}catch(InvalidNeedException e){
-			e.printStackTrace();
 		}
+		findGoal(r, c, agent, -1);
 	}
 	
-	public boolean findGoal(int r, int c, Agent agent, int goal) throws InvalidNeedException{
+	public boolean findGoal(int r, int c, Agent agent, int goal){
 		if(goal == -1 && agent.getHouse().getWorld().isOccupied(r, c) && agent.getHouse().getWorld().getCell(r, c) == agent.getHouse()){
 			agent.setDestinationR(r);
 			agent.setDestinationC(c);
@@ -151,7 +152,7 @@ public class CitizenBehavior extends AgentBehavior
 		double desty = agent.getPathY().peek();
 		double dx = destx-agent.getX();
 		double dy = desty-agent.getY();
-		double v = deltaTime/10000000. * Config.getAgentSpeed();
+		double v = deltaTime/100000000. * Config.getAgentSpeed();
 		if(dx*dx+dy*dy < v*v){
 			agent.setX(destx);
 			agent.setY(desty);

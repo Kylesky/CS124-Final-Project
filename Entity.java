@@ -2,7 +2,7 @@ import java.awt.*;
 
 abstract class Entity{
 	private int r, c, type, timeFlag;
-	private boolean active;
+	private boolean active, toDemolish;
 	private World world;
 	public static final int BUILDING = 0;
 	public static final int HOUSE = 1;
@@ -15,6 +15,7 @@ abstract class Entity{
 		this.type = type;
 		active = true;
 		this.world = world;
+		toDemolish = false;
 	}
 	
 	public void setR(int r){this.r = r;}
@@ -28,6 +29,8 @@ abstract class Entity{
 	public void setType(int type){this.type = type;}
 	public int getType(){return type;}
 	public void setTimeFlag(int flag){timeFlag = flag;}
+	public void toggleDemolish(){toDemolish ^= true;}
+	public boolean toDemolish(){return toDemolish;}
 	public boolean isTimeFlagged(){return world.getTimeFlag(timeFlag);}
 	public int getTimeFlagHour(){return timeFlag/60;}
 	public int getTimeFlagMinute(){return timeFlag%60;}
