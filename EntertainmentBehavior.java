@@ -4,9 +4,9 @@ public class EntertainmentBehavior extends BuildingBehavior
 {
 	int serviceTime;
 	//Universal parameter indices
-	public EntertainmentBehavior(String name, String code, int power, int water, int cost, Color color, int w, int h, int wealth, int serviceTime)
+	public EntertainmentBehavior(String name, String code, int power, int water, int cost, int price, Color color, int w, int h, int wealth, int serviceTime)
 	{
-		super(name, code, power, water, cost, color, w, h, wealth);
+		super(name, code, power, water, cost, price, color, w, h, wealth);
 		this.serviceTime = serviceTime; 
 	}
 	
