@@ -4,8 +4,8 @@ public class HouseBehavior
 {
 	String name, code;
 	Color color;
-	int width, height, cost, capacity, power, water;
-	public HouseBehavior(String name, String code, int power, int water, int cost, Color color, int capacity, int width, int height)
+	int width, height, cost, capacity, power, water, startingAgents, startingMoney;
+	public HouseBehavior(String name, String code, int power, int water, int cost, Color color, int capacity, int width, int height, int startingAgents, int startingMoney)
 	{
 		this.name = name;
 		this.code = code;
@@ -16,6 +16,8 @@ public class HouseBehavior
 		this.capacity = capacity;
 		this.power = power;
 		this.water = water;
+		this.startingAgents = startingAgents;
+		this.startingMoney = startingMoney;
 	}
 	
 	public String getName(){return name;}
@@ -36,6 +38,8 @@ public class HouseBehavior
 	public Color getColor(){return color;}
 	public int getWidth(){return width;}
 	public int getHeight(){return height;}
+	public int getStartingAgents(){return startingAgents;}
+	public int getStartingMoney(){return startingMoney;}
 	public void draw(Graphics2D g, int r, int c, int offsetX, int offsetY, int level)
 	{
 		int cellsize = Config.getWorldCellSize(); 

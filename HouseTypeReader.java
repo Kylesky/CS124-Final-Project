@@ -28,7 +28,9 @@ public class HouseTypeReader
 			int cap = Integer.parseInt(tk.nextToken().trim()); 
 			int width = Integer.parseInt(tk.nextToken().trim());
 			int height = Integer.parseInt(tk.nextToken().trim());
-			ret.add(new HouseBehavior(name, code, power, water, cost, color, cap, width, height));
+			int startingAgents = Integer.parseInt(tk.nextToken().trim());
+			int startingMoney = Integer.parseInt(tk.nextToken().trim());
+			ret.add(new HouseBehavior(name, code, power, water, cost, color, cap, width, height, startingAgents, startingMoney));
 		}
 		return ret;
 	}

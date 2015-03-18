@@ -12,8 +12,8 @@ public class House extends Entity
 	public House(int r, int c, HouseBehavior behavior, World world)
 	{
 		super(r,c,world,Entity.HOUSE);
-		health = 100; 
-		wealth = 0;
+		health = 100;
+		wealth = behavior.getStartingMoney();
 		needs = new int[NeedManager.NUMNEEDS];
 		inAgents = new ArrayDeque<Agent>();
 		outAgents = new HashSet<Agent>();
@@ -52,8 +52,8 @@ public class House extends Entity
 	public int getWealthLevel()
 	{
 		if(wealth<0) return 0;
-		else if(wealth<=30000) return 1; 
-		else if(wealth>30000 && wealth<=70000) return 2;
+		else if(wealth<=getPop()*Config.getLowWealthBracket()) return 1; 
+		else if(wealth<=getPop()*Config.getMediumWealthBracket()) return 2;
 		else return 3; 
 	}
 	

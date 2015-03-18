@@ -5,7 +5,7 @@ class Config{
 	private static int WINDOW_WIDTH, WINDOW_HEIGHT;
 	private static int WORLD_WIDTH, WORLD_HEIGHT, WORLD_CELL_SIZE;
 	private static int COMMANDS_PER_PAGE;
-	private static int STARTING_MONEY, ROAD_COST, GAME_SPEED, AGENT_MAX_WALK_DISTANCE, AGENT_SPEED;
+	private static int STARTING_MONEY, ROAD_COST, GAME_SPEED, AGENT_MAX_WALK_DISTANCE, AGENT_SPEED, LOW_WEALTH_BRACKET, MEDIUM_WEALTH_BRACKET;
 	private static int BUILDING_INIT_COUNT, HOUSE_INIT_COUNT, ROAD_INIT_COUNT, AGENT_INIT_COUNT;
 	
 	private Config(){}
@@ -30,6 +30,8 @@ class Config{
 					case "GameSpeed": GAME_SPEED = Integer.parseInt(split[1]); break;
 					case "AgentMaxWalkDistance": AGENT_MAX_WALK_DISTANCE = Integer.parseInt(split[1]); break;
 					case "AgentSpeed": AGENT_SPEED = Integer.parseInt(split[1]); break;
+					case "LowWealthBracket": LOW_WEALTH_BRACKET = Integer.parseInt(split[1]); break;
+					case "MediumWealthBracket": MEDIUM_WEALTH_BRACKET = Integer.parseInt(split[1]); break;
 					case "InitialBuildingPoolSize": BUILDING_INIT_COUNT = Integer.parseInt(split[1]); break;
 					case "InitialHousePoolSize": HOUSE_INIT_COUNT = Integer.parseInt(split[1]); break;
 					case "InitialRoadPoolSize": ROAD_INIT_COUNT = Integer.parseInt(split[1]); break;
@@ -55,6 +57,8 @@ class Config{
 	public static int getGameSpeed(){return GAME_SPEED;}
 	public static int getAgentMaxWalkDistance(){return AGENT_MAX_WALK_DISTANCE;}
 	public static int getAgentSpeed(){return AGENT_SPEED;}
+	public static int getLowWealthBracket(){return LOW_WEALTH_BRACKET;}
+	public static int getMediumWealthBracket(){return MEDIUM_WEALTH_BRACKET;}
 	public static int getBuildingInitCount(){return BUILDING_INIT_COUNT;}
 	public static int getHouseInitCount(){return HOUSE_INIT_COUNT;}
 	public static int getRoadInitCount(){return ROAD_INIT_COUNT;}

@@ -149,7 +149,7 @@ class World{
 		}else if(type == Entity.HOUSE){
 			e = ObjectHandler.getInstance().createHouse(prototype.getBehaviorName());
 			e.setType(Entity.HOUSE);
-			((House)e).addAgent(1);
+			((House)e).addAgent( ((House)prototype).getBehavior().getStartingAgents() );
 		}else if(type == Entity.ROAD){
 			e = ObjectHandler.getInstance().createRoad();
 			e.setType(Entity.ROAD);
