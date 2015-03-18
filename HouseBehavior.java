@@ -15,13 +15,14 @@ public class HouseBehavior
 		this.cost = cost;
 		this.capacity = capacity;
 		this.power = power;
-		this.water =water;
+		this.water = water;
 	}
 	
 	public String getName(){return name;}
 	public void process(long deltaTime, House house){
 		if(house.isTimeFlagged() && house.getTimeFlagHour() == 0 && house.getTimeFlagMinute() == 0){
-			//midnight
+			if(house.getSat() > (house.getPop()+0.0)/capacity) house.addAgent(1);
+			//consume/degenerate needs
 		}
 		
 		if(house.isTimeFlagged() && 6 <= house.getTimeFlagHour() && house.getTimeFlagHour() < 10){

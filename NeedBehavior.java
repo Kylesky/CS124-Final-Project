@@ -9,7 +9,7 @@ public class NeedBehavior extends BuildingBehavior
 	int servingSize;
 	String serviced;
 	public NeedBehavior(String name, String code, int power, int water, int cost, Color color, int w,
-	int h, int wealth, int defAmount, int serviceTime, String serviced, int servingSize)
+						int h, int wealth, int defAmount, int serviceTime, String serviced, int servingSize)
 	{
 		super(name, code, power, water, cost, color, w, h, wealth);
 		this.defAmount = defAmount; 
@@ -58,8 +58,7 @@ public class NeedBehavior extends BuildingBehavior
 				//Add needs based on serviced to household of Agent e
 				
 				try{house.addNeed(serviced,amount);}
-				catch(InvalidNeedException ex){System.out.println(
-				"ERROR modifying needs");}
+				catch(InvalidNeedException ex){System.out.println("ERROR modifying needs");}
 				build.getWorld().spawnAgent(e,build.getR(),build.getC()); 
 			}else break;
 		}
