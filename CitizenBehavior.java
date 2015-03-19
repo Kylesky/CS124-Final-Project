@@ -92,7 +92,7 @@ public class CitizenBehavior extends AgentBehavior
 				int cm2 = cm-1;
 				if(w.isEmpty(cr2, cc2) || parr[cr2][cc2] != -1) continue;
 				
-				if(w.isRoad(cr2, cc2)){
+				if(w.isRoad(cr2, cc2) || (goal == -1 && w.getCell(cr2, cc2).getType() == Entity.BUILDING)){
 					qr.offer(cr2); qc.offer(cc2); qm.offer(cm2);
 					parr[cr2][cc2] = cr; parc[cr2][cc2] = cc;
 				}else if(w.getCell(cr2, cc2).getType() == Entity.BUILDING &&

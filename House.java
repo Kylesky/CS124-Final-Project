@@ -70,13 +70,15 @@ public class House extends Entity
 	
 	public void acceptAgent(Agent agent){}
 	public void addAgent(int num){
-		while(num++<0){
+		while(num < 0){
 			ObjectHandler.getInstance().destroyAgent(inAgents.poll());
+			num++;
 		}
-		while(num-->0){
+		while(num > 0){
 			Agent agent = ObjectHandler.getInstance().createAgent("CITIZEN");
 			agent.setHouse(this);
 			inAgents.offer(agent);
+			num--;
 		}
 	}
 	
