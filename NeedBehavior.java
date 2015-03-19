@@ -10,9 +10,9 @@ public class NeedBehavior extends BuildingBehavior
 	String serviced;
 
 	public NeedBehavior(String name, String code, int power, int water, int cost, int price, Color color, int w,
-	int h, int wealth, int defAmount, int serviceTime, String serviced, int servingSize)
+	int h, int wealth, int capSize, int defAmount, int serviceTime, String serviced, int servingSize)
 	{
-		super(name, code, power, water, cost, price, color, w, h, wealth);
+		super(name, code, power, water, cost, price, color, w, h, wealth,capSize);
 		this.defAmount = defAmount; 
 		this.serviceTime = serviceTime; 
 		this.serviced = serviced;

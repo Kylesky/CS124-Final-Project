@@ -31,28 +31,29 @@ public class BuildingTypeReader
 			int width = Integer.parseInt(tk.nextToken().trim());
 			int height = Integer.parseInt(tk.nextToken().trim());
 			int wealth = Integer.parseInt(tk.nextToken().trim());
+			int capSize = Integer.parseInt(tk.nextToken().trim());
 			if(type.equals("UTILITY"))
 			{
 				int cap = Integer.parseInt(tk.nextToken().trim());
 				String util = tk.nextToken().trim();
 				//Util==1 is power, util==2 is water
-				ret.add(new UtilityBehavior(name, code, power, water, cost, price, color, width, height, wealth, cap, util));  
+				ret.add(new UtilityBehavior(name, code, power, water, cost, price, color, width, height, wealth, capSize, cap, util));  
 			}else if(type.equals("NEED"))
 			{
 				int defAmount = Integer.parseInt(tk.nextToken().trim());
 				int serviceTime = Integer.parseInt(tk.nextToken().trim());
 				String serviced = tk.nextToken().trim(); 
 				int servingSize = Integer.parseInt(tk.nextToken().trim());
-				ret.add(new NeedBehavior(name, code, power, water, cost, price, color, width, height, wealth, defAmount, serviceTime, serviced, servingSize)); 
+				ret.add(new NeedBehavior(name, code, power, water, cost, price, color, width, height, wealth, capSize, defAmount, serviceTime, serviced, servingSize)); 
 			}else if(type.equals("ENTERTAINMENT"))
 			{
 				int serviceTime = Integer.parseInt(tk.nextToken().trim());
-				ret.add(new EntertainmentBehavior(name, code, power, water, cost, price, color, width, height, wealth, serviceTime)); 
+				ret.add(new EntertainmentBehavior(name, code, power, water, cost, price, color, width, height, wealth, capSize, serviceTime)); 
 			}else if(type.equals("SERVICE"))
 			{
 				int radius = Integer.parseInt(tk.nextToken().trim());
 				String serviced = tk.nextToken().trim(); 
-				ret.add(new ServiceBehavior(name, code, power, water, cost, price, color,width,height,wealth,radius,serviced)); 
+				ret.add(new ServiceBehavior(name, code, power, water, cost, price, color,width,height,wealth, capSize, radius,serviced)); 
 			}
 		}
 		return ret;
