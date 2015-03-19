@@ -2,11 +2,14 @@ import java.awt.*;
 import java.util.*;
 public class Building extends Entity
 {
-	String name;
-	BuildingBehavior behavior; 
+	private String name;
+	private BuildingBehavior behavior; 
 	ArrayDeque<Agent> agents; 
 	ArrayDeque<Long> times; 
-	int[] fields; 
+	int[] fields;
+	private int state;
+	public static final int STATE_OPEN = 0;
+	public static final int STATE_CLOSED = 1;
 	
 	public Building(){}
 	public Building(int r, int c, BuildingBehavior behavior, World world)
