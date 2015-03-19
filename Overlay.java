@@ -75,7 +75,7 @@ public class Overlay{
 		if(agent){
 			int val = 0;
 			switch(basis){
-				case "WEALTH": val = a.getHouse().getWealth(); break;
+				case "WEALTH": val = a.getHouse().getWealthLevel(); break;
 			}
 			for(int i=0; i<ranges.size(); i++){
 				if(val <= ranges.get(i)){
