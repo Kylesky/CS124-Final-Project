@@ -51,7 +51,7 @@ public class EntertainmentBehavior extends BuildingBehavior
 				{
 						Agent e = build.agents.poll();
 						long time = build.times.poll(); 
-						//If agent has not money, he goes in the theater but is not satisfied because he does not 
+						//If agent has no money, he goes in the theater but is not satisfied because he does not 
 						//get to watch
 						House house = e.getHouse(); 
 						int lev = house.getWealthLevel(); 
