@@ -9,7 +9,7 @@ class Paint extends Canvas{
 	private int imgWidth, imgHeight;
 	private double offsetX, offsetY;
 	private World world;
-	private Color GRID_COLOR, TRANS_GREEN, TRANS_RED;
+	public static Color GRID_COLOR, TRANS_GREEN, TRANS_RED, CLOSED_GREY;
 	public static Stroke solidStroke, brokenStroke, roadStroke;
 	public static Font defFont, UIFont, mapFont;
 	private int sidebarPage;
@@ -27,6 +27,7 @@ class Paint extends Canvas{
 		GRID_COLOR = new Color(0, 0, 0, 31);
 		TRANS_GREEN = new Color(0, 255, 0, 31);
 		TRANS_RED = new Color(255, 0, 0, 31);
+		CLOSED_GREY = new Color(200, 200, 200, 255);
 	}
 	
 	public void update(Graphics g){

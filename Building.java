@@ -48,6 +48,12 @@ public class Building extends Entity
 		clearAgents(); 
 		clearTimes();
 		copyFields(prototype);
+		int time = getWorld().getHour()*100 + getWorld().getMinute();
+		if(getBehavior().getOpenTime() <= time && time <= getBehavior().getCloseTime()){
+			setState(STATE_OPEN);
+		}else{
+			setState(STATE_CLOSED);
+		}
 		behavior.updatePowerWater(this);
 	}
 	
@@ -61,7 +67,7 @@ public class Building extends Entity
 	//Houses override these functions so don't worry about behavior being null
 	public void draw(Graphics2D g, int offsetX, int offsetY)
 	{
-		behavior.draw(g,getR(),getC(),offsetX,offsetY); 
+		behavior.draw(g,getR(),getC(),offsetX,offsetY, this); 
 	}
 	
 	public void process(long deltaTime)

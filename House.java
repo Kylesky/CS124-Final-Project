@@ -59,7 +59,7 @@ public class House extends Entity
 	
 	public void draw(Graphics2D g, int offsetX, int offsetY)
 	{
-		behavior.draw(g,getR(),getC(),offsetX,offsetY, getWealthLevel()); 
+		behavior.draw(g,getR(),getC(),offsetX,offsetY, getWealthLevel(), this); 
 	}
 	
 	public void process(long deltaTime)
@@ -68,15 +68,20 @@ public class House extends Entity
 		behavior.process(deltaTime, this);
 	}
 	
-	public void acceptAgent(Agent agent){}
+	public void acceptAgent(Agent agent){
+		putAgent(agent);
+	}
+	
 	public void addAgent(int num){
-		while(num++<0){
+		while(num<0){
 			ObjectHandler.getInstance().destroyAgent(inAgents.poll());
+			num++;
 		}
-		while(num-->0){
+		while(num>0){
 			Agent agent = ObjectHandler.getInstance().createAgent("CITIZEN");
 			agent.setHouse(this);
 			inAgents.offer(agent);
+			num--;
 		}
 	}
 	

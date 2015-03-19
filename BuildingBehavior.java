@@ -35,6 +35,7 @@ public abstract class BuildingBehavior
 		if(build.isTimeFlagged() && build.getTimeFlagHour() == closeTime/100 && build.getTimeFlagMinute() == closeTime%100){
 			build.setState(Building.STATE_CLOSED);
 		}
+		process(deltaTime, build);
 	}
 	
 	public abstract void process(long deltaTime, Building build);
@@ -68,7 +69,7 @@ public abstract class BuildingBehavior
 	}
 	
 	public int getCapSize(){return capSize;}
-	public void draw(Graphics2D g, int r, int c, int offsetX, int offsetY)
+	public void draw(Graphics2D g, int r, int c, int offsetX, int offsetY, Building build)
 	{
 		int cellsize = Config.getWorldCellSize(); 
 		int x = c*cellsize + offsetX;
@@ -77,6 +78,6 @@ public abstract class BuildingBehavior
 		g.fillRect(x,y,width*cellsize,height*cellsize); 
 		g.setColor(Color.WHITE);
 		g.setFont(Paint.mapFont);
-		g.drawString(code, x+5, y+Config.getWorldCellSize()/2);
+		g.drawString((build.toDemolish()?"!":"")+code, x+5, y+Config.getWorldCellSize()/2);
 	}
 }

@@ -42,7 +42,7 @@ public class NeedBehavior extends BuildingBehavior
 			Agent e = build.agents.peek(); 
 			long time = build.times.peek(); 
 
-			long diff = curTime - time; 
+			long diff = curTime - time;
 			if(diff/1000000000L>=serviceTime)
 			{
 				//CHANGE SCALING IF THERE IS TIME!

@@ -46,7 +46,7 @@ public class HouseBehavior
 	public int getHeight(){return height;}
 	public int getStartingAgents(){return startingAgents;}
 	public int getStartingMoney(){return startingMoney;}
-	public void draw(Graphics2D g, int r, int c, int offsetX, int offsetY, int level)
+	public void draw(Graphics2D g, int r, int c, int offsetX, int offsetY, int level, House house)
 	{
 		int cellsize = Config.getWorldCellSize(); 
 		int x = c*cellsize + offsetX;
@@ -55,6 +55,6 @@ public class HouseBehavior
 		g.fillRect(x,y,width*cellsize,height*cellsize); 
 		g.setColor(Color.WHITE);
 		g.setFont(Paint.mapFont);
-		g.drawString(code+"("+level+")", x+5, y+Config.getWorldCellSize()/2);
+		g.drawString((house.toDemolish()?"!":"")+code+"("+level+")", x+5, y+Config.getWorldCellSize()/2);
 	}
 }
