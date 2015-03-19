@@ -97,7 +97,14 @@ class World{
 		if(timeFlags[0]){
 			for(int i=0; i<height; i++){
 				for(int j=0; j<width; j++){
-					if(grid[i][j] != null && grid[i][j].toDemolish()) demolish(i, j);
+					if(grid[i][j] == null) continue;
+					if(grid[i][j].getR() == i && grid[i][j].getC() == j){
+						if(grid[i][j].getType() == Entity.HOUSE){
+							House h = ((House)grid[i][j]);
+							playerMoney += ((int)(h.getSat()*h.getPop()*h.getWealthLevel()));
+						}
+					}
+					if(grid[i][j].toDemolish()) demolish(i, j);
 				}
 			}
 		}

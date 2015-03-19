@@ -23,11 +23,17 @@ public class HouseBehavior
 	public String getName(){return name;}
 	public void process(long deltaTime, House house){
 		if(house.isTimeFlagged() && house.getTimeFlagHour() == 0 && house.getTimeFlagMinute() == 0){
-			if(house.getSat() > (house.getPop()+0.0)/capacity) house.addAgent(1);
-			//consume/degenerate needs
+			if(house.getSat() > 100.0*house.getPop()/capacity) house.addAgent(1);
+			else if(house.getHealth() < 25) house.addAgent(-1);
+			
+			house.addNeed("FOOD", -Math.min(house.getPop()*house.getWealthLevel()*2, house.getNeed("FOOD")));
+			house.addNeed("NONFOOD", -Math.min(house.getPop()*house.getWealthLevel()*2, house.getNeed("NONFOOD")));
+			house.addNeed("ENTERTAINMENT", -Math.min(house.getPop()*house.getWealthLevel()*2, house.getNeed("ENTERTAINMENT")));
+			house.addNeed("EDUCATION", -Math.min(house.getPop()*house.getWealthLevel()*2, house.getNeed("EDUCATION")));
+			house.addWealth((int)(house.getSat()*house.getPop()*house.getWealthLevel()));
 		}
 		
-		if(house.isTimeFlagged() && 6 <= house.getTimeFlagHour() && house.getTimeFlagHour() < 10){
+		if(house.isTimeFlagged() && 6 <= house.getTimeFlagHour() && house.getTimeFlagHour() < 22){
 			if(Math.random() < house.getInPop()/(4.0*house.getPop())){
 				house.getWorld().spawnAgent(house.getAgent(), house.getR(), house.getC());
 			}
