@@ -5,8 +5,8 @@ public abstract class BuildingBehavior
 {
 	String name,code; 
 	Color color; 
-	int width, height, wealth, cost, price, power, water; 
-	public BuildingBehavior(String name, String code, int power, int water, int cost, int price, Color color, int width, int height, int wealth)
+	int width, height, wealth, cost, price, power, water, capSize; 
+	public BuildingBehavior(String name, String code, int power, int water, int cost, int price, Color color, int width, int height, int wealth, int capSize)
 	{
 		this.name = name;
 		this.code = code;
@@ -18,6 +18,7 @@ public abstract class BuildingBehavior
 		this.price = price;
 		this.power = power;
 		this.water = water; 
+		this.capSize = capSize;
 	}
 	public String getName(){return name;}
 	
@@ -40,6 +41,7 @@ public abstract class BuildingBehavior
 		return false;
 	}
 	
+	public int getCapSize(){return capSize;}
 	public void draw(Graphics2D g, int r, int c, int offsetX, int offsetY)
 	{
 		int cellsize = Config.getWorldCellSize(); 

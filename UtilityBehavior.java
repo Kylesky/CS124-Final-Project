@@ -4,9 +4,9 @@ public class UtilityBehavior extends BuildingBehavior
 {
 	int capacity; 
 	String util;
-	public UtilityBehavior(String name, String code, int power, int water, int cost, int price, Color color, int w, int h, int wealth, int capacity, String util)
+	public UtilityBehavior(String name, String code, int power, int water, int cost, int price, Color color, int w, int h, int wealth, int capSize, int capacity, String util)
 	{
-		super(name, code, power, water, cost, price, color, w, h, wealth);
+		super(name, code, power, water, cost, price, color, w, h, wealth, capSize);
 		this.capacity = capacity;
 		this.util = util; 
 	}

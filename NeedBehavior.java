@@ -10,9 +10,9 @@ public class NeedBehavior extends BuildingBehavior
 	String serviced;
 
 	public NeedBehavior(String name, String code, int power, int water, int cost, int price, Color color, int w,
-	int h, int wealth, int defAmount, int serviceTime, String serviced, int servingSize)
+	int h, int wealth, int capSize, int defAmount, int serviceTime, String serviced, int servingSize)
 	{
-		super(name, code, power, water, cost, price, color, w, h, wealth);
+		super(name, code, power, water, cost, price, color, w, h, wealth,capSize);
 		this.defAmount = defAmount; 
 		this.serviceTime = serviceTime; 
 		this.serviced = serviced;
@@ -52,9 +52,9 @@ public class NeedBehavior extends BuildingBehavior
 				House house = e.getHouse(); 
 				int lev = house.getWealthLevel(); 
 				int leftBit = -1; 
-				for(int i=2; i>=0; i--) // find left most 1-bit
+				for(int i=3; i>=1; i--) // find left most 1-bit
 				{
-					if((1<<i & wealth)>0)
+					if((1<<(i-1) & wealth)>0)
 					{
 						leftBit = i; 
 						break;
