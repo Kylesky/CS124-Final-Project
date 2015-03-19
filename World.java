@@ -7,7 +7,7 @@ class World{
 	private ArrayList<Agent> agents, toRemove;
 	private int CELL_SIZE = Config.getWorldCellSize();
 	private long timeNanos;
-	private int timeFlag;
+	private int timeFlag, timeFlagb;
 	private boolean[] timeFlags;
 
 	public World(int width, int height){
@@ -15,6 +15,7 @@ class World{
 		this.height = height;
 		this.timeNanos = 0;
 		this.timeFlag = 0;
+		this.timeFlagb = 0;
 		grid = new Entity[height][width];
 		timeFlags = new boolean[1440];
 		agents = new ArrayList<Agent>();
@@ -95,7 +96,7 @@ class World{
 			timeFlag %= 1440;
 		}
 		
-		if((getMinute() == 0 || getMinute() == 30) && timeFlags[getHour()*60+getMinute()]){
+		if( (getMinute() == 0 || getMinute() == 30) && timeFlags[timeFlagb]){
 			for(int i=0; i<height; i++){
 				for(int j=0; j<width; j++){
 					if(grid[i][j] == null) continue;
@@ -113,7 +114,6 @@ class World{
 			}
 		}
 		
-		// System.out.println(agents.size());
 		for(int i=0; i<agents.size(); i++){
 			agents.get(i).__process(deltaTime);
 		}
@@ -123,7 +123,7 @@ class World{
 		}
 		toRemove.clear();
 		
-		if(timeFlags[0]){
+		if(timeFlagb == 0 && timeFlags[timeFlagb]){
 			for(int i=0; i<height; i++){
 				for(int j=0; j<width; j++){
 					if(grid[i][j] == null) continue;
@@ -137,6 +137,8 @@ class World{
 				}
 			}
 		}
+		
+		timeFlagb = timeFlag;
 	}
 	
 	public void removeAgent(Agent agent){

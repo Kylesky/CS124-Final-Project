@@ -53,7 +53,6 @@ public class Overlay{
 			House h = (House)e;
 			if(house){
 				int val = h.getScale(basis);
-				System.out.println(val + " " + basis);
 				for(int i=0; i<ranges.size(); i++){
 					if(val <= ranges.get(i)){
 						g.setColor(colors.get(i));

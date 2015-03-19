@@ -65,7 +65,6 @@ public class House extends Entity
 	public void process(long deltaTime)
 	{
 		//Agents coming out and stuff
-		System.out.println(Arrays.toString(needs));
 		behavior.process(deltaTime, this);
 	}
 	
@@ -91,7 +90,7 @@ public class House extends Entity
 	public int getHeight(){return getBehavior().getHeight();}
 	public String getBehaviorName(){return getBehavior().getName();}
 	
-	public void addNeed(String need, int val){ needs[NeedManager.conv(need)]+=val; needs[NeedManager.conv(need)]+=val;}
+	public void addNeed(String need, int val){ needs[NeedManager.conv(need)]+=val; }
 	public void addNeed(int need, int val){ needs[need]+=val; }
 	public void setNeed(String need, int val){ needs[NeedManager.conv(need)]=val; }
 	public int getNeed(String need){ return needs[NeedManager.conv(need)]; }
