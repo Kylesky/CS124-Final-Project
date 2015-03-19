@@ -22,6 +22,10 @@ public class ServiceBehavior extends BuildingBehavior
 		return service; 
 	}
 	
+	public void onDemolish(Building build)
+	{
+		service(build,false);
+	}
 	public void service(Building build, boolean give)
 	{
 		int centerc = (build.getR()+width)/2;
@@ -35,8 +39,9 @@ public class ServiceBehavior extends BuildingBehavior
 				Entity temp = world.getCell(i,j);
 				if(temp!=null && temp instanceof House && !covered.contains(temp))
 				{
-					if(give){} //service the Entity temp
-					else //remove service from temp, building destroyed
+					House hold = (House)temp; 
+					if(give) hold.setNeed(service, 1); // add service
+					else hold.setNeed(service,0); //remove service from temp, building destroyed
 					covered.add(temp);
 				}
 			}

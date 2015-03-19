@@ -41,6 +41,11 @@ public class Building extends Entity
 		fields = Arrays.copyOf(b.fields, b.fields.length);
 	}
 	
+	public boolean isFull()
+	{
+		if(agents.size()==behavior.getCapSize()) return true;
+		else return false; 
+	}
 	public void restock(){behavior.restock(this);}
 	
 	public void onBuild(Building prototype)

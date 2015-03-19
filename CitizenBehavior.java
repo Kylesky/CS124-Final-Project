@@ -146,7 +146,7 @@ public class CitizenBehavior extends AgentBehavior
 	public void process(long deltaTime, Agent agent){
 		if(agent.getPathX().size() == 0){
 			Entity destination = agent.getHouse().getWorld().getCell(agent.getDestinationR(), agent.getDestinationC());
-			if( destination.getType() == Entity.BUILDING && ((Building)destination).getState() == Building.STATE_CLOSED ){
+			if( destination.getType() == Entity.BUILDING && ( ((Building)destination).getState() == Building.STATE_CLOSED || ((Building)destination).isFull())){
 				setup(destination.getR(), destination.getC(), agent);
 				return;
 			}
