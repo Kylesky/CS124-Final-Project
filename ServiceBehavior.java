@@ -17,11 +17,11 @@ public class ServiceBehavior extends BuildingBehavior
 	
 	public void process(long deltaTime, Building build)
 	{
+		service(build);
 		World world = build.getWorld();
 		int mins = world.getMinute();
 		int hours = world.getHour(); 
 		int curTime = mins + hours*60; 
-		
 		//If waiting (meaning there are no classes yet)
 		if(build.getFields()[WAIT]==0)
 		{
@@ -75,10 +75,6 @@ public class ServiceBehavior extends BuildingBehavior
 								if(leftBit < lev) satisfaction/=((lev-leftBit)*2);
 								house.addNeed(service,satisfaction);
 							}
-							
-							
-							
-
 							house.addWealth(-price);
 						}
 						build.getWorld().spawnAgent(e,build.getR(),build.getC()); 
@@ -97,12 +93,11 @@ public class ServiceBehavior extends BuildingBehavior
 		super.onBuild(build);
 	}
 	
-	public void onDemolish(Building build)
-	{
+	public void onDemolish(Building build){
 		super.onDemolish(build);
-		service(build,false);
 	}
-	public void service(Building build, boolean give)
+	
+	public void service(Building build)
 	{
 		int centerc = (build.getR()+width)/2;
 		int centerr = (build.getC()+height)/2; 
@@ -116,8 +111,7 @@ public class ServiceBehavior extends BuildingBehavior
 				if(temp!=null && temp instanceof House && !covered.contains(temp))
 				{
 					House hold = (House)temp; 
-					if(give) hold.setNeed(service, 1); // add service
-					else hold.setNeed(service,0); //remove service from temp, building destroyed
+					hold.setNeed(service, 1); 
 					covered.add(temp);
 				}
 			}
