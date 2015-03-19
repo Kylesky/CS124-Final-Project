@@ -25,6 +25,7 @@ public class EntertainmentBehavior extends BuildingBehavior
 		int mins = world.getMinute();
 		int hours = world.getHour(); 
 		int curTime = mins + hours*60; 
+		
 		if(build.getFields()[0]==0)
 		{
 			if(curTime - build.getFields()[1]>=serviceTime)
@@ -37,18 +38,34 @@ public class EntertainmentBehavior extends BuildingBehavior
 		{
 			if(curTime - build.getFields()[1]>=serviceTime)
 			{
+				int leftBit = -1; 
+				for(int i=3; i>=1; i--) // find left most 1-bit in wealth level of this building
+				{
+					if((1<<(i-1) & wealth)>0)
+					{
+						leftBit = i; 
+						break;
+					}
+				}
 				while(!build.agents.isEmpty())
 				{
 						Agent e = build.agents.poll();
 						long time = build.times.poll(); 
 						//If agent has not money, he goes in the theater but is not satisfied because he does not 
 						//get to watch
-						if(e.getHouse().getWealth()>price)
+						House house = e.getHouse(); 
+						int lev = house.getWealthLevel(); 
+						
+						if(house.getWealth()>price)
 						{
 							double amount = Math.min(((double)((curTime*1000000000L) - time)/serviceTime),1);
-							int satisfaction = (int)(amount*(20*e.getHouse().getWealthLevel()));
-							e.getHouse().addNeed("ENTERTAINMENT",satisfaction);
-							e.getHouse().addWealth(-price);
+							int satisfaction = (int)(amount*(20*house.getWealthLevel()));
+							
+							//Satisfaction penalty for high-class person entering low class building
+							if(leftBit < lev) satisfaction/=((lev-leftBit)*2);
+							
+							house.addNeed("ENTERTAINMENT",satisfaction);
+							house.addWealth(-price);
 						}
 						build.getWorld().spawnAgent(e,build.getR(),build.getC()); 
 				}
