@@ -51,6 +51,7 @@ public abstract class BuildingBehavior
 	public int getWidth(){return width;}
 	public int getHeight(){return height;}
 	public int getPrice(){return price;}
+	public int getWealth(){return wealth;}
 	public void onDemolish(Building build)
 	{
 		World world = build.getWorld(); 
