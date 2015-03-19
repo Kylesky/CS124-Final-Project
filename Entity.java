@@ -41,6 +41,7 @@ abstract class Entity{
 			timeFlag %= 1440;
 		}
 	}
+	public void onDemolish(){}
 	
 	public abstract int getWidth();
 	public abstract int getHeight();

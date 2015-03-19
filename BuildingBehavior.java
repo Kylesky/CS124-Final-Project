@@ -5,11 +5,13 @@ public abstract class BuildingBehavior
 {
 	String name,code; 
 	Color color; 
-	int width, height, wealth, cost, price, power, water, capSize; 
-	public BuildingBehavior(String name, String code, int power, int water, int cost, int price, Color color, int width, int height, int wealth, int capSize)
+	int width, height, wealth, cost, price, power, water, capSize, openTime, closeTime; 
+	public BuildingBehavior(String name, String code, int openTime, int closeTime, int power, int water, int cost, int price, Color color, int width, int height, int wealth, int capSize)
 	{
 		this.name = name;
 		this.code = code;
+		this.openTime = openTime;
+		this.closeTime = closeTime; 
 		this.color = color;
 		this.width = width;
 		this.height = height;
@@ -22,14 +24,28 @@ public abstract class BuildingBehavior
 	}
 	public String getName(){return name;}
 	
+	public int getOpenTime(){return openTime;}
+	public int getCloseTime(){return closeTime;}
 	public void restock(Building build){};
 	public abstract void process(long deltaTime, Building build);
-	public void setup(Building build){}; 
+	public void setup(Building build){}
+	public void updatePowerWater(Building build)
+	{
+		World world = build.getWorld(); 
+		world.addConsumedPower(power);
+		world.addConsumedWater(water);
+	}
 	public int getCost(){return cost;}
 	public Color getColor(){return color;}
 	public int getWidth(){return width;}
 	public int getHeight(){return height;}
 	public int getPrice(){return price;}
+	public void onDemolish(Building build)
+	{
+		World world = build.getWorld(); 
+		world.addConsumedPower(-power);
+		world.addConsumedWater(-water);
+	}
 	public abstract String getNeedServiced();
 	
 	public boolean canEnter(int wealthLevel){
