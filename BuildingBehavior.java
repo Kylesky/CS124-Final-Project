@@ -24,7 +24,8 @@ public abstract class BuildingBehavior
 	
 	public void restock(Building build){};
 	public abstract void process(long deltaTime, Building build);
-	public void setup(Building build)
+	public void setup(Building build){}
+	public void updatePowerWater(Building build)
 	{
 		World world = build.getWorld(); 
 		world.addConsumedPower(power);

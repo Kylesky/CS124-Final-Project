@@ -27,7 +27,6 @@ public class NeedBehavior extends BuildingBehavior
 	
 	public void setup(Building build)
 	{
-		super.setup(build);
 		build.fields[UNITS] = defAmount; 
 	}
 	

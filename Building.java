@@ -39,6 +39,15 @@ public class Building extends Entity
 	
 	public void restock(){behavior.restock(this);}
 	
+	public void onBuild(Building prototype)
+	{
+		setBehavior(prototype.getBehavior());
+		clearAgents(); 
+		clearTimes();
+		copyFields(prototype);
+		behavior.updatePowerWater(this);
+	}
+	
 	//Get behavior of certain building flyweight
 	public BuildingBehavior getBehavior(){return behavior;}
 	public void setBehavior(BuildingBehavior behavior){this.behavior = behavior;}
