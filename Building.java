@@ -61,7 +61,7 @@ public class Building extends Entity
 	{
 		addAgent(agent);
 	}
-	
+	public void onDemolish(){behavior.onDemolish(this);}
 	public int getCost(){return getBehavior().getCost();}
 	public int getWidth(){return getBehavior().getWidth();}
 	public int getHeight(){return getBehavior().getHeight();}

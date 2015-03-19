@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.image.*;
 import java.util.*;
 class World{
-	private int width, height, playerMoney;
+	private int width, height, playerMoney, totalPower, consumedPower, totalWater, consumedWater;
 	private Entity[][] grid;
 	private ArrayList<Agent> agents, toRemove;
 	private int CELL_SIZE = Config.getWorldCellSize();
@@ -20,6 +20,25 @@ class World{
 		agents = new ArrayList<Agent>();
 		toRemove = new ArrayList<Agent>();
 		playerMoney = Config.getStartingMoney();
+		
+		consumedWater = 0;
+		consumedPower = 0;
+		totalWater = 0;
+		totalPower = 0; 
+	}
+	
+	public int getConsumedPower(){return consumedPower;}
+	public int getConsumedWater(){return consumedWater;}
+	public int getTotalWater(){return totalWater;}
+	public int getTotalPower(){return totalPower;}
+	public void addTotalPower(int val){totalPower+=val;}
+	public void addTotalWater(int val){totalWater+=val;}
+	public void addConsumedPower(int val){consumedPower+=val;}
+	public void addConsumedWater(int val){consumedWater+=val;}
+	public void addTotalUtility(int val, String util)
+	{
+		if(util.equals("POWER")) totalPower+=val; 
+		else totalWater+=val; 
 	}
 	
 	public boolean boundsCheck(int r, int c){
@@ -202,6 +221,7 @@ class World{
 				grid[r+i][c+j] = null;
 			}
 		}
+		e.onDemolish(); 
 		ObjectHandler.getInstance().destroyEntity(e);
 	}
 }

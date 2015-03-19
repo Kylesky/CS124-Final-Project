@@ -24,12 +24,23 @@ public abstract class BuildingBehavior
 	
 	public void restock(Building build){};
 	public abstract void process(long deltaTime, Building build);
-	public void setup(Building build){}; 
+	public void setup(Building build)
+	{
+		World world = build.getWorld(); 
+		world.addConsumedPower(power);
+		world.addConsumedWater(water);
+	}
 	public int getCost(){return cost;}
 	public Color getColor(){return color;}
 	public int getWidth(){return width;}
 	public int getHeight(){return height;}
 	public int getPrice(){return price;}
+	public void onDemolish(Building build)
+	{
+		World world = build.getWorld(); 
+		world.addConsumedPower(-power);
+		world.addConsumedWater(-water);
+	}
 	public abstract String getNeedServiced();
 	
 	public boolean canEnter(int wealthLevel){
