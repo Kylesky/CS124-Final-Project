@@ -52,12 +52,8 @@ public class Overlay{
 		}else if(e.getType() == Entity.HOUSE){
 			House h = (House)e;
 			if(house){
-				int val = 0;
-				switch(basis){
-					case "SATISFACTION": val = (int)h.getSat(); break;
-					case "WEALTH": val = h.getWealth(); break;
-					default: val = h.getScale(basis); break;
-				}
+				int val = h.getScale(basis);
+				System.out.println(val + " " + basis);
 				for(int i=0; i<ranges.size(); i++){
 					if(val <= ranges.get(i)){
 						g.setColor(colors.get(i));

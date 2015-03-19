@@ -93,9 +93,13 @@ public class ServiceBehavior extends BuildingBehavior
 	{
 		return service; 
 	}
+	public void onBuild(Building build){
+		super.onBuild(build);
+	}
 	
 	public void onDemolish(Building build)
 	{
+		super.onDemolish(build);
 		service(build,false);
 	}
 	public void service(Building build, boolean give)

@@ -41,12 +41,6 @@ public abstract class BuildingBehavior
 	
 	public abstract void process(long deltaTime, Building build);
 	public void setup(Building build){}
-	public void updatePowerWater(Building build)
-	{
-		World world = build.getWorld(); 
-		world.addConsumedPower(power);
-		world.addConsumedWater(water);
-	}
 	public int getCost(){return cost;}
 	public Color getColor(){return color;}
 	public int getWidth(){return width;}
@@ -58,6 +52,12 @@ public abstract class BuildingBehavior
 		World world = build.getWorld(); 
 		world.addConsumedPower(-power);
 		world.addConsumedWater(-water);
+	}
+	public void onBuild(Building build)
+	{
+		World world = build.getWorld(); 
+		world.addConsumedPower(power);
+		world.addConsumedWater(water);
 	}
 	public abstract String getNeedServiced();
 	

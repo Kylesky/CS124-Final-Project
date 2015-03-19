@@ -44,13 +44,10 @@ public class NeedManager
 	
 	public double getIndivSat(House house, int need){
 		double req = house.getPop()*house.getWealthLevel()*10.0;
-		for(int i=0; i<NUMNEEDS; i++)
-		{
-			if(i == 0) return Math.min((house.getWorld().getTotalPower()+0.0)/house.getWorld().getConsumedPower(), 1);
-			else if(i == 1)  return Math.min((house.getWorld().getTotalWater()+0.0)/house.getWorld().getConsumedWater(), 1);
-			else if(2 <= i && i <= 6) return Math.min(house.getNeed(i)/req, 1)*weights[i];
-			else if(7 <= i) return house.getNeed(i);
-		}
+		if(need == 0) return Math.min((house.getWorld().getTotalPower()+0.0)/house.getWorld().getConsumedPower(), 1);
+		else if(need == 1)  return Math.min((house.getWorld().getTotalWater()+0.0)/house.getWorld().getConsumedWater(), 1);
+		else if(2 <= need && need <= 6) return Math.min(house.getNeed(need)/req, 1);
+		else if(7 <= need) return house.getNeed(need);
 		return 0;
 	}
 	

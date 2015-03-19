@@ -40,6 +40,19 @@ public class HouseBehavior
 		}
 	}
 	
+	public void onDemolish(House house)
+	{
+		World world = house.getWorld(); 
+		world.addConsumedPower(-power);
+		world.addConsumedWater(-water);
+	}
+	public void onBuild(House house)
+	{
+		World world = house.getWorld(); 
+		world.addConsumedPower(power);
+		world.addConsumedWater(water);
+	}
+	
 	public int getCost(){return cost;}
 	public Color getColor(){return color;}
 	public int getWidth(){return width;}

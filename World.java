@@ -98,6 +98,14 @@ class World{
 		for(int i=0; i<height; i++){
 			for(int j=0; j<width; j++){
 				if(grid[i][j] == null) continue;
+				if(grid[i][j].getR() != i || grid[i][j].getC() != j || grid[i][j].getType() != Entity.HOUSE) continue;
+				((House)grid[i][j]).resetServices();
+			}
+		}
+		
+		for(int i=0; i<height; i++){
+			for(int j=0; j<width; j++){
+				if(grid[i][j] == null) continue;
 				if(grid[i][j].getR() != i || grid[i][j].getC() != j) continue;
 				grid[i][j].__process(deltaTime);
 			}

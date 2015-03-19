@@ -65,6 +65,7 @@ public class House extends Entity
 	public void process(long deltaTime)
 	{
 		//Agents coming out and stuff
+		System.out.println(Arrays.toString(needs));
 		behavior.process(deltaTime, this);
 	}
 	
@@ -105,5 +106,20 @@ public class House extends Entity
 			}
 		}
 		return 0;
+	}
+	
+	public void resetServices(){
+		for(int i=7; i<10; i++){
+			needs[i] = 0;
+		}
+	}
+	
+	public void onDemolish()
+	{
+		behavior.onDemolish(this);
+	}
+	public void onBuild()
+	{
+		behavior.onBuild(this);
 	}
 }

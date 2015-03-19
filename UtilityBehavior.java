@@ -16,9 +16,8 @@ public class UtilityBehavior extends BuildingBehavior
 		
 	}
 	
-	public void updatePowerWater(Building build)
-	{
-		super.updatePowerWater(build);
+	public void onBuild(Building build){
+		super.onBuild(build);
 		World world = build.getWorld(); 
 		world.addTotalUtility(capacity,util);
 	}

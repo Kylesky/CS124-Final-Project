@@ -60,7 +60,7 @@ public class Building extends Entity
 		}else{
 			setState(STATE_CLOSED);
 		}
-		behavior.updatePowerWater(this);
+		behavior.onBuild(this);
 	}
 	
 	//Get behavior of certain building flyweight
@@ -86,6 +86,7 @@ public class Building extends Entity
 		addAgent(agent);
 	}
 	public void onDemolish(){behavior.onDemolish(this);}
+	public void onBuild(){behavior.onBuild(this);}
 	public int getCost(){return getBehavior().getCost();}
 	public int getWidth(){return getBehavior().getWidth();}
 	public int getHeight(){return getBehavior().getHeight();}
