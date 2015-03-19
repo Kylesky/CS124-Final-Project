@@ -95,11 +95,13 @@ class World{
 			timeFlag %= 1440;
 		}
 		
-		for(int i=0; i<height; i++){
-			for(int j=0; j<width; j++){
-				if(grid[i][j] == null) continue;
-				if(grid[i][j].getR() != i || grid[i][j].getC() != j || grid[i][j].getType() != Entity.HOUSE) continue;
-				((House)grid[i][j]).resetServices();
+		if((getMinute() == 0 || getMinute() == 30) && timeFlags[getHour()*60+getMinute()]){
+			for(int i=0; i<height; i++){
+				for(int j=0; j<width; j++){
+					if(grid[i][j] == null) continue;
+					if(grid[i][j].getR() != i || grid[i][j].getC() != j || grid[i][j].getType() != Entity.HOUSE) continue;
+					((House)grid[i][j]).resetServices();
+				}
 			}
 		}
 		
