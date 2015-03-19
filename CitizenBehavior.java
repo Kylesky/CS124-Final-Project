@@ -12,7 +12,7 @@ public class CitizenBehavior extends AgentBehavior
 	}
 	
 	public void setup(int r, int c, Agent agent){
-		if(agent.getHouse().getWorld().getHour() >= 22 || agent.getHouse().getWorld().getHour() < 6){
+		if(agent.getHouse().getWorld().getHour() >= 21 || agent.getHouse().getWorld().getHour() < 6){
 			findGoal(r, c, agent, -1);
 			return;
 		}
@@ -96,7 +96,9 @@ public class CitizenBehavior extends AgentBehavior
 					qr.offer(cr2); qc.offer(cc2); qm.offer(cm2);
 					parr[cr2][cc2] = cr; parc[cr2][cc2] = cc;
 				}else if(w.getCell(cr2, cc2).getType() == Entity.BUILDING &&
-					NeedManager.conv(((Building)w.getCell(cr2, cc2)).getBehavior().getNeedServiced()) == goal){
+					NeedManager.conv(((Building)w.getCell(cr2, cc2)).getBehavior().getNeedServiced()) == goal &&
+					agent.getHouse().getWealth() >= ((Building)w.getCell(cr2, cc2)).getPrice() &&
+					((Building)w.getCell(cr2, cc2)).getBehavior().canEnter(agent.getHouse().getWealthLevel())){
 					possibler.add(cr2); possiblec.add(cc2); possiblew.add(cm2);
 					parr[cr2][cc2] = cr; parc[cr2][cc2] = cc;
 				}else if(goal == -1 && w.getCell(cr2, cc2) == agent.getHouse()){

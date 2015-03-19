@@ -52,9 +52,9 @@ public class NeedBehavior extends BuildingBehavior
 				House house = e.getHouse(); 
 				int lev = house.getWealthLevel(); 
 				int leftBit = -1; 
-				for(int i=3; i>=1; i--) // find left most 1-bit
+				for(int i=2; i>=0; i--) // find left most 1-bit
 				{
-					if((1<<(i-1) & wealth)>0)
+					if((1<<i & wealth)>0)
 					{
 						leftBit = i; 
 						break;

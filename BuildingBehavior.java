@@ -15,7 +15,7 @@ public abstract class BuildingBehavior
 		this.height = height;
 		this.wealth = wealth;
 		this.cost = cost; 
-		this.price =price;
+		this.price = price;
 		this.power = power;
 		this.water = water; 
 	}
@@ -28,7 +28,18 @@ public abstract class BuildingBehavior
 	public Color getColor(){return color;}
 	public int getWidth(){return width;}
 	public int getHeight(){return height;}
-	public abstract String getNeedServiced(); 
+	public int getPrice(){return price;}
+	public abstract String getNeedServiced();
+	
+	public boolean canEnter(int wealthLevel){
+		for(int i=wealthLevel-1; i>=0; i--){
+			if((wealth & (1<<i)) != 0){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public void draw(Graphics2D g, int r, int c, int offsetX, int offsetY)
 	{
 		int cellsize = Config.getWorldCellSize(); 

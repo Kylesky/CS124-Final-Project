@@ -65,5 +65,6 @@ public class Building extends Entity
 	public int getCost(){return getBehavior().getCost();}
 	public int getWidth(){return getBehavior().getWidth();}
 	public int getHeight(){return getBehavior().getHeight();}
+	public int getPrice(){return getBehavior().getPrice();}
 	public String getBehaviorName(){return getBehavior().getName();}
 }
