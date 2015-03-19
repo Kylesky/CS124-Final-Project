@@ -18,7 +18,8 @@ public class Building extends Entity
 		fields = new int[5]; 
 		behavior.setup(this); 
 	}
-	
+	public int setField(int ind, int val){return fields[ind]=val;}
+	public int[] getFields(){return fields;}
 	public void addAgent(Agent e)
 	{
 		agents.offer(e);
