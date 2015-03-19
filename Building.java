@@ -66,7 +66,7 @@ public class Building extends Entity
 	
 	public void process(long deltaTime)
 	{
-		getBehavior().process(deltaTime, this);
+		getBehavior().__process(deltaTime, this);
 	}
 	
 	public void acceptAgent(Agent agent)
@@ -78,5 +78,7 @@ public class Building extends Entity
 	public int getWidth(){return getBehavior().getWidth();}
 	public int getHeight(){return getBehavior().getHeight();}
 	public int getPrice(){return getBehavior().getPrice();}
+	public int getState(){return state;}
+	public void setState(int state){this.state = state;}
 	public String getBehaviorName(){return getBehavior().getName();}
 }
