@@ -24,7 +24,6 @@ public abstract class BuildingBehavior
 	}
 	public String getName(){return name;}
 	
-	public int getCapSize(){return capSize;}
 	public int getOpenTime(){return openTime;}
 	public int getCloseTime(){return closeTime;}
 	public void restock(Building build){};
@@ -52,6 +51,7 @@ public abstract class BuildingBehavior
 	public int getWidth(){return width;}
 	public int getHeight(){return height;}
 	public int getPrice(){return price;}
+	public int getWealth(){return wealth;}
 	public void onDemolish(Building build)
 	{
 		World world = build.getWorld(); 
@@ -69,6 +69,7 @@ public abstract class BuildingBehavior
 		return false;
 	}
 	
+	public int getCapSize(){return capSize;}
 	public void draw(Graphics2D g, int r, int c, int offsetX, int offsetY, Building build)
 	{
 		int cellsize = Config.getWorldCellSize(); 

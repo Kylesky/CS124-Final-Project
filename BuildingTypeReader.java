@@ -55,8 +55,7 @@ public class BuildingTypeReader
 			{
 				int radius = Integer.parseInt(tk.nextToken().trim());
 				String serviced = tk.nextToken().trim(); 
-				int serviceTime = Integer.parseInt(tk.nextToken().trim());
-				ret.add(new ServiceBehavior(name, code, openTime, closeTime, power, water, cost, price, color,width,height,wealth, capSize, radius,serviced,serviceTime)); 
+				ret.add(new ServiceBehavior(name, code, openTime, closeTime, power, water, cost, price, color,width,height,wealth, capSize, radius,serviced)); 
 			}
 		}
 		return ret;

@@ -21,8 +21,7 @@ public class Building extends Entity
 		fields = new int[5]; 
 		behavior.setup(this); 
 	}
-	public int setField(int ind, int val){return fields[ind]=val;}
-	public int[] getFields(){return fields;}
+	
 	public void addAgent(Agent e)
 	{
 		agents.offer(e);
@@ -41,11 +40,6 @@ public class Building extends Entity
 		fields = Arrays.copyOf(b.fields, b.fields.length);
 	}
 	
-	public boolean isFull()
-	{
-		if(agents.size()==behavior.getCapSize()) return true;
-		else return false; 
-	}
 	public void restock(){behavior.restock(this);}
 	
 	public void onBuild(Building prototype)

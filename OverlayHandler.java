@@ -18,19 +18,13 @@ class OverlayHandler{
 	private Overlay currentOverlay;
 	
 	public void setup() throws Exception{
-		overlays = new ArrayList<Overlay>();
+		overlays = OverlayTypeReader.getOverlays();
 		overlayMap = new HashMap<String, Overlay>();
 		
-		currentOverlay = new Overlay("BASIC");
-		overlays.add(currentOverlay);
-		overlayMap.put(currentOverlay.getName(), currentOverlay);
-		
-		/* read overlays from file
-		try{
-			BufferedReader sc = new BufferedReader(new FileReader(""));
-		}catch(IOException ioe){
+		for(int i=0; i<overlays.size(); i++){
+			overlayMap.put(overlays.get(i).getName(), overlays.get(i));
 		}
-		*/
+		currentOverlay = overlayMap.get("BASIC");
 	}
 	
 	public void setOverlay(String name){
