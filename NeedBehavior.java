@@ -45,7 +45,6 @@ public class NeedBehavior extends BuildingBehavior
 			long diff = curTime - time;
 			if(diff/1000000000L>=serviceTime)
 			{
-				//CHANGE SCALING IF THERE IS TIME!
 				build.agents.poll();
 				build.times.poll();
 				House house = e.getHouse(); 
@@ -60,10 +59,7 @@ public class NeedBehavior extends BuildingBehavior
 					}
 				}
 				//test if can purchase entire serving
-				int amount = servingSize; 
-				
-				//if service is lower end, less satisfied, but stocks are still reduced normally
-				//if(leftBit < lev) amount/=((lev-leftBit)*2);
+				int amount = servingSize;
 				
 				//If less than one serving left, buy everything
 				if(amount>build.fields[UNITS]) amount = build.fields[UNITS];
