@@ -44,6 +44,7 @@ public class ServiceBehavior extends BuildingBehavior
 						break;
 					}
 				}
+				System.out.println(build.agents.size());
 				while(!build.agents.isEmpty())
 				{
 						Agent e = build.agents.poll();
