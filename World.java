@@ -127,7 +127,6 @@ class World{
 				}
 			}
 		}
-		System.out.println(getTotalPower() + " " + getTotalWater());
 	}
 	
 	public void removeAgent(Agent agent){

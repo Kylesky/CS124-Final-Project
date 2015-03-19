@@ -5,11 +5,13 @@ public abstract class BuildingBehavior
 {
 	String name,code; 
 	Color color; 
-	int width, height, wealth, cost, price, power, water, capSize; 
-	public BuildingBehavior(String name, String code, int power, int water, int cost, int price, Color color, int width, int height, int wealth, int capSize)
+	int width, height, wealth, cost, price, power, water, capSize, openTime, closeTime; 
+	public BuildingBehavior(String name, String code, int openTime, int closeTime, int power, int water, int cost, int price, Color color, int width, int height, int wealth, int capSize)
 	{
 		this.name = name;
 		this.code = code;
+		this.openTime = openTime;
+		this.closeTime = closeTime; 
 		this.color = color;
 		this.width = width;
 		this.height = height;
@@ -22,6 +24,8 @@ public abstract class BuildingBehavior
 	}
 	public String getName(){return name;}
 	
+	public int getOpenTime(){return openTime;}
+	public int getCloseTime(){return closeTime;}
 	public void restock(Building build){};
 	public abstract void process(long deltaTime, Building build);
 	public void setup(Building build){}
