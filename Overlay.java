@@ -10,10 +10,17 @@ public class Overlay{
 
 	public void process(Graphics2D g, Entity e){
 		if(e.getType() == Entity.BUILDING){
-			g.setColor(((Building)e).getBehavior().getColor());
+			Building b = (Building)e;
+			if(b.getState() == Building.STATE_CLOSED){
+				g.setColor(Paint.CLOSED_GREY);
+			}else{
+				g.setColor(b.getBehavior().getColor());
+			}
 		}else if(e.getType() == Entity.HOUSE){
-			g.setColor(((House)e).getBehavior().getColor());
+			House h = (House)e;
+			g.setColor(h.getBehavior().getColor());
 		}else if(e.getType() == Entity.ROAD){
+			Road r = (Road)e;
 			g.setColor(Color.BLACK);
 		}
 	}

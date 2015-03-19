@@ -48,7 +48,9 @@ public class NeedManager
 		double req = house.getPop()*house.getWealthLevel()*10.0;
 		for(int i=0; i<NUMNEEDS; i++)
 		{
-			sat += Math.min(house.getNeed(i)/req, 1)*weights[i];
+			if(i <= 1) sat += Math.min((house.getWorld().getTotalPower()+0.0)/house.getWorld().getConsumedPower(), 1);
+			else if(2 <= i && i <= 6) sat += Math.min(house.getNeed(i)/req, 1)*weights[i];
+			else if(7 <= i) sat += house.getNeed(i);
 		}
 		return 100*(sat/weightTot);
 	}

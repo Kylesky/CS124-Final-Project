@@ -28,6 +28,7 @@ public class Road extends Entity
 			}
 		}
 		g.setStroke(Paint.solidStroke);
+		g.drawString((toDemolish()?"!":""), x+5, y+Config.getWorldCellSize()/2);
 	}
 	
 	public void process(long deltaTime){

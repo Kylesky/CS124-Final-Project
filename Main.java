@@ -30,10 +30,8 @@ public class Main{
 		
 		world = new World(Config.getWorldWidth(), Config.getWorldHeight());
 		
-		StateHandler stateHandler = StateHandler.getInstance();
 		ObjectHandler objectHandler = ObjectHandler.getInstance();
 		OverlayHandler overlayHandler = OverlayHandler.getInstance();
-		stateHandler.setup();
 		objectHandler.setup();
 		overlayHandler.setup();
 		

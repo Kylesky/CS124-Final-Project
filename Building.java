@@ -2,11 +2,14 @@ import java.awt.*;
 import java.util.*;
 public class Building extends Entity
 {
-	String name;
-	BuildingBehavior behavior; 
+	private String name;
+	private BuildingBehavior behavior; 
 	ArrayDeque<Agent> agents; 
 	ArrayDeque<Long> times; 
-	int[] fields; 
+	int[] fields;
+	private int state;
+	public static final int STATE_OPEN = 0;
+	public static final int STATE_CLOSED = 1;
 	
 	public Building(){}
 	public Building(int r, int c, BuildingBehavior behavior, World world)
@@ -46,6 +49,12 @@ public class Building extends Entity
 		clearAgents(); 
 		clearTimes();
 		copyFields(prototype);
+		int time = getWorld().getHour()*100 + getWorld().getMinute();
+		if(getBehavior().getOpenTime() <= time && time <= getBehavior().getCloseTime()){
+			setState(STATE_OPEN);
+		}else{
+			setState(STATE_CLOSED);
+		}
 		behavior.updatePowerWater(this);
 	}
 	
@@ -59,12 +68,12 @@ public class Building extends Entity
 	//Houses override these functions so don't worry about behavior being null
 	public void draw(Graphics2D g, int offsetX, int offsetY)
 	{
-		behavior.draw(g,getR(),getC(),offsetX,offsetY); 
+		behavior.draw(g,getR(),getC(),offsetX,offsetY, this); 
 	}
 	
 	public void process(long deltaTime)
 	{
-		getBehavior().process(deltaTime, this);
+		getBehavior().__process(deltaTime, this);
 	}
 	
 	public void acceptAgent(Agent agent)
@@ -76,5 +85,7 @@ public class Building extends Entity
 	public int getWidth(){return getBehavior().getWidth();}
 	public int getHeight(){return getBehavior().getHeight();}
 	public int getPrice(){return getBehavior().getPrice();}
+	public int getState(){return state;}
+	public void setState(int state){this.state = state;}
 	public String getBehaviorName(){return getBehavior().getName();}
 }

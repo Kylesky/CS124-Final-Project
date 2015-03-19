@@ -98,7 +98,8 @@ public class CitizenBehavior extends AgentBehavior
 				}else if(w.getCell(cr2, cc2).getType() == Entity.BUILDING &&
 					NeedManager.conv(((Building)w.getCell(cr2, cc2)).getBehavior().getNeedServiced()) == goal &&
 					agent.getHouse().getWealth() >= ((Building)w.getCell(cr2, cc2)).getPrice() &&
-					((Building)w.getCell(cr2, cc2)).getBehavior().canEnter(agent.getHouse().getWealthLevel())){
+					((Building)w.getCell(cr2, cc2)).getBehavior().canEnter(agent.getHouse().getWealthLevel()) &&
+					((Building)w.getCell(cr2, cc2)).getState() == Building.STATE_OPEN){
 					possibler.add(cr2); possiblec.add(cc2); possiblew.add(cm2);
 					parr[cr2][cc2] = cr; parc[cr2][cc2] = cc;
 				}else if(goal == -1 && w.getCell(cr2, cc2) == agent.getHouse()){
@@ -145,6 +146,10 @@ public class CitizenBehavior extends AgentBehavior
 	public void process(long deltaTime, Agent agent){
 		if(agent.getPathX().size() == 0){
 			Entity destination = agent.getHouse().getWorld().getCell(agent.getDestinationR(), agent.getDestinationC());
+			if( destination.getType() == Entity.BUILDING && ((Building)destination).getState() == Building.STATE_CLOSED ){
+				setup(destination.getR(), destination.getC(), agent);
+				return;
+			}
 			destination.acceptAgent(agent);
 			agent.getHouse().getWorld().removeAgent(agent);
 			return;
