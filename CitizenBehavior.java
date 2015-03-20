@@ -99,7 +99,8 @@ public class CitizenBehavior extends AgentBehavior
 					NeedManager.conv(((Building)w.getCell(cr2, cc2)).getBehavior().getNeedServiced()) == goal &&
 					agent.getHouse().getWealth() >= ((Building)w.getCell(cr2, cc2)).getPrice() &&
 					((Building)w.getCell(cr2, cc2)).getBehavior().canEnter(agent.getHouse().getWealthLevel()) &&
-					((Building)w.getCell(cr2, cc2)).getState() == Building.STATE_OPEN){
+					((Building)w.getCell(cr2, cc2)).getState() == Building.STATE_OPEN &&
+					((Building)w.getCell(cr2, cc2)).getStock() > 0){
 					possibler.add(cr2); possiblec.add(cc2); possiblew.add(cm2);
 					parr[cr2][cc2] = cr; parc[cr2][cc2] = cc;
 				}else if(goal == -1 && w.getCell(cr2, cc2) == agent.getHouse()){
