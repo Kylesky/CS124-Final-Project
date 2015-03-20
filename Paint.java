@@ -89,17 +89,19 @@ class Paint extends Canvas{
 					}
 				}
 			}
-			sat /= totPop;
-			wealth /= totPop;
-			wealthlevel /= totPop;
-			health /= totPop;
-			food /= totPop;
-			nonfood /= totPop;
-			entertainment /= totPop;
-			education /= totPop;
-			environment /= totPop;
-			police /= totPop;
-			firehouse /= totPop;
+			if(totPop != 0){
+				sat /= totPop;
+				wealth /= totPop;
+				wealthlevel /= totPop;
+				health /= totPop;
+				food /= totPop;
+				nonfood /= totPop;
+				entertainment /= totPop;
+				education /= totPop;
+				environment /= totPop;
+				police /= totPop;
+				firehouse /= totPop;
+			}
 			
 			bufg.drawString("Average Satisfaction: ", 50, 20);
 			bufg.drawString(String.format("%.2f/%", sat), 200, 20);
