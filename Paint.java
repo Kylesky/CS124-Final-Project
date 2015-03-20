@@ -51,59 +51,128 @@ class Paint extends Canvas{
 		bufg.clearRect(0, 0, imgWidth, imgHeight);
 
 		/*
-			GRID
+			MAIN VIEW
 		*/
-        bufg.setStroke(brokenStroke);
-		bufg.setColor(GRID_COLOR);
-		for(int i=0; i<=world.getWidth(); i++){
-			int x = (int)(i*world.getCellSize()+offsetX);
-			if(x < 0) continue;
-			if(x > imgWidth) continue;
-			bufg.drawLine(x, -3*world.getCellSize()/8+(int)(offsetY)%world.getCellSize()-(movy?1:0), x, imgHeight);
-		}
-		for(int i=0; i<=world.getHeight(); i++){
-			int y = (int)(i*world.getCellSize()+offsetY);
-			if(y < 0) continue;
-			if(y > imgHeight) break;
-			bufg.drawLine(-3*world.getCellSize()/8+(int)(offsetX)%world.getCellSize()-(movx?1:0), y, imgWidth, y);
-		}
-        bufg.setStroke(solidStroke);
-		
-		/*
-			OBJECTS
-		*/
-		for(int c=0; c<world.getWidth(); c++){
-			for(int r=0; r<world.getHeight(); r++){
-				if(world.isEmpty(r, c)) continue;
-				Entity toDraw = world.getCell(r, c);
-				if(toDraw.getR() == r && toDraw.getC() == c){
-					OverlayHandler.getInstance().applyOverlay(bufg, toDraw);
-					toDraw.draw(bufg, (int)offsetX, (int)offsetY);
+		if(Main.UIState == Main.UI_STATISTICS){
+			bufg.setFont(UIFont);
+			
+			double sat = 0;
+			double wealth = 0;
+			double wealthlevel = 0;
+			double health = 0;
+			double food = 0;
+			double nonfood = 0;
+			double entertainment = 0;
+			double education = 0;
+			double environment = 0;
+			double police = 0;
+			double firehouse = 0;
+			int totPop = 0;
+			
+			for(int c=0; c<world.getWidth(); c++){
+				for(int r=0; r<world.getHeight(); r++){
+					if(world.isEmpty(r, c) || world.getCell(r, c).getType() != Entity.HOUSE) continue;
+					House house = (House)world.getCell(r,c);
+					if(house.getR() == r && house.getC() == c){
+						totPop += house.getPop();
+						sat += house.getSat()*house.getPop();
+						wealth += house.getWealth();
+						wealthlevel += house.getWealthLevel()*house.getPop();
+						health += house.getHealth()*house.getPop();
+						food += house.getScale("FOOD")*house.getPop();
+						nonfood += house.getScale("NONFOOD")*house.getPop();
+						entertainment += house.getScale("ENTERTAINMENT")*house.getPop();
+						education += house.getScale("EDUCATION")*house.getPop();
+						environment += house.getScale("ENVIRONMENT")*house.getPop();
+						police += house.getScale("POLICE")*house.getPop();
+						firehouse += house.getScale("FIREHOUSE")*house.getPop();
+					}
 				}
 			}
-		}
+			sat /= totPop;
+			wealth /= totPop;
+			wealthlevel /= totPop;
+			health /= totPop;
+			food /= totPop;
+			nonfood /= totPop;
+			entertainment /= totPop;
+			education /= totPop;
+			environment /= totPop;
+			police /= totPop;
+			firehouse /= totPop;
+			
+			bufg.drawString("Average Satisfaction: ", 50, 20);
+			bufg.drawString(String.format("%.2f/%", sat), 200, 20);
+			bufg.drawString("Average Wealth per Citizen: ", 50, 60);
+			bufg.drawString(String.format("%.2f/%", wealth), 200, 60);
+			bufg.drawString("Average Wealth Level: ", 50, 100);
+			bufg.drawString(String.format("%.2f/%", wealthlevel), 200, 100);
+			bufg.drawString("Average Health: ", 50, 140);
+			bufg.drawString(String.format("%.2f/%", health), 200, 140);
+			bufg.drawString("Average Food Supply: ", 50, 180);
+			bufg.drawString(String.format("%.2f/%", food), 200, 180);
+			bufg.drawString("Average Nonfood Supply: ", 50, 220);
+			bufg.drawString(String.format("%.2f/%", nonfood), 200, 220);
+			bufg.drawString("Average Entertainment: ", 50, 260);
+			bufg.drawString(String.format("%.2f/%", entertainment), 200, 260);
+			bufg.drawString("Average Education: ", 50, 300);
+			bufg.drawString(String.format("%.2f/%", education), 200, 300);
+			bufg.drawString("Environment Reach: ", 50, 340);
+			bufg.drawString(String.format("%.2f/%", environment), 200, 340);
+			bufg.drawString("Police Reach: ", 50, 380);
+			bufg.drawString(String.format("%.2f/%", police), 200, 380);
+			bufg.drawString("Firehouse Reach: ", 50, 420);
+			bufg.drawString(String.format("%.2f/%", firehouse), 200, 420);
+		}else{
+			bufg.setStroke(brokenStroke);
+			bufg.setColor(GRID_COLOR);
+			for(int i=0; i<=world.getWidth(); i++){
+				int x = (int)(i*world.getCellSize()+offsetX);
+				if(x < 0) continue;
+				if(x > imgWidth) continue;
+				bufg.drawLine(x, -3*world.getCellSize()/8+(int)(offsetY)%world.getCellSize()-(movy?1:0), x, imgHeight);
+			}
+			for(int i=0; i<=world.getHeight(); i++){
+				int y = (int)(i*world.getCellSize()+offsetY);
+				if(y < 0) continue;
+				if(y > imgHeight) break;
+				bufg.drawLine(-3*world.getCellSize()/8+(int)(offsetX)%world.getCellSize()-(movx?1:0), y, imgWidth, y);
+			}
+			bufg.setStroke(solidStroke);
+			
+			for(int c=0; c<world.getWidth(); c++){
+				for(int r=0; r<world.getHeight(); r++){
+					if(world.isEmpty(r, c)) continue;
+					Entity toDraw = world.getCell(r, c);
+					if(toDraw.getR() == r && toDraw.getC() == c){
+						OverlayHandler.getInstance().applyOverlay(bufg, toDraw);
+						toDraw.draw(bufg, (int)offsetX, (int)offsetY);
+					}
+				}
+			}
+			
+			for(int i=0; i<world.getAgents(); i++){
+				Agent toDraw = world.getAgent(i);
+				OverlayHandler.getInstance().applyOverlay(bufg, toDraw);
+				toDraw.draw(bufg, offsetX, offsetY);
+			}
 		
-		for(int i=0; i<world.getAgents(); i++){
-			Agent toDraw = world.getAgent(i);
-			OverlayHandler.getInstance().applyOverlay(bufg, toDraw);
-			toDraw.draw(bufg, offsetX, offsetY);
-		}
-		
-		int x = (int)((MouseHandler.getInstance().getMouseX()-offsetX)/world.getCellSize());
-		int y = (int)((MouseHandler.getInstance().getMouseY()-offsetY)/world.getCellSize());
-		if(Main.UIState == Main.UI_BUILD){
-			if(Main.buildCommandSelected != null){
-				if(world.isBuildable(Main.buildCommandSelected.getPrototype(), y, x)){
-					bufg.setColor(TRANS_GREEN);
-				}else{
+			int x = (int)((MouseHandler.getInstance().getMouseX()-offsetX)/world.getCellSize());
+			int y = (int)((MouseHandler.getInstance().getMouseY()-offsetY)/world.getCellSize());
+			if(Main.UIState == Main.UI_BUILD){
+				if(Main.buildCommandSelected != null){
+					if(world.isBuildable(Main.buildCommandSelected.getPrototype(), y, x)){
+						bufg.setColor(TRANS_GREEN);
+					}else{
+						bufg.setColor(TRANS_RED);
+					}
+					bufg.fillRect(x*world.getCellSize()+(int)offsetX, y*world.getCellSize()+(int)offsetY, Main.buildCommandSelected.getPrototype().getWidth()*world.getCellSize(), Main.buildCommandSelected.getPrototype().getHeight()*world.getCellSize());
+				}
+			}else if(Main.UIState == Main.UI_DEMOLISH){
+				if(world.isOccupied(y, x)){
 					bufg.setColor(TRANS_RED);
+					bufg.fillRect(world.getCell(y, x).getC()*world.getCellSize()+(int)offsetX, world.getCell(y, x).getR()*world.getCellSize()+(int)offsetY, world.getCell(y, x).getWidth()*world.getCellSize(), world.getCell(y, x).getHeight()*world.getCellSize());
 				}
-				bufg.fillRect(x*world.getCellSize()+(int)offsetX, y*world.getCellSize()+(int)offsetY, Main.buildCommandSelected.getPrototype().getWidth()*world.getCellSize(), Main.buildCommandSelected.getPrototype().getHeight()*world.getCellSize());
-			}
-		}else if(Main.UIState == Main.UI_DEMOLISH){
-			if(world.isOccupied(y, x)){
-				bufg.setColor(TRANS_RED);
-				bufg.fillRect(world.getCell(y, x).getC()*world.getCellSize()+(int)offsetX, world.getCell(y, x).getR()*world.getCellSize()+(int)offsetY, world.getCell(y, x).getWidth()*world.getCellSize(), world.getCell(y, x).getHeight()*world.getCellSize());
 			}
 		}
 		
