@@ -58,7 +58,6 @@ public class EntertainmentBehavior extends BuildingBehavior
 							//Satisfaction penalty for high-class person entering low class building
 							if(leftBit < lev) satisfaction/=((lev-leftBit)*2);
 							house.addNeed("ENTERTAINMENT",satisfaction);
-							System.out.println("ENTERTAINMENT SATISFACTION ADDED: " + satisfaction);
 							house.addWealth(-price);
 					}
 					build.getWorld().spawnAgent(e,build.getR(),build.getC()); 
@@ -87,7 +86,6 @@ public class EntertainmentBehavior extends BuildingBehavior
 		int minEnd = curTime%60; 
 		build.setField(HOUR_END, hourEnd);
 		build.setField(MIN_END, minEnd);
-		System.out.println(hourEnd + ":" + minEnd);
 	}
 	
 	public void onBuild(Building build){

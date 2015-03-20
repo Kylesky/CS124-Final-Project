@@ -76,7 +76,6 @@ public class ServiceBehavior extends BuildingBehavior
 							//Satisfaction penalty for high-class person entering low class building
 							if(leftBit < lev) satisfaction/=((lev-leftBit)*2);
 							house.addNeed(service,satisfaction);
-							System.out.println(service + " SATISFACTION ADDED: " + satisfaction);
 						}
 						house.addWealth(-price);
 					}
@@ -107,7 +106,6 @@ public class ServiceBehavior extends BuildingBehavior
 		int minEnd = curTime%60; 
 		build.setField(HOUR_END, hourEnd);
 		build.setField(MIN_END, minEnd);
-		System.out.println(hourEnd + ":" + minEnd);
 	}
 	public void setup(Building build)
 	{
