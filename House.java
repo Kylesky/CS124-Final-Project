@@ -12,12 +12,12 @@ public class House extends Entity
 	public House(int r, int c, HouseBehavior behavior, World world)
 	{
 		super(r,c,world,Entity.HOUSE);
-		health = behavior.getStartingAgents()*100;
 		wealth = behavior.getStartingMoney();
 		needs = new int[NeedManager.NUMNEEDS];
 		inAgents = new ArrayDeque<Agent>();
 		outAgents = new HashSet<Agent>();
 		this.behavior = behavior;
+		health = behavior.getStartingAgents()*getWealthLevel()*10;
 	}
 	
 	public double getSat(){return NeedManager.getInstance().getSat(this);}
@@ -29,8 +29,8 @@ public class House extends Entity
 	public void addWealth(int wealth){this.wealth += wealth;}
 	public void setWealth(int wealth){this.wealth = wealth;}
 	public int getWealth(){return wealth;}
-	public void addHealth(int health){this.health += health;}
-	public void setHealth(int health){this.health = health;}
+	public void addHealth(int health){this.health += health; if(this.health < 0) this.health = 0;}
+	public void setHealth(int health){this.health = Math.max(health, 0);}
 	public int getHealth(){return health;}
 	public void setBehavior(HouseBehavior behavior){this.behavior = behavior;}
 	public HouseBehavior getBehavior(){return behavior;}
@@ -55,6 +55,13 @@ public class House extends Entity
 		else if(wealth<=getPop()*Config.getLowWealthBracket()) return 1; 
 		else if(wealth<=getPop()*Config.getMediumWealthBracket()) return 2;
 		else return 3; 
+	}
+	public int getWealthOverlay()
+	{
+		if(wealth<0) return 0;
+		else if(wealth<=getPop()*Config.getLowWealthBracket()) return 1; 
+		else if(wealth<=getPop()*Config.getMediumWealthBracket()) return 2;
+		else return 4; 
 	}
 	
 	public void draw(Graphics2D g, int offsetX, int offsetY)
@@ -90,15 +97,27 @@ public class House extends Entity
 	public int getHeight(){return getBehavior().getHeight();}
 	public String getBehaviorName(){return getBehavior().getName();}
 	
-	public void addNeed(String need, int val){ needs[NeedManager.conv(need)]+=val; }
-	public void addNeed(int need, int val){ needs[need]+=val; }
-	public void setNeed(String need, int val){ needs[NeedManager.conv(need)]=val; }
+	public void addNeed(String need, int val){
+		needs[NeedManager.conv(need)]+=val;
+		if(needs[NeedManager.conv(need)]<0){
+			needs[NeedManager.conv(need)] = 0;
+		}
+	}
+	public void addNeed(int need, int val){
+		needs[need]+=val;
+		if(needs[need] < 0){
+			needs[need] = 0;
+		}
+	}
+	public void setNeed(String need, int val){
+		needs[NeedManager.conv(need)]=Math.max(0,val);
+	}
 	public int getNeed(String need){ return needs[NeedManager.conv(need)]; }
 	public int getScale(String need){
 		switch(need){
 			case "SATISFACTION": return (int)getSat();
-			case "WEALTH": return getWealthLevel();
-			case "HEALTH": return (int)(getHealth()/(getPop()*getWealthLevel()*10.0));
+			case "WEALTH": return getWealthOverlay();
+			case "HEALTH": return (int)(100*Math.min(getHealth()/(getPop()*getWealthLevel()*10.0), 1));
 			default: return (int)(100*NeedManager.getInstance().getIndivSat(this, NeedManager.conv(need))+1e-7);
 		}
 	}

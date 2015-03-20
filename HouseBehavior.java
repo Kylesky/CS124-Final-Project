@@ -26,13 +26,14 @@ public class HouseBehavior
 			house.addWealth((int)(2*house.getSat()*house.getPop()*house.getWealthLevel()));
 			if(house.getSat() < 50) house.addHealth((int)((house.getSat()-50)*house.getPop()*house.getWealthLevel()/5));
 			if(house.getSat() > 100.0*house.getPop()/capacity) house.addAgent(1);
-			else if(house.getHealth() < 25) house.addAgent(-1);
+			else if(house.getScale("HEALTH") < 25 && house.getPop()>1) house.addAgent(-1);
 			
 			house.addNeed("FOOD", -Math.min(house.getPop()*house.getWealthLevel()*2, house.getNeed("FOOD")));
 			house.addNeed("NONFOOD", -Math.min(house.getPop()*house.getWealthLevel()*2, house.getNeed("NONFOOD")));
 			house.addNeed("ENTERTAINMENT", -Math.min(house.getPop()*house.getWealthLevel()*2, house.getNeed("ENTERTAINMENT")));
 			house.addNeed("EDUCATION", -Math.min(house.getPop()*house.getWealthLevel()*2, house.getNeed("EDUCATION")));
 		}
+		house.setNeed("HEALTH", house.getHealth());
 		
 		if(house.isTimeFlagged() && 6 <= house.getTimeFlagHour() && house.getTimeFlagHour() < 22){
 			if(Math.random() < house.getInPop()/(4.0*house.getPop())){
@@ -50,7 +51,6 @@ public class HouseBehavior
 	public void onBuild(House house)
 	{
 		World world = house.getWorld(); 
-		System.out.println("what");
 		world.addConsumedPower(power);
 		world.addConsumedWater(water);
 	}

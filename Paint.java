@@ -78,7 +78,7 @@ class Paint extends Canvas{
 						sat += house.getSat()*house.getPop();
 						wealth += house.getWealth();
 						wealthlevel += house.getWealthLevel()*house.getPop();
-						health += house.getHealth()*house.getPop();
+						health += house.getScale("HEALTH")*house.getPop();
 						food += house.getScale("FOOD")*house.getPop();
 						nonfood += house.getScale("NONFOOD")*house.getPop();
 						entertainment += house.getScale("ENTERTAINMENT")*house.getPop();
@@ -103,28 +103,30 @@ class Paint extends Canvas{
 				firehouse /= totPop;
 			}
 			
-			bufg.drawString("Average Satisfaction: ", 50, 20);
-			bufg.drawString(String.format("%.2f/%", sat), 200, 20);
-			bufg.drawString("Average Wealth per Citizen: ", 50, 60);
-			bufg.drawString(String.format("%.2f/%", wealth), 200, 60);
-			bufg.drawString("Average Wealth Level: ", 50, 100);
-			bufg.drawString(String.format("%.2f/%", wealthlevel), 200, 100);
-			bufg.drawString("Average Health: ", 50, 140);
-			bufg.drawString(String.format("%.2f/%", health), 200, 140);
-			bufg.drawString("Average Food Supply: ", 50, 180);
-			bufg.drawString(String.format("%.2f/%", food), 200, 180);
-			bufg.drawString("Average Nonfood Supply: ", 50, 220);
-			bufg.drawString(String.format("%.2f/%", nonfood), 200, 220);
-			bufg.drawString("Average Entertainment: ", 50, 260);
-			bufg.drawString(String.format("%.2f/%", entertainment), 200, 260);
-			bufg.drawString("Average Education: ", 50, 300);
-			bufg.drawString(String.format("%.2f/%", education), 200, 300);
-			bufg.drawString("Environment Reach: ", 50, 340);
-			bufg.drawString(String.format("%.2f/%", environment), 200, 340);
-			bufg.drawString("Police Reach: ", 50, 380);
-			bufg.drawString(String.format("%.2f/%", police), 200, 380);
-			bufg.drawString("Firehouse Reach: ", 50, 420);
-			bufg.drawString(String.format("%.2f/%", firehouse), 200, 420);
+			bufg.drawString("Total Population: ", 50, 30);
+			bufg.drawString(String.format("%d", totPop), 450, 30);
+			bufg.drawString("Average Satisfaction: ", 50, 70);
+			bufg.drawString(String.format("%.2f%%", sat), 450, 70);
+			bufg.drawString("Average Wealth per Citizen: ", 50, 110);
+			bufg.drawString(String.format("%.2f", wealth), 450, 110);
+			bufg.drawString("Average Wealth Level: ", 50, 150);
+			bufg.drawString(String.format("%.2f", wealthlevel), 450, 150);
+			bufg.drawString("Average Health: ", 50, 190);
+			bufg.drawString(String.format("%.2f%%", health), 450, 190);
+			bufg.drawString("Average Food Supply: ", 50, 230);
+			bufg.drawString(String.format("%.2f%%", food), 450, 230);
+			bufg.drawString("Average Nonfood Supply: ", 50, 270);
+			bufg.drawString(String.format("%.2f%%", nonfood), 450, 270);
+			bufg.drawString("Average Entertainment: ", 50, 310);
+			bufg.drawString(String.format("%.2f%%", entertainment), 450, 310);
+			bufg.drawString("Average Education: ", 50, 350);
+			bufg.drawString(String.format("%.2f%%", education), 450, 350);
+			bufg.drawString("Environment Reach: ", 50, 390);
+			bufg.drawString(String.format("%.2f%%", environment), 450, 390);
+			bufg.drawString("Police Reach: ", 50, 430);
+			bufg.drawString(String.format("%.2f%%", police), 450, 430);
+			bufg.drawString("Firehouse Reach: ", 50, 470);
+			bufg.drawString(String.format("%.2f%%", firehouse), 450, 470);
 		}else{
 			bufg.setStroke(brokenStroke);
 			bufg.setColor(GRID_COLOR);
@@ -155,8 +157,10 @@ class Paint extends Canvas{
 			
 			for(int i=0; i<world.getAgents(); i++){
 				Agent toDraw = world.getAgent(i);
-				OverlayHandler.getInstance().applyOverlay(bufg, toDraw);
-				toDraw.draw(bufg, offsetX, offsetY);
+				try{
+					OverlayHandler.getInstance().applyOverlay(bufg, toDraw);
+					toDraw.draw(bufg, offsetX, offsetY);
+				}catch(Exception e){}
 			}
 		
 			int x = (int)((MouseHandler.getInstance().getMouseX()-offsetX)/world.getCellSize());
