@@ -61,12 +61,12 @@ public class ServiceBehavior extends BuildingBehavior
 						if(service.equals("HEALTH"))
 						{
 							//Clinics do satisfy Health needs with radius, but heal patients that go inside
-							amount = house.getHealth()*.3; 
+							amount = house.getWealthLevel()*10; 
 							satisfaction = (int)amount; 
 							//wealth difference penalty
 							if(leftBit<lev)satisfaction/=((lev-leftBit)*2);
 															
-							house.setHealth(house.getHealth()+satisfaction);
+							house.addHealth(satisfaction);
 						}
 						else
 						{
