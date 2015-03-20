@@ -98,7 +98,7 @@ public class House extends Entity
 		switch(need){
 			case "SATISFACTION": return (int)getSat();
 			case "WEALTH": return getWealthLevel();
-			case "HEALTH": return getHealth();
+			case "HEALTH": return (int)(getHealth()/(getPop()*getWealthLevel()*10.0));
 			default: return (int)(100*NeedManager.getInstance().getIndivSat(this, NeedManager.conv(need))+1e-7);
 		}
 	}
