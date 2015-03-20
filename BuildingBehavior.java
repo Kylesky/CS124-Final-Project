@@ -28,7 +28,7 @@ public abstract class BuildingBehavior
 	public int getOpenTime(){return openTime;}
 	public int getCloseTime(){return closeTime;}
 	public void restock(Building build){};
-	
+	public int getStock(Building build){return build.getFields()[0];}
 	public void __process(long deltaTime, Building build){
 		if(build.isTimeFlagged() && build.getTimeFlagHour() == openTime/100 && build.getTimeFlagMinute() == openTime%100){
 			build.setState(Building.STATE_OPEN);

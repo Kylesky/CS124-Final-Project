@@ -18,6 +18,7 @@ public class NeedBehavior extends BuildingBehavior
 		this.servingSize = servingSize;
 	}
 	
+	public int getStock(Building build){return build.getFields()[UNITS];}
 	public void restock(Building build)
 	{
 		//Some products are lost to spoilage, while a portion of the sales are reinvested into stocks

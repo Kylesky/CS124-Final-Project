@@ -47,7 +47,7 @@ public class Building extends Entity
 		else return false; 
 	}
 	public void restock(){behavior.restock(this);}
-	
+	public int getStock(){return behavior.getStock(this);}
 	public void onBuild(Building prototype)
 	{
 		setBehavior(prototype.getBehavior());
