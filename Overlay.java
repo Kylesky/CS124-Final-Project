@@ -6,8 +6,9 @@ public class Overlay{
 	private boolean building, house, road, agent;
 	private ArrayList<Integer> ranges;
 	private ArrayList<Color> colors;
+	private ArrayList<String> display;
 	
-	public Overlay(String name, String basis, boolean building, boolean house, boolean road, boolean agent, ArrayList<Integer> ranges, ArrayList<Color> colors){
+	public Overlay(String name, String basis, boolean building, boolean house, boolean road, boolean agent, ArrayList<Integer> ranges, ArrayList<Color> colors, ArrayList<String> display){
 		this.name = name;
 		this.basis = basis;
 		this.building = building;
@@ -16,6 +17,7 @@ public class Overlay{
 		this.agent = agent;
 		this.ranges = ranges;
 		this.colors = colors;
+		this.display = display;
 	}
 	
 	public String getName(){return name;}
@@ -27,6 +29,7 @@ public class Overlay{
 	public int getRanges(){return ranges.size();}
 	public int getRange(int i){return ranges.get(i);}
 	public Color getColor(int i){return colors.get(i);}
+	public String getDisplay(int i){return display.get(i);}
 
 	public void process(Graphics2D g, Entity e){
 		if(e.getType() == Entity.BUILDING){

@@ -108,26 +108,6 @@ class Paint extends Canvas{
 		}
 		
 		/*
-			BOTTOM UI
-		*/
-		bufg.setColor(Color.BLUE);
-		bufg.fillRect(0, imgHeight-80, imgWidth, 40);
-		bufg.setColor(Color.BLACK);
-		bufg.setFont(UIFont);
-		bufg.drawString(world.getTime(), 10, imgHeight-52);
-		bufg.drawRect(5, imgHeight-75, 67, 28);
-		bufg.drawString(String.format("%07d", world.getPlayerMoney()), 90, imgHeight-52);
-		bufg.drawRect(85, imgHeight-75, 100, 28);
-		bufg.drawString("Build", 200, imgHeight-52);
-		bufg.drawRect(195, imgHeight-75, 58, 28);
-		bufg.drawString("Demolish", 270, imgHeight-52);
-		bufg.drawRect(265, imgHeight-75, 103, 28);
-		bufg.drawString("Overlays", 385, imgHeight-52);
-		bufg.drawRect(380, imgHeight-75, 100, 28);
-		bufg.drawString("Statistics", 500, imgHeight-52);
-		bufg.drawRect(495, imgHeight-75, 100, 28);
-		
-		/*
 			RIGHT-SIDE UI
 		*/
 		bufg.setColor(Color.BLUE);
@@ -155,7 +135,42 @@ class Paint extends Canvas{
 			
 				index++;
 			}while(index%Config.getCommandsPerPage() != 0 && index < Main.overlaySwitchCommands.size());
+			Overlay legend = OverlayHandler.getInstance().getOverlay();
+			for(int i=0; i<legend.getRanges(); i++){
+				bufg.setColor(legend.getColor(i));
+				bufg.fillRect(imgWidth-235, imgHeight-120-i*15, 25, 10);
+				bufg.setColor(Color.BLACK);
+				bufg.drawRect(imgWidth-235, imgHeight-120-i*15, 25, 10);
+				bufg.drawString(legend.getDisplay(i), imgWidth-205, imgHeight-110-i*15);
+			}
 		}
+		
+		/*
+			BOTTOM UI
+		*/
+		bufg.setColor(Color.BLUE);
+		bufg.fillRect(0, imgHeight-80, imgWidth, 40);
+		bufg.setColor(Color.BLACK);
+		bufg.setFont(UIFont);
+		bufg.drawString(world.getTime(), 10, imgHeight-52);
+		bufg.drawRect(5, imgHeight-75, 67, 28);
+		bufg.drawString(String.format("%07d", world.getPlayerMoney()), 90, imgHeight-52);
+		bufg.drawRect(85, imgHeight-75, 100, 28);
+		bufg.drawString("Build", 200, imgHeight-52);
+		bufg.drawRect(195, imgHeight-75, 58, 28);
+		bufg.drawString("Demolish", 270, imgHeight-52);
+		bufg.drawRect(265, imgHeight-75, 103, 28);
+		bufg.drawString("Overlays", 385, imgHeight-52);
+		bufg.drawRect(380, imgHeight-75, 100, 28);
+		bufg.drawString("Statistics", 500, imgHeight-52);
+		bufg.drawRect(495, imgHeight-75, 100, 28);
+		
+		bufg.setFont(defFont);
+		bufg.drawString("Power", 670, imgHeight-65);
+		bufg.drawString(String.format("%05d/%05d", world.getConsumedPower(), world.getTotalPower()), 720, imgHeight-65);
+		bufg.drawString("Water", 670, imgHeight-50);
+		bufg.drawString(String.format("%05d/%05d", world.getConsumedWater(), world.getTotalWater()), 720, imgHeight-50);
+		
 		
 		/*
 			FINISHED

@@ -23,6 +23,7 @@ public class HouseBehavior
 	public String getName(){return name;}
 	public void process(long deltaTime, House house){
 		if(house.isTimeFlagged() && house.getTimeFlagHour() == 0 && house.getTimeFlagMinute() == 0){
+			house.addWealth((int)(house.getSat()*house.getPop()*house.getWealthLevel()));
 			if(house.getSat() > 100.0*house.getPop()/capacity) house.addAgent(1);
 			else if(house.getHealth() < 25) house.addAgent(-1);
 			
@@ -30,7 +31,6 @@ public class HouseBehavior
 			house.addNeed("NONFOOD", -Math.min(house.getPop()*house.getWealthLevel()*2, house.getNeed("NONFOOD")));
 			house.addNeed("ENTERTAINMENT", -Math.min(house.getPop()*house.getWealthLevel()*2, house.getNeed("ENTERTAINMENT")));
 			house.addNeed("EDUCATION", -Math.min(house.getPop()*house.getWealthLevel()*2, house.getNeed("EDUCATION")));
-			house.addWealth((int)(house.getSat()*house.getPop()*house.getWealthLevel()));
 		}
 		
 		if(house.isTimeFlagged() && 6 <= house.getTimeFlagHour() && house.getTimeFlagHour() < 22){
@@ -69,5 +69,6 @@ public class HouseBehavior
 		g.setColor(Color.WHITE);
 		g.setFont(Paint.mapFont);
 		g.drawString((house.toDemolish()?"!":"")+code+"("+level+")", x+5, y+Config.getWorldCellSize()/2);
+		g.drawString(house.getPop() + ":" + house.getWealth(), x+5, y+Config.getWorldCellSize()/2+15);
 	}
 }
