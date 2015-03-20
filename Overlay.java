@@ -40,7 +40,7 @@ public class Overlay{
 					case "WEALTH": val = b.getBehavior().getWealth(); break;
 				}
 				for(int i=0; i<ranges.size(); i++){
-					if(val <= ranges.get(i)){
+					if(val <= ranges.get(i) || i == ranges.size()-1){
 						g.setColor(colors.get(i));
 						break;
 					}
@@ -57,7 +57,7 @@ public class Overlay{
 			if(house){
 				int val = h.getScale(basis);
 				for(int i=0; i<ranges.size(); i++){
-					if(val <= ranges.get(i)){
+					if(val <= ranges.get(i) || i == ranges.size()-1){
 						g.setColor(colors.get(i));
 						break;
 					}
@@ -81,7 +81,7 @@ public class Overlay{
 				case "WEALTH": val = a.getHouse().getWealthLevel(); break;
 			}
 			for(int i=0; i<ranges.size(); i++){
-				if(val <= ranges.get(i)){
+				if(val <= ranges.get(i) || i == ranges.size()-1){
 					g.setColor(colors.get(i));
 					break;
 				}

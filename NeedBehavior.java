@@ -38,6 +38,9 @@ public class NeedBehavior extends BuildingBehavior
 	
 	public void process(long deltaTime, Building build)
 	{
+		if(house.isTimeFlagged() && house.getTimeFlagHour() == 0 && house.getTimeFlagMinute() == 0){
+			restock(build);
+		}
 		long curTime = build.getWorld().getCurrentTime(); 
 		while(!build.agents.isEmpty())
 		{
@@ -83,5 +86,18 @@ public class NeedBehavior extends BuildingBehavior
 				build.getWorld().spawnAgent(e,build.getR(),build.getC()); 
 			}else break;
 		}
+	}
+	
+	public void draw(Graphics2D g, int r, int c, int offsetX, int offsetY, Building build)
+	{
+		int cellsize = Config.getWorldCellSize(); 
+		int x = c*cellsize + offsetX;
+		int y = r*cellsize + offsetY;
+		if(x > Config.getWindowWidth() || y > Config.getWindowHeight() || x+width*cellsize < 0 || y+height*cellsize < 0) return;
+		g.fillRect(x,y,width*cellsize,height*cellsize); 
+		g.setColor(Color.WHITE);
+		g.setFont(Paint.mapFont);
+		g.drawString((build.toDemolish()?"!":"")+code, x+5, y+Config.getWorldCellSize()/2);
+		g.drawString(build.getStock(), x+5, y+Config.getWorldCellSize()/2+15);
 	}
 }
