@@ -12,7 +12,7 @@ public class House extends Entity
 	public House(int r, int c, HouseBehavior behavior, World world)
 	{
 		super(r,c,world,Entity.HOUSE);
-		health = 100;
+		health = behavior.getStartingAgents()*100;
 		wealth = behavior.getStartingMoney();
 		needs = new int[NeedManager.NUMNEEDS];
 		inAgents = new ArrayDeque<Agent>();
