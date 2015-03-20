@@ -24,7 +24,7 @@ public class HouseBehavior
 	public void process(long deltaTime, House house){
 		if(house.isTimeFlagged() && house.getTimeFlagHour() == 0 && house.getTimeFlagMinute() == 0){
 			house.addWealth((int)(house.getSat()*house.getPop()*house.getWealthLevel()));
-			if(house.getSat() < 50) house.addHealth((house.getSat()-50)*house.getPop()*house.getWealthLevel()/5);
+			if(house.getSat() < 50) house.addHealth((int)((house.getSat()-50)*house.getPop()*house.getWealthLevel()/5));
 			if(house.getSat() > 100.0*house.getPop()/capacity) house.addAgent(1);
 			else if(house.getHealth() < 25) house.addAgent(-1);
 			

@@ -38,7 +38,7 @@ public class NeedBehavior extends BuildingBehavior
 	
 	public void process(long deltaTime, Building build)
 	{
-		if(house.isTimeFlagged() && house.getTimeFlagHour() == 0 && house.getTimeFlagMinute() == 0){
+		if(build.isTimeFlagged() && build.getTimeFlagHour() == 0 && build.getTimeFlagMinute() == 0){
 			restock(build);
 		}
 		long curTime = build.getWorld().getCurrentTime(); 
@@ -98,6 +98,6 @@ public class NeedBehavior extends BuildingBehavior
 		g.setColor(Color.WHITE);
 		g.setFont(Paint.mapFont);
 		g.drawString((build.toDemolish()?"!":"")+code, x+5, y+Config.getWorldCellSize()/2);
-		g.drawString(build.getStock(), x+5, y+Config.getWorldCellSize()/2+15);
+		g.drawString(build.getStock()+"", x+5, y+Config.getWorldCellSize()/2+15);
 	}
 }
