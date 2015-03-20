@@ -96,11 +96,8 @@ class ObjectHandler{
 		
 		instance.setWorld(Main.world);
 		instance.setTimeFlag(Main.world.getCurrentTimeFlag());
-		instance.setBehavior(prototype.getBehavior());
-		instance.setupNeeds();
-		instance.clearAgents();
-		instance.copyFields(prototype);
 		instance.setActive(true);
+		instance.onBuild(prototype);
 		
 		return instance;
 	}

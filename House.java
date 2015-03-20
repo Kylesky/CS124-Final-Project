@@ -113,8 +113,15 @@ public class House extends Entity
 	{
 		behavior.onDemolish(this);
 	}
-	public void onBuild()
+	public void onBuild(House prototype)
 	{
+		setBehavior(prototype.getBehavior());
+		setupNeeds();
+		clearAgents();
+		copyFields(prototype);
+		behavior.onBuild(this);
+	}
+	public void onBuild(){
 		behavior.onBuild(this);
 	}
 }

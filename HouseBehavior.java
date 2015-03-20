@@ -50,6 +50,7 @@ public class HouseBehavior
 	public void onBuild(House house)
 	{
 		World world = house.getWorld(); 
+		System.out.println("what");
 		world.addConsumedPower(power);
 		world.addConsumedWater(water);
 	}
