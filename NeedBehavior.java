@@ -24,6 +24,7 @@ public class NeedBehavior extends BuildingBehavior
 		//Some products are lost to spoilage, while a portion of the sales are reinvested into stocks
 		build.fields[UNITS] -= .1*build.fields[UNITS]; 
 		build.fields[UNITS]+= 1.7*build.fields[SALES];
+		if(build.fields[UNITS]>defAmount) build.fields[UNITS] = defAmount;
 	}
 	
 	public void setup(Building build)
