@@ -95,16 +95,12 @@ public class House extends Entity
 	public void setNeed(String need, int val){ needs[NeedManager.conv(need)]=val; }
 	public int getNeed(String need){ return needs[NeedManager.conv(need)]; }
 	public int getScale(String need){
-		int flag = NeedManager.conv(need);
-		if(flag != -1){
-			return (int)(100*NeedManager.getInstance().getIndivSat(this, flag)+1e-7);
-		}else{
-			switch(need){
-				case "SATISFACTION": return (int)getSat();
-				case "WEALTH": return getWealthLevel();
-			}
+		switch(need){
+			case "SATISFACTION": return (int)getSat();
+			case "WEALTH": return getWealthLevel();
+			case "HEALTH": return getHealth();
+			default: return (int)(100*NeedManager.getInstance().getIndivSat(this, NeedManager.conv(need))+1e-7);
 		}
-		return 0;
 	}
 	
 	public void resetServices(){
