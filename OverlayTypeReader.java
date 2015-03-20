@@ -33,6 +33,7 @@ public class OverlayTypeReader
 			int rangeNum = Integer.parseInt(tk.nextToken().trim()); 
 			ArrayList<Integer> ranges = new ArrayList<Integer>();
 			ArrayList<Color> colors = new ArrayList<Color>();
+			ArrayList<String> display = new ArrayList<String>();
 			while(rangeNum-->0){
 				ranges.add(Integer.parseInt(tk.nextToken().trim()));
 				tk2 = new StringTokenizer(tk.nextToken().trim(), "|");
@@ -40,9 +41,10 @@ public class OverlayTypeReader
 				int g = Integer.parseInt(tk2.nextToken().trim());
 				int b = Integer.parseInt(tk2.nextToken().trim());
 				colors.add(new Color(r, g, b));
+				display.add(tk.nextToken().trim());
 			}
 			
-			ret.add(new Overlay(name, basis, building, house, road, agent, ranges, colors));
+			ret.add(new Overlay(name, basis, building, house, road, agent, ranges, colors, display));
 		}
 		return ret;
 	}

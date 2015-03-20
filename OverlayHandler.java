@@ -45,4 +45,8 @@ class OverlayHandler{
 			list.add(new OverlaySwitchCommand(overlays.get(i).getName()));
 		}
 	}
+	
+	public Overlay getOverlay(){
+		return currentOverlay;
+	}
 }

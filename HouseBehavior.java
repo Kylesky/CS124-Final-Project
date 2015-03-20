@@ -69,5 +69,6 @@ public class HouseBehavior
 		g.setColor(Color.WHITE);
 		g.setFont(Paint.mapFont);
 		g.drawString((house.toDemolish()?"!":"")+code+"("+level+")", x+5, y+Config.getWorldCellSize()/2);
+		g.drawString(house.getPop() + ":" + house.getWealth(), x+5, y+Config.getWorldCellSize()/2+15);
 	}
 }
